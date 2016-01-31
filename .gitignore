@@ -1,0 +1,8 @@
+bin/
+graphviz/
+vim74/
+vimfiles/bundle/
+!vimfiles/bundle/Vundle.vim/
+vimfiles/tools/
+*.exe
+*.dat

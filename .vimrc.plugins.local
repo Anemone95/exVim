@@ -1,0 +1,89 @@
+" 对齐线
+Bundle 'Yggdroot/indentLine'
+    au! BufRead,BufNewFile,BufEnter IndentLinesToggle()
+    let g:indentLine_char = "┊"
+    let g:indentLine_first_char = "┊"
+" Python字典增强
+Bundle 'pydiction'
+    "then make sure you set g:pydiction_location to the full path of where you installed complete-dict. Ex:
+    "for example, if you used Pathogen to install Pydiction, you would set this to:
+
+    let g:pydiction_location = $VIM."/vimfiles/bundle/pydiction/complete-dict"
+    " python pydiction.py <module> [module]
+" 一键编译&运行
+Bundle 'xuhdev/SingleCompile'
+    nmap <F9> :w<cr>: SCCompileRun<CR>
+    imap <F9> <ESC>:w<CR>:SCCompileRun<CR>
+    let g:SingleCompile_showquickfixiferror = 1
+" matlab 增强插件
+Bundle 'lazywei/vim-matlab'
+" php 自动注释
+Bundle 'vim-scripts/PDV--phpDocumentor-for-Vim'
+" java 补全增强
+Bundle 'cespare/vjde'
+
+" Bundle 'artur-shaik/vim-javacomplete2'
+    " autocmd FileType java set omnifunc=javacomplete#Complete
+" Bundle 'vim-scripts/javacomplete'
+    " autocmd FileType java set omnifunc=javacomplete#Complete
+    " autocmd FileType java set completefunc=javacomplete#CompleteParamsInfo
+" 括号自动补全
+Bundle 'jiangmiao/auto-pairs'
+
+" 多语言模板补全,补全自动弹出
+Plugin 'Shougo/neosnippet-snippets'
+Plugin 'Shougo/neosnippet.vim'
+    " Plugin key-mappings.
+    imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+    smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+    xmap <C-k>     <Plug>(neosnippet_expand_target)
+
+    " SuperTab like snippets behavior.
+    "imap <expr><TAB>
+    " \ pumvisible() ? "\<C-n>" :
+    " \ neosnippet#expandable_or_jumpable() ?
+    " \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+    " For conceal markers.
+    if has('conceal')
+      set conceallevel=2 concealcursor=niv
+    endif
+
+Bundle 'Shougo/neocomplete.vim'
+    let g:neocomplete#enable_debug = 0
+    let g:acp_enableAtStartup = 0
+    let g:neocomplete#enable_at_startup = 1
+    let g:neocomplete#enable_smart_case = 1
+    let g:neocomplete#enable_auto_select = 0
+    let g:neocomplete#sources#syntax#min_keyword_length = 4
+    let g:neocomplete#sources#auto_completion_start_length = 4
+    let g:neocomplete#sources#dictionary#dictionaries = {
+        \ 'default' : '',
+        \ 'arduino' : $VIM.'/vimfiles/dict/arduino.dict',
+        \ 'c' : $VIM.'/vimfiles/dict/c.dict',
+        \ 'cpp' : $VIM.'/vimfiles/dict/cpp.dict',
+        \ 'css' : $VIM.'/vimfiles/dict/css.dict',
+        \ 'java' : $VIM.'/vimfiles/dict/java.dict',
+        \ 'javascript' : $VIM.'/vimfiles/dict/javascript.dict',
+        \ 'php' : $VIM.'/vimfiles/dict/php.dict',
+        \ 'vim' : $VIM.'/vimfiles/dict/vim.dict',
+        \ 'matlab' : $VIM.'/vimfiles/dict/matlab.dict',
+    \ }
+    inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+    autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+    autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+    autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+    autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+    autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+" 目录树
+" Bundle 'scrooloose/nerdtree'
+    map <F2> :NERDTreeToggle<CR>
+" 历史操作列表
+" Plugin 'mbbill/undotree'
+    nnoremap <F3> :UndotreeToggle<CR>
+
+" Plugin 'tpope/vim-surround'
+    xmap ) S(
+    xmap ] S[
+    xmap } S{
+    " xmap ' S'
+    xmap " S"
