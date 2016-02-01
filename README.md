@@ -4,11 +4,17 @@
 # 安装
 **以下流程仅适用于Windows用户**
 1. 安装[exVim](https://github.com/vim/vim-win3c2-installer/releases).**建议安装x86版本,同时需要将exVim安装在C盘根目录下,如c:\exVim.否则需要修改reg文件**
+
 2. 运行cmd_here.reg,edit_with_vim.reg,new_project.reg.
+
 3. 检查vim.exe是否在环境变量内,并将newProject.vbs放入环境变量中.
+
 4. 安装[Git](http://git-scm.com/download/),检查环境变量.
+
 5. 安装[Python](https://www.python.org/),[Lua](http://www.lua.org/download.html),填写环境变量.
+
 6. 安装youyuan字体.
+
 7. 运行exVim,无视错误,输入 :BundleUpdate,安装插件.
 
 # 特性
