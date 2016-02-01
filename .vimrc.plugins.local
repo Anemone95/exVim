@@ -14,6 +14,7 @@ Bundle 'pydiction'
 Bundle 'xuhdev/SingleCompile'
     nmap <F9> :w<cr>: SCCompileRun<CR>
     imap <F9> <ESC>:w<CR>:SCCompileRun<CR>
+    nmap <F10> :SCCompile<cr>
     let g:SingleCompile_showquickfixiferror = 1
 " matlab 增强插件
 Bundle 'lazywei/vim-matlab'

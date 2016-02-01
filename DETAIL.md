@@ -1,4 +1,7 @@
 # exVim 增强配置(支持Windows)
+
+(http://ww1.sinaimg.cn/large/0060lm7Tgw1f0j4d3hyo4j31hk0u0adx.jpg)
+
 基于exVim进行配置,仅更改.vimrc.local和.vimrc.plugin.local文件.支持C/C++,Java,Python,PHP,Matlab,Arduino等语言.对界面,字体进行美化调整,改变部分案件映射,同时对Windows进行优化.另外,vim.local文件可以改名为.vimrc文件提供一个无插件的轻型vim配置文件.
 
 # 安装
@@ -239,6 +242,8 @@ Ctrl+k用来选择以及跳到下一处
 
 # 其他
 联系方式:x565178035@126.com
+
+Github仓库:https://github.com/x565178035/exvim
 
 Windows完整版:http://pan.baidu.com/s/1o6Yhbaa 密码：lvsv
 
