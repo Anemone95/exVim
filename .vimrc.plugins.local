@@ -19,7 +19,20 @@ Bundle 'xuhdev/SingleCompile'
 " matlab 增强插件
 Bundle 'lazywei/vim-matlab'
 " php 自动注释
-Bundle 'vim-scripts/PDV--phpDocumentor-for-Vim'
+" Bundle 'vim-scripts/PDV--phpDocumentor-for-Vim'
+" 多语言自动注释
+Bundle 'vim-scripts/DoxygenToolkit.vim'
+    map <leader>dx :Dox<CR>
+    map <leader>dl :DoxLic<CR>
+    map <leader>da :DoxAuthor<CR>
+    let g:DoxygenToolkit_authorName="x565178035,x565178035@126.com"
+    " let s:licenseTag = "Copyright(C)\<enter>"
+    " let s:licenseTag = s:licenseTag . "For free\<enter>"
+    " let s:licenseTag = s:licenseTag . "All right reserved\<enter>"
+    " let g:DoxygenToolkit_licenseTag = s:licenseTag
+    let g:DoxygenToolkit_briefTag_funcName="yes"
+    let g:doxygen_enhanced_color=1
+
 " java 补全增强
 Bundle 'cespare/vjde'
 
