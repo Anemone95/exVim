@@ -1,6 +1,6 @@
 set fileformat=unix
 
-function! LoadMain(filename)
+function! LoadMainOld(filename)
     "let s:test=input("Please input:")
     sil! exec "0r ".$VIM."/vimfiles/php-support/".a:filename
     let l:pathArr=split(expand("%:p"),"\\")
@@ -14,9 +14,19 @@ function! LoadMain(filename)
     "call TemplateReplTags()
 endfunction
 
+function! LoadMain(filename)
+    "let s:test=input("Please input:")
+    exec "0r ".$VIM."/vimfiles/".a:filename
+    """echo "0r ".$VIMFILES."/py-support/".a:filename
+	sil! execute "%s/<FILE_NAME>/".expand("%:t")."/g"
+    sil! execute "%s/<FUN_NAME>/".expand("%:t:r")."/g"
+	sil! execute "%s/<DATE>/".strftime("%Y-%m-%d %H:%M")."/g"
+    sil! execute "9"
+endfunction
+
 if match(expand("%"),"func.php")!=-1
     if line("$")==1
-        call LoadMain("main.php")
+        call LoadMain("php_main.template")
     endif
 endif
 

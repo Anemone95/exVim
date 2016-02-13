@@ -25,7 +25,7 @@ Bundle 'vim-scripts/DoxygenToolkit.vim'
     map <leader>dx :Dox<CR>
     map <leader>dl :DoxLic<CR>
     map <leader>da :DoxAuthor<CR>
-    let g:DoxygenToolkit_authorName="x565178035,x565178035@126.com"
+    let g:DoxygenToolkit_authorName="Anemone,x565178035@126.com"
     " let s:licenseTag = "Copyright(C)\<enter>"
     " let s:licenseTag = s:licenseTag . "For free\<enter>"
     " let s:licenseTag = s:licenseTag . "All right reserved\<enter>"

@@ -8,15 +8,12 @@ nmap gm :call search("int main")<cr>k
 
 function! LoadMain(filename)
     "let s:test=input("Please input:")
-    sil! exec "0r ".$VIMFILES."/c-support/".a:filename
+    exec "0r ".$VIM."/vimfiles/".a:filename
     """echo "0r ".$VIMFILES."/py-support/".a:filename
-	sil! execute "%s/<FILENAME>/".expand("%")."/g"
+	sil! execute "%s/<FILE_NAME>/".expand("%:t")."/g"
+    sil! execute "%s/<FUN_NAME>/".expand("%:t:r")."/g"
 	sil! execute "%s/<DATE>/".strftime("%Y-%m-%d %H:%M")."/g"
-	"sil! execute "%s/<DATE>/"."hello"."/g"
-    call search("<CU","W")
-    sil! execute "normal df>"
-    sil! execute "startinsert!"
-    "call TemplateReplTags()
+    sil! execute "15"
 endfunction
 
 function! PushDeclare()
@@ -51,6 +48,6 @@ inoremap    <buffer>  <silent>  <LocalLeader>if    <Esc>G:call C_InsertTemplate(
  noremap    <buffer>  <silent>  <LocalLeader>ud          :call PushDeclare()<CR>
 
 if line("$")==1
-    call LoadMain("main.c")
+    call LoadMain("c_main.template")
 endif
 call SingleCompile#ChooseCompiler('c', 'gcc')

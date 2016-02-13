@@ -16,14 +16,12 @@ function! Note()
 endfunction
 function! LoadMain(filename)
     "let s:test=input("Please input:")
-    sil! exec "0r ".$VIM."/vimfiles/c-support/".a:filename
+    sil! exec "0r ".$VIM."/vimfiles/".a:filename
     """echo "0r ".$VIMFILES."/py-support/".a:filename
-	sil! execute "%s/<FILENAME>/".expand("%")."/g"
+	sil! execute "%s/<FILE_NAME>/".expand("%:t")."/g"
+	sil! execute "%s/<FUN_NAME>/".expand("%:t:r")."/g"
 	sil! execute "%s/<DATE>/".strftime("%Y-%m-%d %H:%M")."/g"
-	"sil! execute "%s/<DATE>/"."hello"."/g"
-    call search("<CU","W")
-    sil! execute "normal \"adf>"
-    sil! execute "startinsert!"
+    sil! execute "18"
     "call TemplateReplTags()
 endfunction
 
@@ -156,7 +154,7 @@ function! LinkRun()
 endfunction
 function! AutoFill()
     if line("$")==1
-        call LoadMain("main.cpp")
+        call LoadMain("cpp_main.template")
     endif
 endfunction
 

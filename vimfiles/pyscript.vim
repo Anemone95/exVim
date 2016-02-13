@@ -7,17 +7,17 @@ vmap <Tab> <c-v>I<Tab><Esc>
 nmap <C-i> :call LoadTemplate("main.py")<CR>
 function! LoadTemplate(filename)
     "let s:test=input("Please input:")
-    sil! exec "0r ".$VIM."/vimfiles/py-support/".a:filename
-    sil! exec "%s/<FILENAME>/".expand("%:t")."/g"
+    sil! exec "0r ".$VIM."/vimfiles/".a:filename
+    sil! exec "%s/<FILE_NAME>/".expand("%:t")."/g"
     sil! exec "%s/<FUN_NAME>/".expand("%:t:r")."/g"
     sil! exec "%s/<DATE>/".strftime("%Y-%m-%d %H:%M")."/g"
-    call search("<CU","W")
-    sil! exec "normal \"adf>"
-    sil! exec "startinsert!"
+    sil! exec "15"
+    " call search("<CU","W")
+    " sil! exec "normal \"adf>"
+    " sil! exec "startinsert!"
     "call TemplateReplTags()
 endfunction
 if line("$")==1
-    call LoadTemplate("main.py")
+    call LoadTemplate("py_main.template")
 endif
 
-imap <c-n> <Tab>

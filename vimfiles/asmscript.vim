@@ -25,22 +25,17 @@ endfunction
 " call SingleCompile#SetOutfile('asm', 'ml', '$(FILE_TITLE)$.exe')
 " call SingleCompile#ChooseCompiler('asm', 'ml')
 
-function! LoadTemplate(filename)
+function! LoadMain(filename)
     "let s:test=input("Please input:")
-    sil! exec "0r ".$VIMFILES."/asm-support/".a:filename
+    exec "0r ".$VIM."/vimfiles/".a:filename
     """echo "0r ".$VIMFILES."/py-support/".a:filename
-    sil! execute "%s/<FILENAME>/".expand("%")."/g"
+	sil! execute "%s/<FILE_NAME>/".expand("%:t")."/g"
 	sil! execute "%s/<DATE>/".strftime("%Y-%m-%d %H:%M")."/g"
-	"sil! execute "%s/<DATE>/"."hello"."/g"
-    call search("<CU","W")
-    sil! execute "normal df>"
-    sil! execute "startinsert!"
-    "call TemplateReplTags()
+    sil! execute "19"
 endfunction
 
-nmap <C-i>   :call LoadTemplate("main.asm")<CR>
 noremap <F9> :w<cr>:call Compile()<CR>
 
 if line("$")==1
-    call LoadTemplate("main.asm")
+    call LoadMain("asm_main.template")
 endif

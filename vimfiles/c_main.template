@@ -1,0 +1,19 @@
+/*
+ * @file <FILE_NAME>
+ * @brief <FUN_NAME>
+ * @author Anemone,x565178035@126.com
+ * @version 1.0
+ * @date <DATE>
+ */
+
+#include <errno.h>
+#include <math.h>
+#include <stdlib.h>
+#include <string.h>
+#include <stdio.h>
+
+int main() {
+
+    return 0;
+}
+

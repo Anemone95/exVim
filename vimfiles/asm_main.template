@@ -1,7 +1,7 @@
 ;  Author:         Anemone
-;  Filename:       <FILENAME>
+;  Filename:       <FILE_NAME>
 ;  Last modified:  <DATE>
-;  E-mail:         anemone@82flex.com
+;  E-mail:         x565178035@126.com
 
 data segment
         ;input data segment code here
@@ -16,7 +16,7 @@ code segment
 start:
     mov ax,data
     mov ds,ax
- <CURSOR>   
+
     mov ah,4ch
     int 21h
 code ends
