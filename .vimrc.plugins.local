@@ -34,7 +34,7 @@ Bundle 'vim-scripts/DoxygenToolkit.vim'
     let g:doxygen_enhanced_color=1
 
 " java 补全增强
-Bundle 'cespare/vjde'
+" Bundle 'cespare/vjde'
 
 " Bundle 'artur-shaik/vim-javacomplete2'
     " autocmd FileType java set omnifunc=javacomplete#Complete
@@ -53,10 +53,10 @@ Plugin 'Shougo/neosnippet.vim'
     xmap <C-k>     <Plug>(neosnippet_expand_target)
 
     " SuperTab like snippets behavior.
-    "imap <expr><TAB>
-    " \ pumvisible() ? "\<C-n>" :
-    " \ neosnippet#expandable_or_jumpable() ?
-    " \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+    imap <expr><TAB>
+    \ pumvisible() ? "\<C-n>" :
+    \ neosnippet#expandable_or_jumpable() ?
+    \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
     " For conceal markers.
     if has('conceal')
       set conceallevel=2 concealcursor=niv
@@ -68,8 +68,9 @@ Bundle 'Shougo/neocomplete.vim'
     let g:neocomplete#enable_at_startup = 1
     let g:neocomplete#enable_smart_case = 1
     let g:neocomplete#enable_auto_select = 0
-    let g:neocomplete#sources#syntax#min_keyword_length = 4
-    let g:neocomplete#sources#auto_completion_start_length = 4
+    let g:neocomplete#sources#syntax#min_keyword_length = 2
+    let g:neocomplete#sources#auto_completion_start_length = 3
+    let g:neocomplete#max_list=20
     let g:neocomplete#sources#dictionary#dictionaries = {
         \ 'default' : '',
         \ 'arduino' : $VIM.'/vimfiles/dict/arduino.dict',
@@ -88,6 +89,11 @@ Bundle 'Shougo/neocomplete.vim'
     autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
     autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
     autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+
+    inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+    inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+"颜色增强
+Bundle "sentientmachine/erics_vim_syntax_and_color_highlighting"
 " 目录树
 " Bundle 'scrooloose/nerdtree'
     map <F2> :NERDTreeToggle<CR>
@@ -101,3 +107,45 @@ Bundle 'Shougo/neocomplete.vim'
     xmap } S{
     " xmap ' S'
     xmap " S"
+
+Bundle "vim-airline/vim-airline"
+Bundle "vim-airline/vim-airline-themes"
+   " let g:airline_extensions = ['tabline', 'unite', 'quickfix']
+    let g:airline_theme="molokai"
+    let g:airline_powerline_fonts = 1
+    let g:airline_left_sep = ''
+    let g:airline_left_alt_sep = ''
+    let g:airline_right_sep = ''
+    let g:airline_right_alt_sep = ''
+
+    "打开tabline功能,方便查看Buffer和切换，这个功能比较不错"
+    "我还省去了minibufexpl插件，因为我习惯在1个Tab下用多个buffer"
+    let g:airline#extensions#tabline#enabled = 1
+    let g:airline#extensions#tabline#buffer_nr_show = 1
+
+    "设置切换Buffer快捷键"
+    nnoremap <C-N> :bn<CR>
+    nnoremap <C-P> :bp<CR>
+
+    " 关闭状态显示空白符号计数,这个对我用处不大"
+    let g:airline#extensions#whitespace#enabled = 0
+    let g:airline#extensions#whitespace#symbol = '!'
+    noremap q :call BufferDelete()<CR>
+    function! BufferDelete()
+        if &modified
+            echohl ErrorMsg
+            echomsg "No write since last change. Not closing buffer."
+            echohl NONE
+        else
+            let s:total_nr_buffers = len(filter(range(1, bufnr('$')), 'buflisted(v:val)'))
+
+            if s:total_nr_buffers == 1
+                bdelete
+                echo "Buffer deleted. Created new buffer."
+            else
+                bprevious
+                bdelete #
+                echo "Buffer deleted."
+            endif
+        endif
+    endfunction

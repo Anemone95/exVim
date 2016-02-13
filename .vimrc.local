@@ -83,6 +83,25 @@ map w e
 imap ]] {<CR>
 cmap W w
 imap jj <ESC>
+imap <C-]> <ESC>
+vmap <C-]> <ESC>
+cmap <C-]> <ESC>
 imap kk <ESC>la
+map <C-a> ggvG
 
+" -----------------------------------------------------------------------------
+"  < 编码配置 >
+" -----------------------------------------------------------------------------
+" 注：使用utf-8格式后，软件与程序源码、文件路径不能有中文，否则报错
+set encoding=utf-8                                    "设置gvim内部编码，默认不更改
+set fileencoding=utf-8                                "设置当前文件编码，可以更改，如：gbk（同cp936）
+set fileencodings=ucs-bom,utf-8,gbk,cp936,latin-1     "设置支持打开的文件的编码
 
+" 文件格式，默认 ffs=dos,unix
+set fileformat=unix                                   "设置新（当前）文件的<EOL>格式，可以更改，如：dos（windows系统常用）
+
+if has('multi_byte_ime')
+    hi Cursor guifg=bg guibg=White gui=NONE
+    hi CursorIM guifg=NONE guibg=Skyblue gui=NONE
+    set iminsert=0 imsearch=0
+endif
