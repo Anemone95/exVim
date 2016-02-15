@@ -1,5 +1,9 @@
 "共享剪切板
-set clipboard=unnamed
+set clipboard+=unnamed
+set clipboard+=unnamedplus
+
+map <leader>y "*y
+map <leader>p "*p
 "指定窗口出现的位置，坐标原点在屏幕左上角
 winpos 100 10
 "换行时自动缩进宽度，可更改（宽度同tabstop）

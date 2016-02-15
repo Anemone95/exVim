@@ -68,9 +68,9 @@ Bundle 'Shougo/neocomplete.vim'
     let g:neocomplete#enable_at_startup = 1
     let g:neocomplete#enable_smart_case = 1
     let g:neocomplete#enable_auto_select = 0
-    let g:neocomplete#sources#syntax#min_keyword_length = 2
-    let g:neocomplete#sources#auto_completion_start_length = 3
-    let g:neocomplete#max_list=20
+    " let g:neocomplete#sources#syntax#min_keyword_length = 2
+    " let g:neocomplete#sources#auto_completion_start_length = 3
+    let g:neocomplete#max_list=30
     let g:neocomplete#sources#dictionary#dictionaries = {
         \ 'default' : '',
         \ 'arduino' : $VIM.'/vimfiles/dict/arduino.dict',
