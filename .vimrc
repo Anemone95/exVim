@@ -75,21 +75,51 @@ scriptencoding utf-8
 " Bundle steup
 "/////////////////////////////////////////////////////////////////////////////
 
-" vundle#begin
-filetype off " required
+" " vundle#begin
+" filetype off " required
+" 
+" " set the runtime path to include Vundle
+" if exists('g:exvim_custom_path')
+"     let g:ex_tools_path = g:exvim_custom_path.'/vimfiles/tools/'
+"     exec 'set rtp+=' . fnameescape ( g:exvim_custom_path.'/vimfiles/bundle/Vundle.vim/' )
+"     call vundle#rc(g:exvim_custom_path.'/vimfiles/bundle/')
+" else
+"     let g:ex_tools_path = '~/.vim/tools/'
+"     set rtp+=~/.vim/bundle/Vundle.vim/
+"     call vundle#rc('~/.vim/bundle/')
+" endif
+" 
+" " load .vimrc.plugins & .vimrc.plugins.local
+" if exists('g:exvim_custom_path')
+"     let vimrc_plugins_path = g:exvim_custom_path.'/.vimrc.plugins'
+"     let vimrc_plugins_local_path = g:exvim_custom_path.'/.vimrc.plugins.local'
+" else
+"     let vimrc_plugins_path = '~/.vimrc.plugins'
+"     let vimrc_plugins_local_path = '~/.vimrc.plugins.local'
+" endif
+" if filereadable(expand(vimrc_plugins_path))
+"     exec 'source ' . fnameescape(vimrc_plugins_path)
+" endif
+" if filereadable(expand(vimrc_plugins_local_path))
+"     exec 'source ' . fnameescape(vimrc_plugins_local_path)
+" endif
 
-" set the runtime path to include Vundle
+
+" vundle#end
+filetype plugin indent on " required
+syntax on " required
+
 if exists('g:exvim_custom_path')
     let g:ex_tools_path = g:exvim_custom_path.'/vimfiles/tools/'
-    exec 'set rtp+=' . fnameescape ( g:exvim_custom_path.'/vimfiles/bundle/Vundle.vim/' )
-    call vundle#rc(g:exvim_custom_path.'/vimfiles/bundle/')
+    " exec 'set rtp+=' . fnameescape ( g:exvim_custom_path.'/vimfiles/bundle/Vundle.vim/' )
+    " call vundle#rc(g:exvim_custom_path.'/vimfiles/bundle/')
+    call plug#begin(g:exvim_custom_path.'/vimfiles/plugged/')
 else
     let g:ex_tools_path = '~/.vim/tools/'
-    set rtp+=~/.vim/bundle/Vundle.vim/
-    call vundle#rc('~/.vim/bundle/')
+    " set rtp+=~/.vim/bundle/Vundle.vim/
+    call plug#begin(g:exvim_custom_path.'/vimfiles/plugged/')
 endif
-
-" load .vimrc.plugins & .vimrc.plugins.local
+" " load .vimrc.plugins & .vimrc.plugins.local
 if exists('g:exvim_custom_path')
     let vimrc_plugins_path = g:exvim_custom_path.'/.vimrc.plugins'
     let vimrc_plugins_local_path = g:exvim_custom_path.'/.vimrc.plugins.local'
@@ -104,9 +134,8 @@ if filereadable(expand(vimrc_plugins_local_path))
     exec 'source ' . fnameescape(vimrc_plugins_local_path)
 endif
 
-" vundle#end
-filetype plugin indent on " required
-syntax on " required
+Plug 'exvim/ex-colorschemes'
+call plug#end()
 
 "/////////////////////////////////////////////////////////////////////////////
 " Default colorscheme setup
