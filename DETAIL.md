@@ -5,14 +5,83 @@
 基于exVim进行配置,仅更改.vimrc.local和.vimrc.plugin.local文件.支持C/C++,Java,Python,PHP,Matlab,Arduino等语言.对界面,字体进行美化调整,改变部分案件映射,同时对Windows进行优化.另外,vim.local文件可以改名为.vimrc文件提供一个无插件的轻型vim配置文件.
 
 # 安装
-**以下流程仅适用于Windows用户**
-1. 安装[exVim](https://github.com/vim/vim-win3c2-installer/releases).**建议安装x86版本,同时需要将exVim安装在C盘根目录下,如c:\exVim.否则需要修改reg文件**
-2. 运行cmd_here.reg,edit_with_vim.reg,new_project.reg.
-3. 检查vim.exe是否在环境变量内,并将newProject.vbs放入环境变量中.
-4. 安装[Git](http://git-scm.com/download/),检查环境变量.
-5. 安装[Python](https://www.python.org/),[Lua](http://www.lua.org/download.html),填写环境变量.
-6. 安装youyuan字体.
-7. 运行exVim,无视错误,输入 :BundleUpdate,安装插件.
+##Windows
+1. 安装[exVim](https://github.com/vim/vim-win3c2-installer/releases).**建议安装x86版本,同时需要将exVim安装在C盘根目录下,即c:\exVim.否则需要修改reg文件**
+2. 下载个人配置文件(https://github.com/x565178035/exvim)
+
+        git clone https://github.com/x565178035/exvim
+3. 复制文件夹覆盖exVim文件夹
+4. 运行`cmd_here.reg`,`edit_with_vim.reg`,`new_project.reg`,`vim_here.reg`.
+5. 检查`vim.exe`是否在`%PATH%`内,并将newProject.vbs放入`%PATH%`中.
+6. 安装[Git](http://git-scm.com/download/),检查`%PATH%`.
+7. 安装[Python](https://www.python.org/),[Lua](http://www.lua.org/download.html),填写`%PATH%`.
+8. 安装`youyuan.ttf`,`DejaVu Sans Mono for Powerline.ttf`字体.
+9. 运行exVim,无视错误,输入 :BundleUpdate,安装插件.
+10. 注释`.vimrc.local` 个人配置部分.(Line.92)
+
+        " autocmd BufNewFile,BufRead *.h source $VIM/vimfiles/hscript.vim
+        " autocmd BufNewFile,BufRead *.c source $VIM/vimfiles/cscript.vim
+        " autocmd BufNewFile,BufRead *.cpp source $VIM/vimfiles/cppscript.vim
+        " autocmd FileType python source $VIM/vimfiles/pyscript.vim
+        " autocmd FileType arduino source $VIM/vimfiles/inoscript.vim
+        " autocmd FileType matlab source $VIM/vimfiles/matlabscript.vim
+        " autocmd FileType asm source $VIM/vimfiles/asmscript.vim
+        " autocmd FileType php source $VIM/vimfiles/phpscript.vim
+        " autocmd FileType java source $VIM/vimfiles/javascript.vim
+
+        " map w e
+        " imap ]] {<CR>
+        " cmap W w
+        " imap jj <ESC>
+        " imap <C-]> <ESC>
+        " vmap <C-]> <ESC>
+        " cmap <C-]> <ESC>
+        " imap kk <ESC>la
+        " map <C-a> ggvG
+
+##Linux
+1. 安装[exVim](http://exvim.github.io/docs/install/).
+
+        git clone https://github.com/exvim/main
+        cd main/
+        sh unix/install.sh
+        sh unix/replace-my-vim.sh
+2. 下载个人配置文件.
+
+        cd ~
+        git clone https://github.com/x565178035/exVim
+3. 安装`youyuan.ttf`,`DejaVu Sans Mono for Powerline.ttf`字体.
+4. 覆盖配置文件
+
+        mv ~/exVim/.vimrc.* ~/
+        mv ~/exVim/dict/ ~/.vim/dict
+5. 运行exVim,无视错误,输入 :BundleUpdate,安装插件.
+6. 注释`.vimrc.local` 个人配置部分.(Line.92)
+
+        " autocmd BufNewFile,BufRead *.h source $VIM/vimfiles/hscript.vim
+        " autocmd BufNewFile,BufRead *.c source $VIM/vimfiles/cscript.vim
+        " autocmd BufNewFile,BufRead *.cpp source $VIM/vimfiles/cppscript.vim
+        " autocmd FileType python source $VIM/vimfiles/pyscript.vim
+        " autocmd FileType arduino source $VIM/vimfiles/inoscript.vim
+        " autocmd FileType matlab source $VIM/vimfiles/matlabscript.vim
+        " autocmd FileType asm source $VIM/vimfiles/asmscript.vim
+        " autocmd FileType php source $VIM/vimfiles/phpscript.vim
+        " autocmd FileType java source $VIM/vimfiles/javascript.vim
+
+        " map w e
+        " imap ]] {<CR>
+        " cmap W w
+        " imap jj <ESC>
+        " imap <C-]> <ESC>
+        " vmap <C-]> <ESC>
+        " cmap <C-]> <ESC>
+        " imap kk <ESC>la
+        " map <C-a> ggvG
+
+
+##Mac
+1. 安装[exVim](http://exvim.github.io/docs/install/).
+2. 2-6步与Linux大致相同.
 
 # 特性
 ## 原版功能

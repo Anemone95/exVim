@@ -88,7 +88,7 @@ if has('multi_byte_ime')
 endif
 
 
-" 个人配置,分本人使用请全部注释
+" 个人配置,非本人使用请全部注释
 autocmd BufNewFile,BufRead *.h source $VIM/vimfiles/hscript.vim
 autocmd BufNewFile,BufRead *.c source $VIM/vimfiles/cscript.vim
 autocmd BufNewFile,BufRead *.cpp source $VIM/vimfiles/cppscript.vim
