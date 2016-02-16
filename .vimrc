@@ -72,11 +72,10 @@ endif
 scriptencoding utf-8
 
 "/////////////////////////////////////////////////////////////////////////////
-" Bundle steup
+" vim-plug steup
 "/////////////////////////////////////////////////////////////////////////////
-" vundle#end
-filetype plugin indent on " required
-syntax on " required
+" filetype plugin indent on " required
+" syntax on " required
 
 if exists('g:exvim_custom_path')
     let g:ex_tools_path = g:exvim_custom_path.'/vimfiles/tools/'

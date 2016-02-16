@@ -500,7 +500,10 @@ Plug 'wavded/vim-stylus',{'for':['css','html']}
 " ---------------------------------------------------
 Plug 'plasticboy/vim-markdown',{'for':'markdown'}
 
-let g:vim_markdown_initial_foldlevel=9999
+let g:vim_markdown_initial_foldlevel=0
+let g:vim_markdown_folding_style_pythonic = 1
+let g:vim_markdown_folding_level = 0
+set conceallevel=0
 
 "}}}
 
