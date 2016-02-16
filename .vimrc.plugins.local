@@ -4,24 +4,24 @@ Plug 'Yggdroot/indentLine'
     let g:indentLine_char = "┊"
     let g:indentLine_first_char = "┊"
 " Python字典增强
-Plug 'pydiction'
+Plug 'pydiction',{'for':'python'}
     "then make sure you set g:pydiction_location to the full path of where you installed complete-dict. Ex:
     "for example, if you used Pathogen to install Pydiction, you would set this to:
 
     let g:pydiction_location = $VIM."/vimfiles/bundle/pydiction/complete-dict"
     " python pydiction.py <module> [module]
 " 一键编译&运行
-Plug 'xuhdev/SingleCompile'
+Plug 'xuhdev/SingleCompile',{'on':['SCCompile','SCCompileRun']}
     nmap <F9> :w<cr>: SCCompileRun<CR>
     imap <F9> <ESC>:w<CR>:SCCompileRun<CR>
     nmap <F10> :SCCompile<cr>
     let g:SingleCompile_showquickfixiferror = 1
 " matlab 增强插件
-Plug 'lazywei/vim-matlab'
+Plug 'lazywei/vim-matlab',{'for':'matlab'}
 " php 自动注释
 " Plug 'vim-scripts/PDV--phpDocumentor-for-Vim'
 " 多语言自动注释
-Plug 'vim-scripts/DoxygenToolkit.vim'
+Plug 'vim-scripts/DoxygenToolkit.vim',{'for':language}
     map <leader>dx :Dox<CR>
     map <leader>dl :DoxLic<CR>
     map <leader>da :DoxAuthor<CR>
@@ -43,9 +43,9 @@ Plug 'vim-scripts/DoxygenToolkit.vim'
     " autocmd FileType java set completefunc=javacomplete#CompleteParamsInfo
 " 括号自动补全
 Plug 'jiangmiao/auto-pairs'
-
+    let g:AutoPairs={'(':')', '[':']', '{':'}',"'":"'",'"':'"', '`':'`','<':'>'}
 " 多语言模板补全,补全自动弹出
-Plug 'Shougo/neosnippet-snippets'| Plug 'Shougo/neosnippet.vim'
+Plug 'Shougo/neosnippet-snippets',{'for':language}| Plug 'Shougo/neosnippet.vim'
     " Plugin key-mappings.
     imap <C-k>     <Plug>(neosnippet_expand_or_jump)
     smap <C-k>     <Plug>(neosnippet_expand_or_jump)
@@ -61,7 +61,7 @@ Plug 'Shougo/neosnippet-snippets'| Plug 'Shougo/neosnippet.vim'
       set conceallevel=2 concealcursor=niv
     endif
 
-Plug 'Shougo/neocomplete.vim'
+Plug 'Shougo/neocomplete.vim',{'for':language}
     let g:neocomplete#enable_debug = 0
     let g:acp_enableAtStartup = 0
     let g:neocomplete#enable_at_startup = 1
@@ -92,7 +92,7 @@ Plug 'Shougo/neocomplete.vim'
     inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
     inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
 "颜色增强
-Plug 'sentientmachine/erics_vim_syntax_and_color_highlighting'
+Plug 'sentientmachine/erics_vim_syntax_and_color_highlighting',{'for':language}
 " 目录树
 " Plug 'scrooloose/nerdtree'
     map <F2> :NERDTreeToggle<CR>

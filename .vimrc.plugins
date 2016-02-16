@@ -1,3 +1,4 @@
+let language=['python','c','cpp','vbs','vim','java','php','ino','vimentry']
 " Pathogen or Vundle (deafult is Vundle) {{{
 
 " Comment-out if you want to use pahogen
@@ -6,12 +7,6 @@
 
 " man.vim: invoked by :Man {name}
 source $VIMRUNTIME/ftplugin/man.vim
-
-" let Vundle manage Vundle, required
-" ---------------------------------------------------
-Plug 'gmarik/Vundle.vim'
-
-"}}}
 
 " general plugins {{{
 
@@ -33,7 +28,7 @@ nmap <unique> <silent> <Leader><Esc> :EXgp<CR><ESC>
 
 " ex-aftercolor
 " ---------------------------------------------------
-Plug 'exvim/ex-aftercolors'
+Plug 'exvim/ex-aftercolors',{'for':language}
 
 " ex-vimentry
 " ---------------------------------------------------
@@ -41,7 +36,7 @@ Plug 'exvim/ex-vimentry'
 
 " ex-project
 " ---------------------------------------------------
-Plug 'exvim/ex-project'
+Plug 'exvim/ex-project',{'for':language}
 
 " ex-gsearch
 " ---------------------------------------------------
@@ -91,7 +86,7 @@ Plug 'exvim/ex-qfix'
 
 " ex-hierarchy
 " ---------------------------------------------------
-Plug 'exvim/ex-hierarchy'
+Plug 'exvim/ex-hierarchy',{'for':language}
 
 nnoremap <unique> <leader>hv :EXHierarchyCWord<CR>
 
@@ -209,16 +204,16 @@ let g:tagbar_type_cpp = {
 
 " ex-showmarks: invoke by m... or <leader>mm, <leader>ma
 " ---------------------------------------------------
-Plug 'exvim/ex-showmarks'
-
-" TODO: bootleq/ShowMarks on github is well organized in code, but have lots
-" bugs, consider merge his code and fixes the bugs
-let g:showmarks_enable = 1
-let g:showmarks_include = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
-let g:showmarks_ignore_type = 'hqm' " Ignore help, quickfix, non-modifiable buffers
-" Hilight lower & upper marks
-let g:showmarks_hlline_lower = 1
-let g:showmarks_hlline_upper = 0
+" Plug 'exvim/ex-showmarks'
+"
+" " TODO: bootleq/ShowMarks on github is well organized in code, but have lots
+" " bugs, consider merge his code and fixes the bugs
+" let g:showmarks_enable = 1
+" let g:showmarks_include = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+" let g:showmarks_ignore_type = 'hqm' " Ignore help, quickfix, non-modifiable buffers
+" " Hilight lower & upper marks
+" let g:showmarks_hlline_lower = 1
+" let g:showmarks_hlline_upper = 0
 
 " ex-visincr: invoke when select text and type ':II'
 " ---------------------------------------------------
@@ -374,7 +369,7 @@ let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
 
 " undotree: invoke by <Leader>u
 " ---------------------------------------------------
-Plug 'mbbill/undotree'
+Plug 'mbbill/undotree',{'on':'UndotreeToggle'}
 
 nnoremap <leader>u :UndotreeToggle<CR>
 let g:undotree_SetFocusWhenToggle=1
@@ -396,7 +391,7 @@ endfunction
 
 " tabular: invoke by <leader>= alignment-character
 " ---------------------------------------------------
-Plug 'godlygeek/tabular'
+Plug 'godlygeek/tabular',{'on':'Tabular'}
 
 nnoremap <silent> <leader>= :call g:Tabular(1)<CR>
 xnoremap <silent> <leader>= :call g:Tabular(0)<CR>
@@ -425,7 +420,7 @@ let g:EasyMotion_startofline = 0 " keep cursor colum when JK motion
 " LargeFile
 " ---------------------------------------------------
 Plug 'vim-scripts/LargeFile'
-let g:LargeFile= 5 " files >= 5MB will use LargeFile rules
+let g:LargeFile= 1 " files >= 5MB will use LargeFile rules
 
 "}}}
 
@@ -439,7 +434,7 @@ let g:LargeFile= 5 " files >= 5MB will use LargeFile rules
 
 " ex-cref: invoke by <leader>cr
 " ---------------------------------------------------
-Plug 'exvim/ex-cref'
+Plug 'exvim/ex-cref',{'for':['cpp','c']}
 
 " this is modified for default c syntax highlight settings
 " make it don't highlight error pattern
@@ -474,7 +469,7 @@ let g:indent_guides_guide_size = 1
 
 " vim-javascript
 " ---------------------------------------------------
-Plug 'pangloss/vim-javascript'
+Plug 'pangloss/vim-javascript',{'for':'javascript'}
 
 " vim-coffee-script
 " ---------------------------------------------------
@@ -482,7 +477,7 @@ Plug 'kchmck/vim-coffee-script'
 
 " vim-html
 " ---------------------------------------------------
-Plug 'exvim/ex-indenthtml.vim'
+Plug 'exvim/ex-indenthtml.vim',{'for':'html'}
 
 
 " DISABLE: Slow to open big css file
@@ -491,19 +486,19 @@ Plug 'exvim/ex-indenthtml.vim'
 " Plug 'skammer/vim-css-color'
 
 " vim-css3-syntax
-Plug 'hail2u/vim-css3-syntax'
+Plug 'hail2u/vim-css3-syntax',{'for':['css','html']}
 
 " vim-less
 " ---------------------------------------------------
-Plug 'groenewege/vim-less'
+Plug 'groenewege/vim-less',{'for':['css','html']}
 
 " vim-stylus
 " ---------------------------------------------------
-Plug 'wavded/vim-stylus'
+Plug 'wavded/vim-stylus',{'for':['css','html']}
 
 " vim-markdown
 " ---------------------------------------------------
-Plug 'plasticboy/vim-markdown'
+Plug 'plasticboy/vim-markdown',{'for':'markdown'}
 
 let g:vim_markdown_initial_foldlevel=9999
 
