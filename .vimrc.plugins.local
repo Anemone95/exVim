@@ -1,0 +1,149 @@
+" 对齐线
+Plug 'Yggdroot/indentLine'
+    au! BufRead,BufNewFile,BufEnter IndentLinesToggle()
+    let g:indentLine_char = "┊"
+    let g:indentLine_first_char = "┊"
+" Python字典增强
+Plug 'pydiction'
+    "then make sure you set g:pydiction_location to the full path of where you installed complete-dict. Ex:
+    "for example, if you used Pathogen to install Pydiction, you would set this to:
+
+    let g:pydiction_location = $VIM."/vimfiles/bundle/pydiction/complete-dict"
+    " python pydiction.py <module> [module]
+" 一键编译&运行
+Plug 'xuhdev/SingleCompile'
+    nmap <F9> :w<cr>: SCCompileRun<CR>
+    imap <F9> <ESC>:w<CR>:SCCompileRun<CR>
+    nmap <F10> :SCCompile<cr>
+    let g:SingleCompile_showquickfixiferror = 1
+" matlab 增强插件
+Plug 'lazywei/vim-matlab'
+" php 自动注释
+" Plug 'vim-scripts/PDV--phpDocumentor-for-Vim'
+" 多语言自动注释
+Plug 'vim-scripts/DoxygenToolkit.vim'
+    map <leader>dx :Dox<CR>
+    map <leader>dl :DoxLic<CR>
+    map <leader>da :DoxAuthor<CR>
+    let g:DoxygenToolkit_authorName="Anemone,x565178035@126.com"
+    " let s:licenseTag = "Copyright(C)\<enter>"
+    " let s:licenseTag = s:licenseTag . "For free\<enter>"
+    " let s:licenseTag = s:licenseTag . "All right reserved\<enter>"
+    " let g:DoxygenToolkit_licenseTag = s:licenseTag
+    let g:DoxygenToolkit_briefTag_funcName="yes"
+    let g:doxygen_enhanced_color=1
+
+" java 补全增强
+" Plug 'cespare/vjde'
+
+" Plug 'artur-shaik/vim-javacomplete2'
+    " autocmd FileType java set omnifunc=javacomplete#Complete
+" Plug 'vim-scripts/javacomplete'
+    " autocmd FileType java set omnifunc=javacomplete#Complete
+    " autocmd FileType java set completefunc=javacomplete#CompleteParamsInfo
+" 括号自动补全
+Plug 'jiangmiao/auto-pairs'
+
+" 多语言模板补全,补全自动弹出
+Plug 'Shougo/neosnippet-snippets'| Plug 'Shougo/neosnippet.vim'
+    " Plugin key-mappings.
+    imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+    smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+    xmap <C-k>     <Plug>(neosnippet_expand_target)
+
+    " SuperTab like snippets behavior.
+    imap <expr><TAB>
+    \ pumvisible() ? "\<C-n>" :
+    \ neosnippet#expandable_or_jumpable() ?
+    \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+    " For conceal markers.
+    if has('conceal')
+      set conceallevel=2 concealcursor=niv
+    endif
+
+Plug 'Shougo/neocomplete.vim'
+    let g:neocomplete#enable_debug = 0
+    let g:acp_enableAtStartup = 0
+    let g:neocomplete#enable_at_startup = 1
+    let g:neocomplete#enable_smart_case = 1
+    let g:neocomplete#enable_auto_select = 0
+    " let g:neocomplete#sources#syntax#min_keyword_length = 2
+    " let g:neocomplete#sources#auto_completion_start_length = 3
+    let g:neocomplete#max_list=30
+    let g:neocomplete#sources#dictionary#dictionaries = {
+        \ 'default' : '',
+        \ 'arduino' : $VIM.'/vimfiles/dict/arduino.dict',
+        \ 'c' : $VIM.'/vimfiles/dict/c.dict',
+        \ 'cpp' : $VIM.'/vimfiles/dict/cpp.dict',
+        \ 'css' : $VIM.'/vimfiles/dict/css.dict',
+        \ 'java' : $VIM.'/vimfiles/dict/java.dict',
+        \ 'javascript' : $VIM.'/vimfiles/dict/javascript.dict',
+        \ 'php' : $VIM.'/vimfiles/dict/php.dict',
+        \ 'vim' : $VIM.'/vimfiles/dict/vim.dict',
+        \ 'matlab' : $VIM.'/vimfiles/dict/matlab.dict',
+    \ }
+    inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+    autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+    autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+    autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+    autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+    autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+
+    inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+    inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+"颜色增强
+Plug 'sentientmachine/erics_vim_syntax_and_color_highlighting'
+" 目录树
+" Plug 'scrooloose/nerdtree'
+    map <F2> :NERDTreeToggle<CR>
+" 历史操作列表
+" Plugin 'mbbill/undotree'
+    nnoremap <F3> :UndotreeToggle<CR>
+
+" Plugin 'tpope/vim-surround'
+    xmap ) S(
+    xmap ] S[
+    xmap } S{
+    " xmap ' S'
+    xmap " S"
+
+Plug 'vim-airline/vim-airline-themes'| Plug 'vim-airline/vim-airline'
+   " let g:airline_extensions = ['tabline', 'unite', 'quickfix']
+    let g:airline_theme="molokai"
+    let g:airline_powerline_fonts = 1
+    let g:airline_left_sep = ''
+    let g:airline_left_alt_sep = ''
+    let g:airline_right_sep = ''
+    let g:airline_right_alt_sep = ''
+
+    "打开tabline功能,方便查看Buffer和切换，这个功能比较不错"
+    "我还省去了minibufexpl插件，因为我习惯在1个Tab下用多个buffer"
+    let g:airline#extensions#tabline#enabled = 1
+    let g:airline#extensions#tabline#buffer_nr_show = 1
+
+    "设置切换Buffer快捷键"
+    nnoremap <C-N> :bn<CR>
+    nnoremap <C-P> :bp<CR>
+
+    " 关闭状态显示空白符号计数,这个对我用处不大"
+    let g:airline#extensions#whitespace#enabled = 0
+    let g:airline#extensions#whitespace#symbol = '!'
+    noremap q :call BufferDelete()<CR>
+    function! BufferDelete()
+        if &modified
+            echohl ErrorMsg
+            echomsg "No write since last change. Not closing buffer."
+            echohl NONE
+        else
+            let s:total_nr_buffers = len(filter(range(1, bufnr('$')), 'buflisted(v:val)'))
+
+            if s:total_nr_buffers == 1
+                bdelete
+                echo "Buffer deleted. Created new buffer."
+            else
+                bprevious
+                bdelete #
+                echo "Buffer deleted."
+            endif
+        endif
+    endfunction

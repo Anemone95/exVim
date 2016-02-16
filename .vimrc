@@ -134,8 +134,8 @@ if filereadable(expand(vimrc_plugins_local_path))
     exec 'source ' . fnameescape(vimrc_plugins_local_path)
 endif
 
-Plug 'exvim/ex-colorschemes'
 call plug#end()
+call InitalExfunction()
 
 "/////////////////////////////////////////////////////////////////////////////
 " Default colorscheme setup

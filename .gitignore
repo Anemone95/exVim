@@ -1,6 +1,7 @@
 bin/
 graphviz/
 vim74/
+vimfiles/plugged/
 vimfiles/bundle/
 !vimfiles/bundle/Vundle.vim/
 vimfiles/tools/
