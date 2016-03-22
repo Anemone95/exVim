@@ -18,6 +18,22 @@ if !exists('g:exvim_custom_path')
     endif
 endif
 
+" set runtimepath+=$VIM/vimfiles/plugged/vim-eclim
+" set runtimepath+=$VIM/vimfiles/plugged/AutoComplPop
+
+" let g:acp_behaviorJavaEclimLength = 0
+" function MeetsForJavaEclim(context)
+  " return g:acp_behaviorJavaEclimLength >= 0 &&
+        " \ a:context =~ '\k\.\k\{' . g:acp_behaviorJavaEclimLength . ',}$'
+" endfunction
+" let g:acp_behavior = {
+    " \ 'java': [{
+      " \ 'command': "\<c-x>\<c-u>",
+      " \ 'completefunc' : 'eclim#java#complete#CodeComplete',
+      " \ 'meets'        : 'MeetsForJavaEclim',
+    " \ }]
+  " \ }
+
 "/////////////////////////////////////////////////////////////////////////////
 " language and encoding setup
 "/////////////////////////////////////////////////////////////////////////////
@@ -67,6 +83,10 @@ else
 endif
 scriptencoding utf-8
 
+"/////////////////////////////////////////////////////////////////////////////
+" vim-plug steup
+"/////////////////////////////////////////////////////////////////////////////
+
 if exists('g:exvim_custom_path')
     let g:ex_tools_path = g:exvim_custom_path.'/vimfiles/tools/'
     " exec 'set rtp+=' . fnameescape ( g:exvim_custom_path.'/vimfiles/bundle/Vundle.vim/' )
@@ -75,9 +95,8 @@ else
     " set rtp+=~/.vim/bundle/Vundle.vim/
     let g:exvim_custom_path=$VIM
 endif
+
 call plug#begin(g:exvim_custom_path.'/vimfiles/plugged/')
-
-
 
 Plug 'Shougo/neosnippet-snippets'| Plug 'Shougo/neosnippet.vim'
     " Plugin key-mappings.
@@ -96,6 +115,22 @@ Plug 'Shougo/neosnippet-snippets'| Plug 'Shougo/neosnippet.vim'
     endif
 
 Plug 'starcraftman/vim-eclim'
+
+
+Plug 'vim-scripts/AutoComplPop'
+    let g:acp_behaviorJavaEclimLength = 1
+    function MeetsForJavaEclim(context)
+      return g:acp_behaviorJavaEclimLength >= 0 &&
+            \ a:context =~ '\k\.\k\{' . g:acp_behaviorJavaEclimLength . ',}$'
+    endfunction
+    let g:acp_behavior = {
+        \ 'java': [{
+          \ 'command': "\<c-x>\<c-u>",
+          \ 'completefunc' : 'eclim#java#complete#CodeComplete',
+          \ 'meets'        : 'MeetsForJavaEclim',
+        \ }]
+      \ }
+
 
 Plug 'exvim/ex-config'
 nnoremap <unique> <leader>ve :call exconfig#edit_cur_vimentry ()<CR>
