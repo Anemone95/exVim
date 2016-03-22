@@ -1,6 +1,6 @@
 @echo off
 set DEST=.\.exvim.exVim
-set TOOLS=C:\exVim\vimfiles\tools\
+set TOOLS=C:\Users\Anemone\.vim\tools\
 set FILE_SUFFIXS=
 set GAWK_SUFFIX=inc
 set FILE_FILTER_PATTERN=""

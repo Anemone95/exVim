@@ -8,7 +8,7 @@ Plug 'pydiction',{'for':'python'}
     "then make sure you set g:pydiction_location to the full path of where you installed complete-dict. Ex:
     "for example, if you used Pathogen to install Pydiction, you would set this to:
 
-    let g:pydiction_location = $VIM."/vimfiles/bundle/pydiction/complete-dict"
+    let g:pydiction_location = $VIM."/vimfiles/plugged/pydiction/complete-dict"
     " python pydiction.py <module> [module]
 " 一键编译&运行
 Plug 'xuhdev/SingleCompile',{'on':['SCCompile','SCCompileRun']}
@@ -43,7 +43,6 @@ Plug 'vim-scripts/DoxygenToolkit.vim',{'for':language}
     " autocmd FileType java set completefunc=javacomplete#CompleteParamsInfo
 " 括号自动补全
 Plug 'jiangmiao/auto-pairs'
-    let g:AutoPairs={'(':')', '[':']', '{':'}',"'":"'",'"':'"', '`':'`','<':'>'}
 " 多语言模板补全,补全自动弹出
 Plug 'Shougo/neosnippet-snippets',{'for':language}| Plug 'Shougo/neosnippet.vim'
     " Plugin key-mappings.
@@ -96,6 +95,7 @@ Plug 'sentientmachine/erics_vim_syntax_and_color_highlighting',{'for':language}
 " 目录树
 " Plug 'scrooloose/nerdtree'
     map <F2> :NERDTreeToggle<CR>
+    let g:NERDTreeWinSize=25
 " 历史操作列表
 " Plugin 'mbbill/undotree'
     nnoremap <F3> :UndotreeToggle<CR>
@@ -122,8 +122,9 @@ Plug 'vim-airline/vim-airline-themes'| Plug 'vim-airline/vim-airline'
     let g:airline#extensions#tabline#buffer_nr_show = 1
 
     "设置切换Buffer快捷键"
-    nnoremap <C-N> :bn<CR>
-    nnoremap <C-P> :bp<CR>
+    nnoremap <c-]> :bn<CR>
+    nnoremap <c-[> :bp<CR>
+    " nnoremap <C-P> :bp<CR>
 
     " 关闭状态显示空白符号计数,这个对我用处不大"
     let g:airline#extensions#whitespace#enabled = 0
@@ -147,3 +148,20 @@ Plug 'vim-airline/vim-airline-themes'| Plug 'vim-airline/vim-airline'
             endif
         endif
     endfunction
+
+Plug 'jmcomets/vim-pony',{'for':'python'}
+    let g:pony_display_colors=0
+" Plug 'hdima/python-syntax'
+    " let python_highlight_all = 1
+
+",{'for':'python'}
+
+" Plug 'vim-scripts/python-fold',{'for':'python'}
+
+Plug 'terryma/vim-multiple-cursors'
+    " let g:multi_cursor_next_key='<Tab>'
+    " let g:multi_cursor_prev_key='<C-q>'
+    " let g:multi_cursor_skip_key='<C-u>'
+    " let g:multi_cursor_quit_key='<C=]>'
+
+Plug 'starcraftman/vim-eclim',{'on':'EclimEnable'}

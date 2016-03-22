@@ -12,7 +12,8 @@ set shiftwidth=4
 "指定按一次backspace就删除shiftwidth宽度
 set smarttab
 
-"启用折叠
+set foldlevelstart=1
+" 启用折叠
 if line("$")>200
     set foldenable
     set foldmethod=syntax
@@ -25,10 +26,10 @@ nnoremap <space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zO')<CR>
 set autoread
 
 " 常规模式下输入 cS 清除行尾空格
-nmap cl :%s/\s\+$//g<CR>:noh<CR>:set fileencoding=utf-8<cr>:%s/\t/<space><space><space><space>/g<CR>
+nmap su :%s/\r$//g<CR>:noh<CR>:set fileencoding=utf-8<cr>:%s/\t/<space><space><space><space>/g<CR>
 
 " 常规模式下输入 cM 清除行尾 ^M 符号
-nmap cm :%s/\r$//g<CR>:noh<CR>:set fileencoding=gbk<cr>
+nmap sg :set fileencoding=gbk<cr>
 " 突出显示当前行
 set cursorline
 " 设置不自动换行
@@ -80,8 +81,7 @@ language messages zh_CN.utf-8
 " -----------------------------------------------------------------------------
 " 注：使用utf-8格式后，软件与程序源码、文件路径不能有中文，否则报错
 set encoding=utf-8                                    "设置gvim内部编码，默认不更改
-set fileencoding=utf-8                                "设置当前文件编码，可以更改，如：gbk（同cp936）
-set fileencodings=ucs-bom,utf-8,gbk,cp936,latin-1     "设置支持打开的文件的编码
+set fileencodings=utf-8,ucs-bom,gbk,cp936,latin-1     "设置支持打开的文件的编码
 
 " 文件格式，默认 ffs=dos,unix
 set fileformat=unix                                   "设置新（当前）文件的<EOL>格式，可以更改，如：dos（windows系统常用）
@@ -103,6 +103,8 @@ autocmd FileType matlab source $VIM/vimfiles/matlabscript.vim
 autocmd FileType asm source $VIM/vimfiles/asmscript.vim
 autocmd FileType php source $VIM/vimfiles/phpscript.vim
 autocmd FileType java source $VIM/vimfiles/javascript.vim
+autocmd FileType markdown set conceallevel=0
+autocmd FileType html set ft=htmldjango.html " For SnipMate
 
 map w e
 imap ]] {<CR>
@@ -112,4 +114,5 @@ imap <C-]> <ESC>
 vmap <C-]> <ESC>
 cmap <C-]> <ESC>
 imap kk <ESC>la
-map <C-a> ggvG
+map <C-a> ggVG
+unmap <esc>

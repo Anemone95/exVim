@@ -173,4 +173,4 @@ inoremap    <buffer>  <silent>  <LocalLeader>xi    <Esc>:call InsertClassX()<CR>
 inoremap    <buffer>  <silent>  <LocalLeader>ai         :call AddAccessor()<CR>
  noremap    <buffer>  <silent>  <LocalLeader>add         :call AddAnyCase()<CR>
 inoremap    <buffer>  <silent>  <LocalLeader>add    <Esc>:call AddAnyCase()<CR>
-call SingleCompile#ChooseCompiler('cpp', 'g++')
+" call SingleCompile#ChooseCompiler('cpp', 'g++')

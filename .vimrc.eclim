@@ -1,0 +1,421 @@
+set nocompatible " be iMproved, required
+
+function! OSX()
+    return has('macunix')
+endfunction
+function! LINUX()
+    return has('unix') && !has('macunix') && !has('win32unix')
+endfunction
+function! WINDOWS()
+    return  (has('win16') || has('win32') || has('win64'))
+endfunction
+
+" On Windows, also use '.vim' instead of 'vimfiles'; this makes synchronization
+" across (heterogeneous) systems easier.
+if !exists('g:exvim_custom_path')
+    if WINDOWS()
+        set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
+    endif
+endif
+
+"/////////////////////////////////////////////////////////////////////////////
+" language and encoding setup
+"/////////////////////////////////////////////////////////////////////////////
+
+" always use English menu
+" NOTE: this must before filetype off, otherwise it won't work
+set langmenu=none
+
+" use English for anaything in vim-editor.
+if WINDOWS()
+    silent exec 'language english'
+elseif OSX()
+    silent exec 'language en_US'
+else
+    let s:uname = system("uname -s")
+    if s:uname == "Darwin\n"
+        " in mac-terminal
+        silent exec 'language en_US'
+    else
+        " in linux-terminal
+        silent exec 'language en_US.utf8'
+    endif
+endif
+
+" try to set encoding to utf-8
+if WINDOWS()
+    " Be nice and check for multi_byte even if the config requires
+    " multi_byte support most of the time
+    if has('multi_byte')
+        " Windows cmd.exe still uses cp850. If Windows ever moved to
+        " Powershell as the primary terminal, this would be utf-8
+        set termencoding=cp850
+        " Let Vim use utf-8 internally, because many scripts require this
+        set encoding=utf-8
+        setglobal fileencoding=utf-8
+        " Windows has traditionally used cp1252, so it's probably wise to
+        " fallback into cp1252 instead of eg. iso-8859-15.
+        " Newer Windows files might contain utf-8 or utf-16 LE so we might
+        " want to try them first.
+        set fileencodings=ucs-bom,utf-8,utf-16le,cp1252,iso-8859-15
+    endif
+
+else
+    " set default encoding to utf-8
+    set encoding=utf-8
+    set termencoding=utf-8
+endif
+scriptencoding utf-8
+
+if exists('g:exvim_custom_path')
+    let g:ex_tools_path = g:exvim_custom_path.'/vimfiles/tools/'
+    " exec 'set rtp+=' . fnameescape ( g:exvim_custom_path.'/vimfiles/bundle/Vundle.vim/' )
+else
+    let g:ex_tools_path = '~/.vim/tools/'
+    " set rtp+=~/.vim/bundle/Vundle.vim/
+    let g:exvim_custom_path=$VIM
+endif
+call plug#begin(g:exvim_custom_path.'/vimfiles/plugged/')
+
+
+
+Plug 'Shougo/neosnippet-snippets'| Plug 'Shougo/neosnippet.vim'
+    " Plugin key-mappings.
+    imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+    smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+    xmap <C-k>     <Plug>(neosnippet_expand_target)
+
+    " SuperTab like snippets behavior.
+    imap <expr><TAB>
+    \ pumvisible() ? "\<C-n>" :
+    \ neosnippet#expandable_or_jumpable() ?
+    \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+    " For conceal markers.
+    if has('conceal')
+      set conceallevel=2 concealcursor=niv
+    endif
+
+Plug 'starcraftman/vim-eclim'
+
+Plug 'exvim/ex-config'
+nnoremap <unique> <leader>ve :call exconfig#edit_cur_vimentry ()<CR>
+Plug 'exvim/ex-utility'
+nnoremap <unique> <silent> <Leader>bd :EXbd<CR>
+nnoremap <unique> <silent> <C-l> :EXbn<CR>
+nnoremap <unique> <silent> <C-h> :EXbp<CR>
+nnoremap <unique> <silent> <C-Tab> :EXbalt<CR>
+nnoremap <unique> <silent> <Leader><Tab> :EXsw<CR>
+nmap <unique> <silent> <Leader><Esc> :EXgp<CR><ESC>
+Plug 'exvim/ex-vimentry'
+
+Plug 'scrooloose/nerdtree'
+map <F2> :NERDTreeToggle<CR>
+let g:NERDTreeWinSize=25
+let g:NERDTreeMouseMode = 1
+let g:NERDTreeMapToggleZoom = '<Space>'
+
+
+" 对齐线
+Plug 'Yggdroot/indentLine'
+    au! BufRead,BufNewFile,BufEnter IndentLinesToggle()
+    let g:indentLine_char = "┊"
+    let g:indentLine_first_char = "┊"
+
+Plug 'vim-scripts/DoxygenToolkit.vim'
+    map <leader>dx :Dox<CR>
+    map <leader>dl :DoxLic<CR>
+    map <leader>da :DoxAuthor<CR>
+    let g:DoxygenToolkit_authorName="Anemone,x565178035@126.com"
+    " let s:licenseTag = "Copyright(C)\<enter>"
+    " let s:licenseTag = s:licenseTag . "For free\<enter>"
+    " let s:licenseTag = s:licenseTag . "All right reserved\<enter>"
+    " let g:DoxygenToolkit_licenseTag = s:licenseTag
+    let g:DoxygenToolkit_briefTag_funcName="yes"
+    let g:doxygen_enhanced_color=1
+
+"颜色增强
+Plug 'sentientmachine/erics_vim_syntax_and_color_highlighting'
+" 括号自动补全
+Plug 'jiangmiao/auto-pairs'
+
+Plug 'vim-airline/vim-airline-themes'| Plug 'vim-airline/vim-airline'
+   " let g:airline_extensions = ['tabline', 'unite', 'quickfix']
+    let g:airline_theme="molokai"
+    let g:airline_powerline_fonts = 1
+    let g:airline_left_sep = ''
+    let g:airline_left_alt_sep = ''
+    let g:airline_right_sep = ''
+    let g:airline_right_alt_sep = ''
+
+    "打开tabline功能,方便查看Buffer和切换，这个功能比较不错"
+    "我还省去了minibufexpl插件，因为我习惯在1个Tab下用多个buffer"
+    let g:airline#extensions#tabline#enabled = 1
+    let g:airline#extensions#tabline#buffer_nr_show = 1
+
+    "设置切换Buffer快捷键"
+    nnoremap <c-]> :bn<CR>
+    nnoremap <c-[> :bp<CR>
+    " nnoremap <C-P> :bp<CR>
+
+    " 关闭状态显示空白符号计数,这个对我用处不大"
+    let g:airline#extensions#whitespace#enabled = 0
+    let g:airline#extensions#whitespace#symbol = '!'
+    noremap q :call BufferDelete()<CR>
+    function! BufferDelete()
+        if &modified
+            echohl ErrorMsg
+            echomsg "No write since last change. Not closing buffer."
+            echohl NONE
+        else
+            let s:total_nr_buffers = len(filter(range(1, bufnr('$')), 'buflisted(v:val)'))
+
+            if s:total_nr_buffers == 1
+                bdelete
+                echo "Buffer deleted. Created new buffer."
+            else
+                bprevious
+                bdelete #
+                echo "Buffer deleted."
+            endif
+        endif
+    endfunction
+
+Plug 'scrooloose/nerdcommenter'
+    let g:NERDSpaceDelims = 1
+    let g:NERDRemoveExtraSpaces = 1
+
+Plug 'tpope/vim-surround'
+    xmap s <Plug>VSurround
+
+Plug 'ntpeters/vim-better-whitespace'
+    nnoremap <unique> <leader>w :StripWhitespace<CR>
+
+Plug 'exvim/ex-colorschemes'
+
+
+Plug 'exvim/ex-tagbar'
+    nnoremap <unique> <silent> <F4> :TagbarToggle<CR>
+
+    let g:tagbar_sort = 0
+    let g:tagbar_map_preview = '<CR>'
+    if has('gui_running')
+        let g:tagbar_map_close = '<Esc>'
+    else
+        let g:tagbar_map_close = '<leader><Esc>'
+    endif
+    let g:tagbar_map_zoomwin = '<Space>'
+    let g:tagbar_zoomwidth = 40
+    let g:tagbar_autofocus = 1
+    let g:tagbar_width = 28
+    let g:tagbar_iconchars = ['+', '-']
+
+    " use command ':TagbarGetTypeConfig lang' change your settings
+    let g:tagbar_type_javascript = {
+        \ 'ctagsbin': 'ctags',
+        \ 'kinds' : [
+            \ 'v:global variables:0:0',
+            \ 'c:classes',
+            \ 'p:properties:0:0',
+            \ 'm:methods',
+            \ 'f:functions',
+            \ 'r:object',
+        \ ],
+    \ }
+    let g:tagbar_type_c = {
+        \ 'kinds' : [
+            \ 'd:macros:0:0',
+            \ 'p:prototypes:0:0',
+            \ 'g:enums',
+            \ 'e:enumerators:0:0',
+            \ 't:typedefs:0:0',
+            \ 's:structs',
+            \ 'u:unions',
+            \ 'm:members:0:0',
+            \ 'v:variables:0:0',
+            \ 'f:functions',
+        \ ],
+    \ }
+    let g:tagbar_type_cpp = {
+        \ 'kinds' : [
+            \ 'd:macros:0:0',
+            \ 'p:prototypes:0:0',
+            \ 'g:enums',
+            \ 'e:enumerators:0:0',
+            \ 't:typedefs:0:0',
+            \ 'n:namespaces',
+            \ 'c:classes',
+            \ 's:structs',
+            \ 'u:unions',
+            \ 'f:functions',
+            \ 'm:members:0:0',
+            \ 'v:variables:0:0',
+        \ ],
+    \ }
+
+call plug#end()
+
+let vimrc_local_path = '~/.vimrc.local'
+if exists('g:exvim_custom_path')
+    let vimrc_local_path = g:exvim_custom_path.'/.vimrc.local'
+endif
+
+" ------------------------------------------------------------------
+" Desc: Visual
+" ------------------------------------------------------------------
+
+set matchtime=0 " 0 second to show the matching paren ( much faster )
+set nu " show line number
+set scrolloff=0 " minimal number of screen lines to keep above and below the cursor
+set nowrap " do not wrap text
+
+" only supoort in 7.3 or higher
+if v:version >= 703
+    set noacd " no autochchdir
+endif
+
+" set default guifont
+if has('gui_running')
+    augroup ex_gui_font
+        " check and determine the gui font after GUIEnter.
+        " NOTE: getfontname function only works after GUIEnter.
+        au!
+        au GUIEnter * call s:set_gui_font()
+    augroup END
+
+    " set guifont
+    function! s:set_gui_font()
+        if has('gui_gtk2')
+            if getfontname( 'DejaVu Sans Mono for Powerline' ) != ''
+                set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 12
+            elseif getfontname( 'DejaVu Sans Mono' ) != ''
+                set guifont=DejaVu\ Sans\ Mono\ 12
+            else
+                set guifont=Luxi\ Mono\ 12
+            endif
+        elseif has('x11')
+            " Also for GTK 1
+            set guifont=*-lucidatypewriter-medium-r-normal-*-*-180-*-*-m-*-*
+        elseif OSX()
+            if getfontname( 'DejaVu Sans Mono for Powerline' ) != ''
+                set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h15
+            elseif getfontname( 'DejaVu Sans Mono' ) != ''
+                set guifont=DejaVu\ Sans\ Mono:h15
+            endif
+        elseif WINDOWS()
+            if getfontname( 'DejaVu Sans Mono for Powerline' ) != ''
+                set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h11:cANSI
+            elseif getfontname( 'DejaVu Sans Mono' ) != ''
+                set guifont=DejaVu\ Sans\ Mono:h11:cANSI
+            elseif getfontname( 'Consolas' ) != ''
+                set guifont=Consolas:h11:cANSI " this is the default visual studio font
+            else
+                set guifont=Lucida_Console:h11:cANSI
+            endif
+        endif
+    endfunction
+endif
+
+" ------------------------------------------------------------------
+" Desc: Vim UI
+" ------------------------------------------------------------------
+
+set wildmenu " turn on wild menu, try typing :h and press <Tab>
+set showcmd " display incomplete commands
+set cmdheight=1 " 1 screen lines to use for the command-line
+set ruler " show the cursor position all the time
+set hidden " allow to change buffer without saving
+set shortmess=aoOtTI " shortens messages to avoid 'press a key' prompt
+set lazyredraw " do not redraw while executing macros (much faster)
+set display+=lastline " for easy browse last line with wrap text
+set laststatus=2 " always have status-line
+set titlestring=%t\ (%{expand(\"%:p:.:h\")}/)
+
+" set window size (if it's GUI)
+if has('gui_running')
+    " set window's width to 130 columns and height to 40 rows
+    if exists('+lines')
+        set lines=40
+    endif
+    if exists('+columns')
+        set columns=130
+    endif
+
+    " DISABLE
+    " if WINDOWS()
+    "     au GUIEnter * simalt ~x " Maximize window when enter vim
+    " else
+    "     " TODO: no way right now
+    " endif
+endif
+
+set showfulltag " show tag with function protype.
+set guioptions+=b " present the bottom scrollbar when the longest visible line exceed the window
+
+" disable menu & toolbar
+set guioptions-=m
+set guioptions-=T
+
+" ------------------------------------------------------------------
+" Desc: Text edit
+" ------------------------------------------------------------------
+
+set ai " autoindent
+set si " smartindent
+set backspace=indent,eol,start " allow backspacing over everything in insert mode
+" indent options
+" see help cinoptions-values for more details
+set	cinoptions=>s,e0,n0,f0,{0,}0,^0,:0,=s,l0,b0,g0,hs,ps,ts,is,+s,c3,C0,0,(0,us,U0,w0,W0,m0,j0,)20,*30
+" default '0{,0},0),:,0#,!^F,o,O,e' disable 0# for not ident preprocess
+" set cinkeys=0{,0},0),:,!^F,o,O,e
+
+" official diff settings
+set diffexpr=g:MyDiff()
+function! g:MyDiff()
+    let opt = '-a --binary -w '
+    if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
+    if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
+    let arg1 = v:fname_in
+    if arg1 =~ ' ' | let arg1 = '"' . arg1 . '"' | endif
+    let arg2 = v:fname_new
+    if arg2 =~ ' ' | let arg2 = '"' . arg2 . '"' | endif
+    let arg3 = v:fname_out
+    if arg3 =~ ' ' | let arg3 = '"' . arg3 . '"' | endif
+    silent execute '!' .  'diff ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3
+endfunction
+
+set cindent shiftwidth=4 " set cindent on to autoinent when editing c/c++ file, with 4 shift width
+set tabstop=4 " set tabstop to 4 characters
+set expandtab " set expandtab on, the tab will be change to space automaticaly
+set ve=block " in visual block mode, cursor can be positioned where there is no actual character
+
+" set Number format to null(default is octal) , when press CTRL-A on number
+" like 007, it would not become 010
+set nf=
+
+" ------------------------------------------------------------------
+" Desc: Fold text
+" ------------------------------------------------------------------
+
+set foldmethod=marker foldmarker={,} foldlevel=9999
+set diffopt=filler,context:9999
+
+" ------------------------------------------------------------------
+" Desc: Search
+" ------------------------------------------------------------------
+
+set showmatch " show matching paren
+set incsearch " do incremental searching
+set hlsearch " highlight search terms
+set ignorecase " set search/replace pattern to ignore case
+set smartcase " set smartcase mode on, If there is upper case character in the search patern, the 'ignorecase' option will be override.
+
+" set this to use id-utils for global search
+set grepprg=lid\ -Rgrep\ -s
+set grepformat=%f:%l:%m
+
+colorscheme molokai
+
+if filereadable(expand(vimrc_local_path))
+    exec 'source ' . fnameescape(vimrc_local_path)
+endif
+set nobackup

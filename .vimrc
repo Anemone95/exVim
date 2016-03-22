@@ -80,13 +80,12 @@ scriptencoding utf-8
 if exists('g:exvim_custom_path')
     let g:ex_tools_path = g:exvim_custom_path.'/vimfiles/tools/'
     " exec 'set rtp+=' . fnameescape ( g:exvim_custom_path.'/vimfiles/bundle/Vundle.vim/' )
-    " call vundle#rc(g:exvim_custom_path.'/vimfiles/bundle/')
-    call plug#begin(g:exvim_custom_path.'/vimfiles/plugged/')
 else
     let g:ex_tools_path = '~/.vim/tools/'
     " set rtp+=~/.vim/bundle/Vundle.vim/
-    call plug#begin(g:exvim_custom_path.'/vimfiles/plugged/')
+    let g:exvim_custom_path=$VIM
 endif
+call plug#begin(g:exvim_custom_path.'/vimfiles/plugged/')
 " " load .vimrc.plugins & .vimrc.plugins.local
 if exists('g:exvim_custom_path')
     let vimrc_plugins_path = g:exvim_custom_path.'/.vimrc.plugins'

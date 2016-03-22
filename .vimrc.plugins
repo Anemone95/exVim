@@ -1,4 +1,4 @@
-let language=['python','c','cpp','vbs','vim','java','php','ino','vimentry']
+let language=['python','c','cpp','vbs','vim','java','php','ino','vimentry','matlab','html']
 " Pathogen or Vundle (deafult is Vundle) {{{
 
 " Comment-out if you want to use pahogen
@@ -61,7 +61,7 @@ Plug 'exvim/ex-symbol'
 " call exsymbol#register_hotkey( 100, 0, '<leader>ss', ":EXSymbolList<CR>", 'List all symbols.' )
 " call exsymbol#register_hotkey( 101, 0, '<leader>sq', ":EXSymbolOpen<CR>", 'Open symbols window.' )
 " call exsymbol#register_hotkey( 102, 0, '<leader>sg', ":EXSymbolCWord<CR>", 'List symbols contains current word.' )
-" 
+"
 " if has('gui_running')
 "     if has ('mac')
 "         call exsymbol#register_hotkey( 102, 0, 'Ò', ":EXSymbolList<CR>:redraw<CR>/", 'List all symbols and stay in search mode.' )
@@ -115,7 +115,7 @@ nnoremap <unique> <leader>hv :EXHierarchyCWord<CR>
 " " very slow, so I disable this
 " " let Tlist_Process_File_Always = 1 " To use the :TlistShowTag and the :TlistShowPrototype commands without the taglist window and the taglist menu, you should set this variable to 1.
 " ":TlistShowPrototype [filename] [linenumber]
-" 
+"
 " " add javascript language
 " let tlist_javascript_settings = 'javascript;v:global variable:0:0;c:class;p:property;m:method;f:function;r:object'
 " " add hlsl shader language
@@ -138,8 +138,9 @@ else
     let g:tagbar_map_close = '<leader><Esc>'
 endif
 let g:tagbar_map_zoomwin = '<Space>'
-let g:tagbar_zoomwidth = 80
+let g:tagbar_zoomwidth = 40
 let g:tagbar_autofocus = 1
+let g:tagbar_width = 28
 let g:tagbar_iconchars = ['+', '-']
 
 " use command ':TagbarGetTypeConfig lang' change your settings
@@ -225,7 +226,7 @@ Plug 'exvim/ex-matchit'
 
 " ex-easyhl:
 " ---------------------------------------------------
-Plug 'exvim/ex-easyhl'
+" Plug 'exvim/ex-easyhl'
 
 " searchcompl: invoke by /
 " ---------------------------------------------------
@@ -503,7 +504,6 @@ Plug 'plasticboy/vim-markdown',{'for':'markdown'}
 let g:vim_markdown_initial_foldlevel=0
 let g:vim_markdown_folding_style_pythonic = 1
 let g:vim_markdown_folding_level = 0
-set conceallevel=0
 
 "}}}
 
