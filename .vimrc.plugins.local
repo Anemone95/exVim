@@ -16,8 +16,12 @@ Plug 'xuhdev/SingleCompile',{'on':['SCCompile','SCCompileRun']}
     imap <F9> <ESC>:w<CR>:SCCompileRun<CR>
     nmap <F10> :SCCompile<cr>
     let g:SingleCompile_showquickfixiferror = 1
-" matlab 增强插件
-Plug 'lazywei/vim-matlab',{'for':'matlab'}
+" MATLAB/MATLAB-fold: MATLAB 语法高亮及代码折叠插件。
+Plug 'djoshea/vim-matlab',{'for':'matlab'}
+Plug 'djoshea/vim-matlab-fold',{'for':'matlab'}
+" Plug 'vim-scripts/MatlabFilesEdition',{'for':'matlab'}
+" Plug 'lazywei/vim-matlab',{'for':'matlab'}
+
 " php 自动注释
 " Plug 'vim-scripts/PDV--phpDocumentor-for-Vim'
 " 多语言自动注释
