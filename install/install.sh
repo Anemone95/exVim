@@ -1,3 +1,4 @@
+#!/bin/
 cd ~/exvim*
 mv vimfiles/ ~/.vim
 mv .vimrc* ~/
