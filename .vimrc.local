@@ -1,6 +1,9 @@
 "共享剪切板
-set clipboard+=unnamed
-set clipboard+=unnamedplus
+if WINDOWS()
+    set clipboard+=unnamed
+else
+    set clipboard=unnamedplus
+endif
 
 map <leader>y "*y
 vmap <leader>y "*y

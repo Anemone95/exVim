@@ -16,6 +16,9 @@ endfunction
 
 " On Windows, also use '.vim' instead of 'vimfiles'; this makes synchronization
 " across (heterogeneous) systems easier.
+if WINDOWS()
+    let g:exvim_custom_path=$VIM
+end
 if !exists('g:exvim_custom_path')
     if WINDOWS()
         set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
@@ -79,13 +82,14 @@ scriptencoding utf-8
 
 if exists('g:exvim_custom_path')
     let g:ex_tools_path = g:exvim_custom_path.'/vimfiles/tools/'
+    let g:plug_path=g:exvim_custom_path.'/vimfiles/plugged/'
     " exec 'set rtp+=' . fnameescape ( g:exvim_custom_path.'/vimfiles/bundle/Vundle.vim/' )
 else
     let g:ex_tools_path = '~/.vim/tools/'
+    let g:plug_path=$HOME.'/.vim/plugged/'
     " set rtp+=~/.vim/bundle/Vundle.vim/
-    let g:exvim_custom_path=$VIM
 endif
-call plug#begin(g:exvim_custom_path.'/vimfiles/plugged/')
+call plug#begin(g:plug_path)
 " " load .vimrc.plugins & .vimrc.plugins.local
 if exists('g:exvim_custom_path')
     let vimrc_plugins_path = g:exvim_custom_path.'/.vimrc.plugins'

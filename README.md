@@ -120,6 +120,9 @@
 由于有的插件需要vim有+python和+lua支持.Windows用户,请下载最新版的exVim,之后再下载对应版本的python和lua,并加入环境变量.注意一点,对应版本不止是x86/x64,还指python和lua自身版本,据我所知以前的vim不支持最新的python和lua.
 ## exVim的全局搜索功能无法使用
 重装[id-utils](http://gnuwin32.sourceforge.net/packages/id-utils.htm),并将路径指定到非系统目录,并添加到环境变量中.重启系统
+## Linux中字体问题
+git https://github.com/powerline/fonts
+sh fonts/install.sh
 
 # 其他
 联系方式:x565178035@126.com
