@@ -234,7 +234,7 @@ Plug 'exvim/ex-searchcompl'
 
 " ex-colorschemes
 " ---------------------------------------------------
-Plug 'exvim/ex-colorschemes'
+" Plug 'exvim/ex-colorschemes'
 
 " vim-color-solarized
 " ---------------------------------------------------
