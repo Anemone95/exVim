@@ -84,6 +84,7 @@ Plug 'Shougo/neocomplete.vim',{'for':language}
         \ 'php' : $VIM.'/vimfiles/dict/php.dict',
         \ 'vim' : $VIM.'/vimfiles/dict/vim.dict',
         \ 'matlab' : $VIM.'/vimfiles/dict/matlab.dict',
+        \ 'sql' : $VIM.'/vimfiles/dict/sql.dict',
     \ }
     inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
     autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
@@ -169,3 +170,5 @@ Plug 'terryma/vim-multiple-cursors'
     " let g:multi_cursor_quit_key='<C=]>'
 
 Plug 'starcraftman/vim-eclim',{'on':'EclimEnable'}
+
+" Plug 'vim-scripts/dbext.vim',{'for':'sql'}

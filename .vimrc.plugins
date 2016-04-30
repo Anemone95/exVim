@@ -1,4 +1,4 @@
-let language=['python','c','cpp','vbs','vim','java','php','ino','vimentry','matlab','html']
+let language=['python','c','cpp','vbs','vim','java','php','ino','vimentry','matlab','html','sql']
 " Pathogen or Vundle (deafult is Vundle) {{{
 
 " Comment-out if you want to use pahogen
