@@ -307,7 +307,9 @@ set nf=
 " Desc: Fold text
 " ------------------------------------------------------------------
 
-set foldmethod=marker foldmarker={,} foldlevel=9999
+" set foldmethod=marker foldmarker={,} foldlevel=9999
+set foldmethod=syntax
+set foldlevel=9999
 set diffopt=filler,context:9999
 
 " ------------------------------------------------------------------

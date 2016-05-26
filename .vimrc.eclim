@@ -101,10 +101,11 @@ Plug 'Shougo/neosnippet-snippets'| Plug 'Shougo/neosnippet.vim'
 Plug 'starcraftman/vim-eclim'
 
 Plug 'vim-scripts/AutoComplPop'
-    let g:acp_behaviorJavaEclimLength = 0
+    let g:acp_behaviorJavaEclimLength = 2
     function MeetsForJavaEclim(context)
       return g:acp_behaviorJavaEclimLength >= 0 &&
-            \ a:context =~ '\k\.\k\{' . g:acp_behaviorJavaEclimLength . ',}$'
+      \ a:context =~ '\k[a-zA-Z._]\k\{' . g:acp_behaviorJavaEclimLength . ',}$'
+      " \ a:context =~ '\k.\k\{' . g:acp_behaviorJavaEclimLength . ',}$'
     endfunction
     let g:acp_behavior = {
         \ 'java': [{

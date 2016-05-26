@@ -28,9 +28,7 @@ endif
 source $VIM/vim74/indent/python.vim
 
 
-if line("$")>200
-    " set foldenable
-    set foldmethod=indent
-    " set foldlevelstart=0
-endif
-
+" if line("$")>200
+    " set foldmethod=indent
+" endif
+set foldmethod=expr

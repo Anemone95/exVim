@@ -85,6 +85,7 @@ Plug 'Shougo/neocomplete.vim',{'for':language}
         \ 'vim' : $VIM.'/vimfiles/dict/vim.dict',
         \ 'matlab' : $VIM.'/vimfiles/dict/matlab.dict',
         \ 'sql' : $VIM.'/vimfiles/dict/sql.dict',
+        \ 'tex' : $VIM.'/vimfiles/dict/latex.dict',
     \ }
     inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
     autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
@@ -95,6 +96,12 @@ Plug 'Shougo/neocomplete.vim',{'for':language}
 
     inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
     inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+    inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+    function! s:my_cr_function()
+      return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
+      " For no inserting <CR> key.
+      "return pumvisible() ? "\<C-y>" : "\<CR>"
+    endfunction
 "颜色增强
 Plug 'sentientmachine/erics_vim_syntax_and_color_highlighting',{'for':language}
 " 目录树
@@ -171,4 +178,7 @@ Plug 'terryma/vim-multiple-cursors'
 
 Plug 'starcraftman/vim-eclim',{'on':'EclimEnable'}
 
-" Plug 'vim-scripts/dbext.vim',{'for':'sql'}
+
+Plug 'tmhedberg/SimpylFold',{'for':'python'}
+    autocmd BufWinEnter *.py setlocal foldexpr=SimpylFold(v:lnum) foldmethod=expr
+    autocmd BufWinLeave *.py setlocal foldexpr< foldmethod<

@@ -5,6 +5,7 @@ else
     set clipboard=unnamedplus
 endif
 
+setlocal completeopt-=preview
 map <leader>y "*y
 vmap <leader>y "*y
 map <leader>p "*p
@@ -15,9 +16,9 @@ set shiftwidth=4
 "指定按一次backspace就删除shiftwidth宽度
 set smarttab
 
-set foldlevelstart=1
 " 启用折叠
 if line("$")>200
+    set foldlevelstart=1
     set foldenable
     set foldmethod=syntax
 endif
