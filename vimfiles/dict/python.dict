@@ -114,6 +114,7 @@ SystemError
 SystemExit
 TabError
 TODO
+time
 try
 tuple
 type

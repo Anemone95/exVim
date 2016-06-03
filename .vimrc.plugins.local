@@ -25,7 +25,7 @@ Plug 'djoshea/vim-matlab-fold',{'for':'matlab'}
 " php 自动注释
 " Plug 'vim-scripts/PDV--phpDocumentor-for-Vim'
 " 多语言自动注释
-Plug 'vim-scripts/DoxygenToolkit.vim',{'for':language}
+Plug 'vim-scripts/DoxygenToolkit.vim',{'for':language_base}
     map <leader>dx :Dox<CR>
     map <leader>dl :DoxLic<CR>
     map <leader>da :DoxAuthor<CR>
@@ -47,8 +47,10 @@ Plug 'vim-scripts/DoxygenToolkit.vim',{'for':language}
     " autocmd FileType java set completefunc=javacomplete#CompleteParamsInfo
 " 括号自动补全
 Plug 'jiangmiao/auto-pairs'
+" let g:AutoPairsMapBS=0
+
 " 多语言模板补全,补全自动弹出
-Plug 'Shougo/neosnippet-snippets',{'for':language}| Plug 'Shougo/neosnippet.vim'
+Plug 'Shougo/neosnippet-snippets',{'for':language_base}| Plug 'Shougo/neosnippet.vim'
     " Plugin key-mappings.
     imap <C-k>     <Plug>(neosnippet_expand_or_jump)
     smap <C-k>     <Plug>(neosnippet_expand_or_jump)
@@ -64,14 +66,11 @@ Plug 'Shougo/neosnippet-snippets',{'for':language}| Plug 'Shougo/neosnippet.vim'
       set conceallevel=2 concealcursor=niv
     endif
 
-Plug 'Shougo/neocomplete.vim',{'for':language}
-    let g:neocomplete#enable_debug = 0
+Plug 'Shougo/neocomplete.vim',{'for':language_ex}
+    " let g:neocomplete#enable_debug = 0
     let g:acp_enableAtStartup = 0
     let g:neocomplete#enable_at_startup = 1
     let g:neocomplete#enable_smart_case = 1
-    let g:neocomplete#enable_auto_select = 0
-    " let g:neocomplete#sources#syntax#min_keyword_length = 2
-    " let g:neocomplete#sources#auto_completion_start_length = 3
     let g:neocomplete#max_list=30
     let g:neocomplete#sources#dictionary#dictionaries = {
         \ 'default' : '',
@@ -94,16 +93,19 @@ Plug 'Shougo/neocomplete.vim',{'for':language}
     autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
     autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
+
     inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
     inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+
     inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
     function! s:my_cr_function()
       return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
-      " For no inserting <CR> key.
-      "return pumvisible() ? "\<C-y>" : "\<CR>"
     endfunction
+
+    inoremap <expr><C-h> pumvisible() ? neocomplete#smart_close_popup()."\<C-h>" : "\<C-h>"
+    inoremap <expr><BS> pumvisible() ? neocomplete#smart_close_popup()."\<C-h>" : "\<BS>"
 "颜色增强
-Plug 'sentientmachine/erics_vim_syntax_and_color_highlighting',{'for':language}
+Plug 'sentientmachine/erics_vim_syntax_and_color_highlighting',{'for':language_ex}
 " 目录树
 " Plug 'scrooloose/nerdtree'
     map <F2> :NERDTreeToggle<CR>
@@ -182,3 +184,6 @@ Plug 'starcraftman/vim-eclim',{'on':'EclimEnable'}
 Plug 'tmhedberg/SimpylFold',{'for':'python'}
     autocmd BufWinEnter *.py setlocal foldexpr=SimpylFold(v:lnum) foldmethod=expr
     autocmd BufWinLeave *.py setlocal foldexpr< foldmethod<
+
+
+Plug 'vim-latex/vim-latex',{'for':'tex'}

@@ -107,7 +107,7 @@ autocmd FileType matlab source $VIM/vimfiles/matlabscript.vim
 autocmd FileType asm source $VIM/vimfiles/asmscript.vim
 autocmd FileType php source $VIM/vimfiles/phpscript.vim
 autocmd FileType java source $VIM/vimfiles/javascript.vim
-autocmd FileType markdown set conceallevel=0
+autocmd FileType tex source $VIM/vimfiles/latexscript.vim
 autocmd FileType html set ft=htmldjango.html " For SnipMate
 
 map w e
@@ -120,3 +120,12 @@ cmap <C-]> <ESC>
 imap kk <ESC>la
 map <C-a> ggVG
 unmap <esc>
+
+nmap <leader>v :call ToggleConcealLevel()<CR>
+function! ToggleConcealLevel()
+    if &conceallevel==0
+        set conceallevel=2
+    else
+        set conceallevel=0
+    endif
+endfunction

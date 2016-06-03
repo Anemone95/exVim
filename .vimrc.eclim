@@ -100,21 +100,38 @@ Plug 'Shougo/neosnippet-snippets'| Plug 'Shougo/neosnippet.vim'
 
 Plug 'starcraftman/vim-eclim'
 
-Plug 'vim-scripts/AutoComplPop'
-    let g:acp_behaviorJavaEclimLength = 2
-    function MeetsForJavaEclim(context)
-      return g:acp_behaviorJavaEclimLength >= 0 &&
-      \ a:context =~ '\k[a-zA-Z._]\k\{' . g:acp_behaviorJavaEclimLength . ',}$'
-      " \ a:context =~ '\k.\k\{' . g:acp_behaviorJavaEclimLength . ',}$'
-    endfunction
-    let g:acp_behavior = {
-        \ 'java': [{
-          \ 'command': "\<c-x>\<c-u>",
-          \ 'completefunc' : 'eclim#java#complete#CodeComplete',
-          \ 'meets'        : 'MeetsForJavaEclim',
-        \ }]
-      \ }
+" Plug 'vim-scripts/AutoComplPop'
+    " autocmd FileType python setlocal dict+=$VIM/vimfiles/dict/python.dict
 
+    " let g:acp_behaviorJavaEclimLength = 1
+    " function MeetsForJavaEclim(context)
+      " return g:acp_behaviorJavaEclimLength >= 0 &&
+      " \ a:context =~ '\k[a-zA-Z\_.]\k\{' . g:acp_behaviorJavaEclimLength . ',}$'
+    " endfunction
+    " let g:acp_behavior = {
+        " \ 'java': [{
+          " \ 'command': "\<c-x>\<c-u>",
+          " \ 'completefunc' : 'eclim#java#complete#CodeComplete',
+          " \ 'meets'        : 'MeetsForJavaEclim',
+        " \ }],
+      " \ }
+
+Plug 'Shougo/neocomplete.vim'
+    let g:EclimCompletionMethod = 'omnifunc'
+    let g:neocomplete#enable_at_startup = 1
+    let g:neocomplete#enable_smart_case = 1
+    let g:neocomplete#enable_auto_delimiter = 1
+    let g:neocomplete#force_overwrite_completefunc=1
+
+    if !exists('g:neocomplete#force_omni_input_patterns')
+        let g:neocomplete#force_omni_input_patterns = {}
+    endif
+    let g:neocomplete#force_omni_input_patterns.java = '\%(\h\w*\|)\)\.\w*'
+	" let g:neocomplete#force_omni_input_patterns.ruby='[^. *\t]\.\w*\|\h\w*::'
+	" let g:neocomplete#force_omni_input_patterns.php='[^. \t]->\h\w*\|\h\w*::'
+	" let g:neocomplete#force_omni_input_patterns.c='[^.[:digit:] *\t]\%(\.\|->\)'
+	" let g:neocomplete#force_omni_input_patterns.cpp='[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+	" let g:neocomplete#force_omni_input_patterns.python='\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
 
 Plug 'exvim/ex-config'
 nnoremap <unique> <leader>ve :call exconfig#edit_cur_vimentry ()<CR>
@@ -444,6 +461,7 @@ if filereadable(expand(vimrc_local_path))
 endif
 
 set nobackup
+set noswapfile
 
 " ------------------------------------------------------------------
 " Desc: Fold text

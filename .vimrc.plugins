@@ -1,4 +1,5 @@
-let language=['python','c','cpp','vbs','vim','java','php','ino','vimentry','matlab','html','sql','tex']
+let language_base=['python','c','cpp','vbs','vim','java','php','ino','vimentry','matlab','html','sql']
+let language_ex=['python','c','cpp','vbs','vim','java','php','ino','vimentry','matlab','html','sql','tex']
 
 " Pathogen or Vundle (deafult is Vundle) {{{
 
@@ -29,7 +30,7 @@ nmap <unique> <silent> <Leader><Esc> :EXgp<CR><ESC>
 
 " ex-aftercolor
 " ---------------------------------------------------
-Plug 'exvim/ex-aftercolors',{'for':language}
+Plug 'exvim/ex-aftercolors',{'for':language_base}
 
 " ex-vimentry
 " ---------------------------------------------------
@@ -37,7 +38,7 @@ Plug 'exvim/ex-vimentry'
 
 " ex-project
 " ---------------------------------------------------
-Plug 'exvim/ex-project',{'for':language}
+Plug 'exvim/ex-project',{'for':language_base}
 
 " ex-gsearch
 " ---------------------------------------------------
@@ -90,7 +91,7 @@ Plug 'exvim/ex-qfix'
 
 " ex-hierarchy
 " ---------------------------------------------------
-Plug 'exvim/ex-hierarchy',{'for':language}
+Plug 'exvim/ex-hierarchy',{'for':language_ex}
 
 nnoremap <unique> <leader>hv :EXHierarchyCWord<CR>
 
@@ -316,6 +317,7 @@ Plug 'scrooloose/syntastic'
 " this will make html file by Angular.js ignore errors
 let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
 
+
 " DISABLE: use ex-autocomplpop instead
 " " neocomplcache: invoke when you insert words
 " Plug 'Shougo/neocomplcache.vim'
@@ -508,6 +510,7 @@ Plug 'plasticboy/vim-markdown',{'for':'markdown'}
 let g:vim_markdown_initial_foldlevel=0
 let g:vim_markdown_folding_style_pythonic = 1
 let g:vim_markdown_folding_level = 0
+let g:vim_markdown_conceal = 0
 
 "}}}
 
