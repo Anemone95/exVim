@@ -559,7 +559,14 @@ snippet label
 alias   \label
     \label{${1}}${0}
 
-snippet list
+snippet listnum
+alias   \list
+    \begin{enumerate}[itemindent=1em,label= (\arabic*)]
+    \item ${1}
+    \item ${0}
+    \end{enumerate}
+
+snippet listpoint
 alias   \list
     \begin{enumerate}[itemindent=1em,label= (\arabic*)]
     \item ${1}
@@ -582,7 +589,21 @@ alias   \img
       \begin{center}
       \includegraphics[width=0.92\textwidth]{${0:FILENAME}}
       \caption{${1:SHOW_NAME}}
+        % \label{<`6`>}
       \end{center}
     \end{figure}
+
+snippet codealgo
+alias   \codealgo
+    \begin{fullwidth}[leftmargin=1.5em,width=0.93\textwidth]
+    % text
+    \begin{algorithm}[H]
+    \caption{${1:TITLENAME}}
+    \label{alg1}
+    \begin{algorithmic}
+    ${0:CODE}
+    \end{algorithmic}
+    \end{algorithm}
+    \end{fullwidth}
 
 

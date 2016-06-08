@@ -28,10 +28,6 @@ let g:tex_flavor='latex'
 
 " imap <c-k> <F7>
 nmap <c-j> <c-w>j
-let g:Tex_SmartKeyBS=0
-
-inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr><BS>  neocomplete#smart_close_popup()."\<C-h>"
 
 nmap <Leader>fa :%s/\./。/gc<cr>
 nmap <Leader>fb :%s/,/，/gc<cr>
