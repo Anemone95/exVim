@@ -1,7 +1,0 @@
-\documentclass{article}
-\begin{document}
-  \author{Wenyuan Xu}
-  \title{}
-  \maketitle
-  hello, world % This is comment
-\end{document}

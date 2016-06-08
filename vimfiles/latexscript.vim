@@ -6,7 +6,9 @@ set sw=2
 " all the figure labels. Very useful!
 set iskeyword+=:
 
-nmap <F9> :call Tex_CompileMultipleTimes()<CR>:call Tex_ViewLaTeX()<CR>
+" nmap <F9> :call Tex_CompileLatex()<CR>
+
+nmap <F10> :call Tex_ViewLaTeX()<CR>
 " inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
 " inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
 filetype indent on
@@ -24,5 +26,25 @@ set grepprg=grep\ -nH\ $*
 " The following changes the default filetype back to 'tex':
 let g:tex_flavor='latex'
 
-imap <c-\> <F7>
+" imap <c-k> <F7>
+nmap <c-j> <c-w>j
 let g:Tex_SmartKeyBS=0
+
+inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><BS>  neocomplete#smart_close_popup()."\<C-h>"
+
+nmap <Leader>fa :%s/\./。/gc<cr>
+nmap <Leader>fb :%s/,/，/gc<cr>
+" :%s/,/，/gc
+
+
+call SingleCompile#SetCompilerTemplate('tex', 'xelatex', 'XeLatex',
+            \ 'xelatex', '-interaction=nonstopmode -synctex=1 -file-line-error-style',
+            \ SingleCompile#GetDefaultOpenCommand() .
+            \ ' "$(FILE_TITLE)$.pdf"')
+" call SingleCompile#SetOutfile('filetype', 'compiler', 'out_file')
+call SingleCompile#ChooseCompiler('tex', 'xelatex')
+nmap <F9> :SCCompile<cr>
+imap <F9> :SCCompile<cr>
+set list lcs=tab:\¦\
+let g:neosnippet#snippets_directory='$VIM/vimfiles/latexsnip'

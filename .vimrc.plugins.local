@@ -11,11 +11,13 @@ Plug 'pydiction',{'for':'python'}
     let g:pydiction_location = $VIM."/vimfiles/plugged/pydiction/complete-dict"
     " python pydiction.py <module> [module]
 " 一键编译&运行
-Plug 'xuhdev/SingleCompile',{'on':['SCCompile','SCCompileRun']}
+" Plug 'xuhdev/SingleCompile',{'on':['SCCompile','SCCompileRun']}
+Plug 'xuhdev/SingleCompile'
     nmap <F9> :w<cr>: SCCompileRun<CR>
     imap <F9> <ESC>:w<CR>:SCCompileRun<CR>
     nmap <F10> :SCCompile<cr>
     let g:SingleCompile_showquickfixiferror = 1
+
 " MATLAB/MATLAB-fold: MATLAB 语法高亮及代码折叠插件。
 Plug 'djoshea/vim-matlab',{'for':'matlab'}
 Plug 'djoshea/vim-matlab-fold',{'for':'matlab'}
@@ -50,7 +52,7 @@ Plug 'jiangmiao/auto-pairs'
 " let g:AutoPairsMapBS=0
 
 " 多语言模板补全,补全自动弹出
-Plug 'Shougo/neosnippet-snippets',{'for':language_base}| Plug 'Shougo/neosnippet.vim'
+Plug 'Shougo/neosnippet-snippets',{'for':language_ex}| Plug 'Shougo/neosnippet.vim'
     " Plugin key-mappings.
     imap <C-k>     <Plug>(neosnippet_expand_or_jump)
     smap <C-k>     <Plug>(neosnippet_expand_or_jump)
@@ -102,8 +104,13 @@ Plug 'Shougo/neocomplete.vim',{'for':language_ex}
       return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
     endfunction
 
-    inoremap <expr><C-h> pumvisible() ? neocomplete#smart_close_popup()."\<C-h>" : "\<C-h>"
-    inoremap <expr><BS> pumvisible() ? neocomplete#smart_close_popup()."\<C-h>" : "\<BS>"
+    if !exists('g:neocomplete#sources#omni#input_patterns')
+      let g:neocomplete#sources#omni#input_patterns = {}
+    endif
+    let g:neocomplete#sources#omni#input_patterns.tex= '\\\h\w*{'
+
+    " inoremap <expr><C-h> pumvisible() ? neocomplete#smart_close_popup()."\<C-h>" : "\<C-h>"
+    " inoremap <expr><BS> pumvisible() ? neocomplete#smart_close_popup()."\<C-h>" : "\<BS>"
 "颜色增强
 Plug 'sentientmachine/erics_vim_syntax_and_color_highlighting',{'for':language_ex}
 " 目录树
@@ -187,3 +194,20 @@ Plug 'tmhedberg/SimpylFold',{'for':'python'}
 
 
 Plug 'vim-latex/vim-latex',{'for':'tex'}
+    " let g:Tex_CompileRule_ps = 'dvips -Ppdf -o $*.ps $*.dvi'
+    " let g:Tex_ViewRule_dvi = 'dviout'
+
+    " let g:Tex_CompileRule_dvi = 'latex -synctex=1 -src-specials --interaction=nonstopmode $*'
+    " let g:Tex_CompileRule_ps = 'dvips -Ppdf -t letter -o $*.ps $*.dvi'
+    let g:Tex_CompileRule_pdf = 'xelatex -synctex=1 -file-line-error-style -interaction=nonstopmode $*'
+
+    let g:Tex_DefaultTargetFormat = 'pdf'
+    let g:Tex_SmartKeyBS=0
+
+    " let g:Tex_ViewRule_ps = 'okular'
+    if WINDOWS()
+        let g:Tex_ViewRule_pdf = 'C:\Users\Anemone\AppData\Local\Apps\Evince-2.32.0.14401\bin\evince.exe'
+    endif
+    let g:Tex_ViewRule_dvi = 'dviout'
+
+    let g:Tex_SmartKeyBS=0
