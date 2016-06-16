@@ -77,7 +77,9 @@ endfunction
 au QuickfixCmdPost make call QfMakeConv()
 
 "解决consle输出乱码
-language messages zh_CN.utf-8
+if WINDOWS()
+    language messages zh_CN.utf-8
+endif
 
 
 " -----------------------------------------------------------------------------
