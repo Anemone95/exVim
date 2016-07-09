@@ -32,3 +32,4 @@ source $VIM/vim74/indent/python.vim
     " set foldmethod=indent
 " endif
 set foldmethod=expr
+set fileformat=unix
