@@ -30,7 +30,7 @@ nnoremap <space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zO')<CR>
 set autoread
 
 " 常规模式下输入 cS 清除行尾空格
-nmap su :%s/\r$//g<CR>:noh<CR>:set fileencoding=utf-8<cr>:%s/\t/<space><space><space><space>/g<CR>
+nmap su :set fileencoding=utf-8<cr>:set fileformat=unix<cr>
 
 " 常规模式下输入 cM 清除行尾 ^M 符号
 nmap sg :set fileencoding=gbk<cr>
@@ -131,4 +131,4 @@ function! ToggleConcealLevel()
 endfunction
 
 " 文件格式，默认 ffs=dos,unix
-set fileformat=unix                                   "设置新（当前）文件的<EOL>格式，可以更改，如：dos（windows系统常用）
+autocmd BufNewFile set fileformat=unix                                   "设置新（当前）文件的<EOL>格式，可以更改，如：dos（windows系统常用）
