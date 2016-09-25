@@ -212,3 +212,6 @@ Plug 'vim-latex/vim-latex',{'for':'tex'}
     let g:Tex_ViewRule_dvi = 'dviout'
 
     let g:Tex_SmartKeyBS=0
+
+Plug 'rhysd/vim-grammarous',{'for':['tex','plaintex']}
+nmap <F5> :GrammarousCheck<CR>

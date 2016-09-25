@@ -109,6 +109,11 @@ autocmd FileType php source $VIM/vimfiles/phpscript.vim
 autocmd FileType java source $VIM/vimfiles/javascript.vim
 autocmd FileType tex source $VIM/vimfiles/latexscript.vim
 autocmd FileType html set ft=htmldjango.html " For SnipMate
+autocmd FileType tex set spell
+autocmd FileType plaintex set spell
+autocmd FileType plaintex set textwidth=100
+
+let g:tex_flavor = "latex"
 
 map w e
 imap ]] {<CR>

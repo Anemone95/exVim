@@ -40,7 +40,10 @@ call SingleCompile#SetCompilerTemplate('tex', 'xelatex', 'XeLatex',
             \ ' "$(FILE_TITLE)$.pdf"')
 " call SingleCompile#SetOutfile('filetype', 'compiler', 'out_file')
 call SingleCompile#ChooseCompiler('tex', 'xelatex')
-nmap <F9> :SCCompile<cr>
-imap <F9> :SCCompile<cr>
+" nmap <F9> :SCCompile<cr>
+nmap <F9> :sil exec "!bibtex ".expand("%:t:r").".aux"<cr>:SCCompile<cr>
+imap <F9> :sil exec "!bibtex ".expand("%:t:r").".aux"<cr>:SCCompile<cr>
+" nmap <F8> 
 set list lcs=tab:\¦\
 let g:neosnippet#snippets_directory='$VIM/vimfiles/latexsnip'
+set textwidth=100
