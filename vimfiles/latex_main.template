@@ -1,0 +1,18 @@
+%        File: test.tex
+%     Created: Fri Jun 03 12:00 PM 2016 中国标准时间
+% Last Change: Fri Jun 03 12:00 PM 2016 中国标准时间
+%
+
+\documentclass[a4paper,11pt]{article}
+\usepackage{amsmath}
+\usepackage{geometry}
+\geometry{left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm}
+
+\title{My MasterPiece}
+\author{Melin Gai}
+
+\begin{document}
+\maketitle
+\tableofcontents
+
+\end{document}

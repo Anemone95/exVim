@@ -1,0 +1,21 @@
+/*
+ * @file <FILE_NAME>
+ * @brief <FUN_NAME>
+ * @author Anemone,x565178035@126.com
+ * @version 1.0
+ * @date <DATE>
+ */
+
+#include <cstdlib>
+#include <cstring>
+#include <cmath>
+#include <fstream>
+#include <iomanip>
+#include <iostream>
+
+using namespace std;
+
+int main ( int argc, char *argv[] ) {
+
+	return EXIT_SUCCESS;
+}		/* ----------  end of function main  ---------- */

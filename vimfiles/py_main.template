@@ -1,0 +1,18 @@
+#!/usr/bin/env python
+#coding=utf-8
+
+# @file <FILE_NAME>
+# @brief <FUN_NAME>
+# @author x565178035,x565178035@126.com
+# @version 1.0
+# @date <DATE>
+
+import sys
+
+reload(sys)
+sys.setdefaultencoding("utf-8")
+def <FUN_NAME>():
+
+if __name__ == '__main__':
+    <FUN_NAME>()
+    raw_input()
