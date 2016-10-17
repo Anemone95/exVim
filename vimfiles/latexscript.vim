@@ -32,7 +32,15 @@ nmap <c-j> <c-w>j
 nmap <Leader>fa :%s/\./。/gc<cr>
 nmap <Leader>fb :%s/,/，/gc<cr>
 " :%s/,/，/gc
-
+function! Compile() abort
+    if findfile("make.sh",".")=="make.sh"
+        execute "!make.sh"
+    elseif findfile("make.bat",".")=="make.bat"
+        execute "!make.bat"
+    else
+        execute "SCCompile"
+    endif
+endfunction
 
 call SingleCompile#SetCompilerTemplate('tex', 'xelatex', 'XeLatex',
             \ 'xelatex', '-interaction=nonstopmode -synctex=1 -file-line-error-style',
@@ -41,8 +49,9 @@ call SingleCompile#SetCompilerTemplate('tex', 'xelatex', 'XeLatex',
 " call SingleCompile#SetOutfile('filetype', 'compiler', 'out_file')
 call SingleCompile#ChooseCompiler('tex', 'xelatex')
 " nmap <F9> :SCCompile<cr>
-nmap <F9> :sil exec "!bibtex ".expand("%:t:r").".aux"<cr>:SCCompile<cr>
-imap <F9> :sil exec "!bibtex ".expand("%:t:r").".aux"<cr>:SCCompile<cr>
+nmap <F9> :call Compile()<cr>
+imap <F9> :call Compile()<cr>
+" map <F10> :!make.bat<cr>
 " nmap <F8> 
 set list lcs=tab:\¦\
 let g:neosnippet#snippets_directory='$VIM/vimfiles/latexsnip'
