@@ -22,9 +22,11 @@ if line("$")>200
     set foldenable
     set foldmethod=syntax
 endif
+set foldmethod=syntax
 
 " 常规模式下用空格键来开关光标行所在折叠（注：zR 展开所有折叠，zM 关闭所有折叠）
 nnoremap <space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zO')<CR>
+nnoremap zz zM
 
 " 当文件在外部被修改，自动更新该文件
 set autoread

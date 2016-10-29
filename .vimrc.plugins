@@ -278,7 +278,7 @@ nnoremap <unique> <leader>bs :CtrlPBuffer<CR>
 
 " vim-fugitive: invoke most by :Gdiff
 " ---------------------------------------------------
-Plug 'tpope/vim-fugitive'
+" Plug 'tpope/vim-fugitive'
 
 " vim-surround: invoke when you select words and press 's'
 " ---------------------------------------------------
