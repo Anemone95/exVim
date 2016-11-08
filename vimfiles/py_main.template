@@ -15,4 +15,3 @@ def <FUN_NAME>():
 
 if __name__ == '__main__':
     <FUN_NAME>()
-    raw_input()

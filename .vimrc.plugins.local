@@ -180,8 +180,9 @@ Plug 'vim-airline/vim-airline-themes'| Plug 'vim-airline/vim-airline'
         endif
     endfunction
 
+let g:pony_display_colors=1
 Plug 'jmcomets/vim-pony',{'for':'python'}
-    let g:pony_display_colors=0
+let g:pony_display_colors=1
 " Plug 'hdima/python-syntax'
     " let python_highlight_all = 1
 

@@ -1,10 +1,5 @@
-bin/
-graphviz/
-vim74/
 vimfiles/plugged/
 vimfiles/bundle/
-vimfiles/tools/
-*.exe
 *.dat
 vim80/
 .exvim.vim/
