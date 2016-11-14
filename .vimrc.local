@@ -125,6 +125,7 @@ imap <C-]> <ESC>
 vmap <C-]> <ESC>
 cmap <C-]> <ESC>
 imap kk <ESC>la
+imap <Right> <ESC>la
 map <C-a> ggVG
 unmap <esc>
 
