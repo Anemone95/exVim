@@ -3,3 +3,4 @@ vimfiles/bundle/
 *.dat
 vim80/
 .exvim.vim/
+vimfiles/view/

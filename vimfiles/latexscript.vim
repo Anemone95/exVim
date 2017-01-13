@@ -55,4 +55,4 @@ imap <F9> :call Compile()<cr>
 " nmap <F8> 
 set list lcs=tab:\¦\
 let g:neosnippet#snippets_directory='$VIM/vimfiles/latexsnip'
-set textwidth=100
+" set textwidth=100

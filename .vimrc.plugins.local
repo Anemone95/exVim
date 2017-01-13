@@ -226,4 +226,4 @@ Plug 'vim-latex/vim-latex',{'for':'tex'}
 Plug 'rhysd/vim-grammarous',{'for':['tex','plaintex']}
 nmap <F5> :GrammarousCheck<CR>
 Plug 'Konfekt/FastFold',{'for':language_ex}
-
+" Plug 'vim-scripts/XML-Folding',{'for':['html','xml','xhtml']}
