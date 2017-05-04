@@ -38,7 +38,7 @@ Plug 'exvim/ex-vimentry'
 
 " ex-project
 " ---------------------------------------------------
-Plug 'exvim/ex-project',{'for':language_base}
+Plug 'exvim/ex-project',{'for':language_ex}
 
 " ex-gsearch
 " ---------------------------------------------------
@@ -312,11 +312,14 @@ map <unique> <C-F11> <Plug>NERDCommenterUncomment
 
 " syntastic: invoke when you save file and have syntac-checker
 " ---------------------------------------------------
-Plug 'scrooloose/syntastic'
+Plug 'scrooloose/syntastic',{'for':language_base}
 
-" this will make html file by Angular.js ignore errors
 let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
 
+" Plug 'w0rp/ale',{'for':language_ex}
+" let g:ale_sign_column_always = 1
+" let g:ale_sign_error = '>>'
+" let g:ale_sign_warning = '--'
 
 " DISABLE: use ex-autocomplpop instead
 " " neocomplcache: invoke when you insert words

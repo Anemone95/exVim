@@ -56,3 +56,5 @@ imap <F9> :call Compile()<cr>
 set list lcs=tab:\¦\
 let g:neosnippet#snippets_directory='$VIM/vimfiles/latexsnip'
 " set textwidth=100
+set lazyredraw
+set ttyfast

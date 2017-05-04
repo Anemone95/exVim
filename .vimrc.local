@@ -20,9 +20,10 @@ set smarttab
 if line("$")>200
     set foldlevelstart=1
     set foldenable
-    set foldmethod=syntax
+    " set foldmethod=syntax
+    set foldmethod=manual
 endif
-set foldmethod=syntax
+set foldmethod=manual
 
 " 常规模式下用空格键来开关光标行所在折叠（注：zR 展开所有折叠，zM 关闭所有折叠）
 nnoremap <space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zO')<CR>
@@ -114,6 +115,7 @@ autocmd FileType html set ft=htmldjango.html " For SnipMate
 autocmd FileType tex set spell
 autocmd FileType plaintex set spell
 autocmd FileType plaintex set textwidth=100
+autocmd FileType bib map <F10> :%s/@//gn<CR>
 
 let g:tex_flavor = "latex"
 
@@ -139,4 +141,5 @@ function! ToggleConcealLevel()
 endfunction
 
 " 文件格式，默认 ffs=dos,unix
-autocmd BufNewFile set fileformat=unix                                   "设置新（当前）文件的<EOL>格式，可以更改，如：dos（windows系统常用）
+autocmd BufNewFile,BufRead * set fileformat=unix
+

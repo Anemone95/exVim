@@ -1,4 +1,3 @@
-" 对齐线
 Plug 'Yggdroot/indentLine'
     au! BufRead,BufNewFile,BufEnter IndentLinesToggle()
     let g:indentLine_char = "┊"
@@ -56,6 +55,9 @@ Plug 'davidhalter/jedi-vim',{'for':'python'}
 Plug 'Shougo/neosnippet-snippets',{'for':language_ex}| Plug 'Shougo/neosnippet.vim'
     " Plugin key-mappings.
     imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+    " imap <expr><C-k>
+                " \ pumvisible() ?  "\<Plug>(neosnippet_expand_or_jump)": "\<C-k>"
+
     smap <C-k>     <Plug>(neosnippet_expand_or_jump)
     xmap <C-k>     <Plug>(neosnippet_expand_target)
 
@@ -112,15 +114,16 @@ Plug 'Shougo/neocomplete.vim',{'for':language_ex}
 
     " inoremap <expr><C-h> pumvisible() ? neocomplete#smart_close_popup()."\<C-h>" : "\<C-h>"
     " inoremap <expr><BS> pumvisible() ? neocomplete#smart_close_popup()."\<C-h>" : "\<BS>"
-function! TreeToggle()
-    try
-        execute 'EXProjectToggle'
-    catch
-        execute 'NERDTreeToggle'
-    endtry
-endfunction
+    function! TreeToggle()
+        try
+            execute 'EXProjectToggle'
+        catch
+            execute 'NERDTreeToggle'
+        endtry
+    endfunction
 "颜色增强
-Plug 'sentientmachine/erics_vim_syntax_and_color_highlighting',{'for':language_ex}
+Plug 'sentientmachine/erics_vim_syntax_and_color_highlighting',{'for':['python','java', 'html', 'javascript', 'php', 'css', 'bash', 'haml', 'viml']}
+" Plug 'sentientmachine/erics_vim_syntax_and_color_highlighting',{'for':language_ex}
 " 目录树
 " Plug 'scrooloose/nerdtree'
 
@@ -139,7 +142,7 @@ Plug 'sentientmachine/erics_vim_syntax_and_color_highlighting',{'for':language_e
     " xmap " S"
 
 Plug 'vim-airline/vim-airline-themes'| Plug 'vim-airline/vim-airline'
-   " let g:airline_extensions = ['tabline', 'unite', 'quickfix']
+   let g:airline_extensions = ['tabline', 'quickfix']
     let g:airline_theme="molokai"
     let g:airline_powerline_fonts = 1
     let g:airline_left_sep = ''
@@ -191,6 +194,19 @@ let g:pony_display_colors=1
 " Plug 'vim-scripts/python-fold',{'for':'python'}
 
 Plug 'terryma/vim-multiple-cursors'
+" Called once right before you start selecting multiple cursors
+function! Multiple_cursors_before()
+  if exists(':NeoCompleteLock')==2
+    exe 'NeoCompleteLock'
+  endif
+endfunction
+
+" Called once only when the multiple selection is canceled (default <Esc>)
+function! Multiple_cursors_after()
+  if exists(':NeoCompleteUnlock')==2
+    exe 'NeoCompleteUnlock'
+  endif
+endfunction
     " let g:multi_cursor_next_key='<Tab>'
     " let g:multi_cursor_prev_key='<C-q>'
     " let g:multi_cursor_skip_key='<C-u>'
@@ -225,5 +241,6 @@ Plug 'vim-latex/vim-latex',{'for':'tex'}
 
 Plug 'rhysd/vim-grammarous',{'for':['tex','plaintex']}
 nmap <F5> :GrammarousCheck<CR>
-Plug 'Konfekt/FastFold',{'for':language_ex}
+Plug 'Konfekt/FastFold',{'for':['python','cpp','h']}
+Plug 'MattesGroeger/vim-bookmarks'
 " Plug 'vim-scripts/XML-Folding',{'for':['html','xml','xhtml']}

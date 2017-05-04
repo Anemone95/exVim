@@ -1,3 +1,8 @@
+snippet \input
+alias   \inp input
+    \input{${0}}
+
+
 snippet \documentclass
 alias   documentclass
     \documentclass[${1}]{${2:article}}${0}
@@ -112,6 +117,13 @@ alias   \begin{thebibliography} \thebibliography
         ${1:TARGET}
     \end{thebibliography}
 
+snippet bib
+alias   \begin{thebibliography} \bib
+    \balance
+    \bibliographystyle{./IEEEtran}
+    \bibliography{ref}
+
+
 snippet tabbing
 alias   \begin{tabbing} \tabbing
     \begin{tabbing}
@@ -215,12 +227,13 @@ alias   \begin{document} \document
     \end{document}
 
 snippet figure
-alias   \begin{figure} \figure
-    \begin{figure}[${1}]
+alias   \begin{figure} \fi figure
+
+    \begin{figure}[!t]
         \centering
-        \includegraphics[${2:width=${3\}}]{${4}}
-        \caption{${5}}
-        \label{${6}}
+        \includegraphics[width=2.5in]{${0:file_name}}
+        \caption{${1:caption}}
+        \label{${2:label}}
     \end{figure}
 
 snippet filecontents
@@ -560,37 +573,27 @@ alias   \label
     \label{${1}}${0}
 
 snippet listnum
-alias   \list
+alias   \li list
     \begin{enumerate}[itemindent=1em,label= (\arabic*)]
     \item ${1}
     \item ${0}
     \end{enumerate}
 
-snippet listpoint
-alias   \list
+snippet list
+alias   \li list
     \begin{itemize}
     \item ${0}
     \end{itemize}
 
 snippet codeblock
-alias   \codeblock
+alias   \code codeblock
     \begin{lstlisting}[language={${1:LANGUAGE}}]
     ${0:TARGET}
     \end{lstlisting}
 
-snippet codefile
-alias   \codefile
+snippet file
+alias   \lstinput
     \lstinputlisting{${0:FILENAME}}
-
-snippet img
-alias   \img
-    \begin{figure}[H]
-      \begin{center}
-      \includegraphics[width=0.92\textwidth]{${0:FILENAME}}
-      \caption{${1:SHOW_NAME}}
-        % \label{<`6`>}
-      \end{center}
-    \end{figure}
 
 snippet codealgo
 alias   \codealgo
