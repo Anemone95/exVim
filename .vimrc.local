@@ -144,3 +144,9 @@ autocmd BufNewFile,BufRead * set fileformat=unix
 
 " set guifont=consolas:h18.5:cANSI
 " set guifont=consolas:h18.5:cGB2312
+
+"Ctrl+h/j/k/l切换窗口
+noremap <Up> <c-w>k
+noremap <Down> <c-w>j
+noremap <Left> <c-w>h
+noremap <Right> <c-w>l
