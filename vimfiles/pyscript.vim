@@ -43,7 +43,7 @@ if match( getline(10),"scrapy" )!=-1||match(getline(6),"scrapy")!=-1
     " else
         " map <F9> :!main.py<cr>
     " endif
-    map <F9> :!main.py<cr>
+    map <F9> :!python main.py<cr>
 endif
 
 "source $VIM/vim74/indent/python.vim
