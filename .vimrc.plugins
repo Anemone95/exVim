@@ -190,7 +190,13 @@ let g:tagbar_type_cpp = {
         \ 'v:variables:0:0',
     \ ],
 \ }
-
+let g:tagbar_type_smali = {
+        \ 'ctagstype' : 'smali',
+        \ 'kinds' : [
+                \ 'f:field',
+                \ 'm:method',
+        \ ]
+\ }
 " DISABLE: minibufexpl makes Vim editing slow when there are too many buffers opened
 "          if you don't mind, and love this plugin, uncomment the script below
 "          to enable it
@@ -487,7 +493,7 @@ Plug 'kchmck/vim-coffee-script'
 
 " vim-html
 " ---------------------------------------------------
-Plug 'exvim/ex-indenthtml.vim',{'for':'html'}
+Plug 'exvim/ex-indenthtml.vim',{'for':[ 'html','htmldjango.html' ]}
 
 
 " DISABLE: Slow to open big css file

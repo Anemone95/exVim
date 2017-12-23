@@ -2,7 +2,7 @@
 基于exVim进行配置,仅更改.vimrc.local和.vimrc.plugin.local文件.支持C/C++,Java,Python,PHP,Matlab,Arduino等语言.对界面,字体进行美化调整,改变部分案件映射,同时对Windows进行优化.另外,vim.local文件可以改名为.vimrc文件提供一个无插件的轻型vim配置文件.
 
 # 安装
-**以下流程仅适用于Windows用户**
+## Windows
 1. 安装[exVim](https://github.com/vim/vim-win3c2-installer/releases).**建议安装x86版本,同时需要将exVim安装在C盘根目录下,如c:\exVim.否则需要修改reg文件**
 
 2. 运行cmd_here.reg,edit_with_vim.reg,new_project.reg.
@@ -16,6 +16,15 @@
 6. 安装youyuan字体.
 
 7. 运行exVim,无视错误,输入 :BundleUpdate,安装插件.
+
+## Linux
+```bash
+cd ~
+git clone https://github.com/Anemone0/exVim.git
+bash ./exVim/install/install.sh
+```
+
+运行exVim,无视错误,输入 :BundleUpdate,安装插件.
 
 # 特性
 ## 原版功能

@@ -15,14 +15,8 @@ set shiftwidth=4
 "指定按一次backspace就删除shiftwidth宽度
 set smarttab
 
-" 启用折叠
-if line("$")>200
-    set foldlevelstart=1
-    set foldenable
-    " set foldmethod=syntax
-    set foldmethod=manual
-endif
-set foldmethod=manual
+
+" set foldmethod=manual
 
 " 常规模式下用空格键来开关光标行所在折叠（注：zR 展开所有折叠，zM 关闭所有折叠）
 nnoremap <space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zO')<CR>
@@ -98,6 +92,15 @@ if has('multi_byte_ime')
     set iminsert=0 imsearch=0
 endif
 
+" 启用折叠
+" set foldmethod=syntax
+if getfsize(expand(@%))>700
+    set foldmethod=syntax
+    set foldlevelstart=0
+    set foldenable
+else
+    set foldlevelstart=999
+endif
 
 " 个人配置,非本人使用请全部注释
 autocmd BufNewFile,BufRead *.h source $VIM/vimfiles/hscript.vim
@@ -111,10 +114,14 @@ autocmd FileType php source $VIM/vimfiles/phpscript.vim
 autocmd FileType java source $VIM/vimfiles/javascript.vim
 autocmd FileType tex source $VIM/vimfiles/latexscript.vim
 autocmd FileType html set ft=htmldjango.html " For SnipMate
+autocmd FileType xhtml set ft=htmldjango.html " For SnipMate
+autocmd FileType htmldjango.html set foldmethod=indent " For SnipMate
+autocmd FileType htmldjango.html set foldlevel=1 " For SnipMate
 autocmd FileType tex set spell
 autocmd FileType plaintex set spell
 autocmd FileType plaintex set textwidth=100
 autocmd FileType bib map <F10> :%s/@//gn<CR>
+autocmd FileType smali set foldmethod=indent
 
 let g:tex_flavor = "latex"
 
@@ -150,3 +157,4 @@ noremap <Up> <c-w>k
 noremap <Down> <c-w>j
 noremap <Left> <c-w>h
 noremap <Right> <c-w>l
+

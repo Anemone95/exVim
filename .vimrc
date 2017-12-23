@@ -116,7 +116,9 @@ if has('gui_running')
     set background=dark
 else
     set background=dark
-    set t_Co=256 " make sure our terminal use 256 color
+    if !WINDOWS()
+        set t_Co=256 " make sure our terminal use 256 color
+    endif
     let g:solarized_termcolors = 256
 endif
 " colorscheme solarized

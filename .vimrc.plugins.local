@@ -86,6 +86,7 @@ Plug 'Shougo/neocomplete.vim',{'for':language_ex}
         \ 'java' : $VIM.'/vimfiles/dict/java.dict',
         \ 'javascript' : $VIM.'/vimfiles/dict/javascript.dict',
         \ 'php' : $VIM.'/vimfiles/dict/php.dict',
+        \ 'python' : $VIM.'/vimfiles/dict/python.dict',
         \ 'vim' : $VIM.'/vimfiles/dict/vim.dict',
         \ 'matlab' : $VIM.'/vimfiles/dict/matlab.dict',
         \ 'sql' : $VIM.'/vimfiles/dict/sql.dict',
@@ -216,9 +217,8 @@ Plug 'starcraftman/vim-eclim',{'on':'EclimEnable'}
 
 
 Plug 'tmhedberg/SimpylFold',{'for':'python'}
-    autocmd BufWinEnter *.py setlocal foldexpr=SimpylFold(v:lnum) foldmethod=expr
-    autocmd BufWinLeave *.py setlocal foldexpr< foldmethod<
-
+    " autocmd BufWinEnter *.py setlocal foldexpr=SimpylFold(v:lnum) foldmethod=expr
+    " autocmd BufWinLeave *.py setlocal foldexpr< foldmethod<
 
 Plug 'vim-latex/vim-latex',{'for':'tex'}
     " let g:Tex_CompileRule_ps = 'dvips -Ppdf -o $*.ps $*.dvi'
@@ -239,8 +239,9 @@ Plug 'vim-latex/vim-latex',{'for':'tex'}
 
     let g:Tex_SmartKeyBS=0
 
-Plug 'rhysd/vim-grammarous',{'for':['tex','plaintex']}
-nmap <F5> :GrammarousCheck<CR>
 Plug 'Konfekt/FastFold',{'for':['python','cpp','h']}
+let g:python_folding=1
 Plug 'MattesGroeger/vim-bookmarks'
+" smali语法高亮
+Plug 'mzlogin/vim-smali',{'for':'smali'}
 " Plug 'vim-scripts/XML-Folding',{'for':['html','xml','xhtml']}
