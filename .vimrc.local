@@ -5,18 +5,15 @@ else
 endif
 
 setlocal completeopt-=preview
-map <leader>y "*y
-vmap <leader>y "*y
-map <leader>p "*p
+" map <leader>y "*y
+" vmap <leader>y "*y
+" map <leader>p "*p
 "指定窗口出现的位置，坐标原点在屏幕左上角
 winpos 100 10
 "换行时自动缩进宽度，可更改（宽度同tabstop）
 set shiftwidth=4
 "指定按一次backspace就删除shiftwidth宽度
 set smarttab
-
-
-" set foldmethod=manual
 
 " 常规模式下用空格键来开关光标行所在折叠（注：zR 展开所有折叠，zM 关闭所有折叠）
 nnoremap <space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zO')<CR>
@@ -42,12 +39,6 @@ noremap <c-k> <c-w>k
 noremap <c-j> <c-w>j
 noremap <c-h> <c-w>h
 noremap <c-l> <c-w>l
-
-"
-" set complete-=k
-" set complete+=k
-" set complete-=t
-" set complete+=t
 
 " 隐藏滚动条
 set guioptions-=L " 隐藏左侧滚动条
@@ -84,6 +75,8 @@ endif
 " 注：使用utf-8格式后，软件与程序源码、文件路径不能有中文，否则报错
 set encoding=utf-8                                    "设置gvim内部编码，默认不更改
 set fileencodings=utf-8,ucs-bom,gbk,cp936,latin-1     "设置支持打开的文件的编码
+" 文件格式，默认 ffs=dos,unix
+autocmd BufNewFile,BufRead * set fileformat=unix
 
 
 if has('multi_byte_ime')
@@ -146,8 +139,6 @@ function! ToggleConcealLevel()
     endif
 endfunction
 
-" 文件格式，默认 ffs=dos,unix
-autocmd BufNewFile,BufRead * set fileformat=unix
 
 " set guifont=consolas:h18.5:cANSI
 " set guifont=consolas:h18.5:cGB2312
@@ -158,3 +149,16 @@ noremap <Down> <c-w>j
 noremap <Left> <c-w>h
 noremap <Right> <c-w>l
 
+" 定制化编译
+function! Compile() abort
+    if findfile("make.sh",".")=="make.sh"
+        execute "!make.sh"
+    elseif findfile("make.bat",".")=="make.bat"
+        execute "!make.bat"
+    else
+        execute "SCCompile"
+    endif
+endfunction
+
+nmap <F9> :call Compile()<cr>
+imap <F9> :call Compile()<cr>

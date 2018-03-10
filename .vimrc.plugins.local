@@ -48,24 +48,30 @@ Plug 'vim-scripts/DoxygenToolkit.vim',{'for':language_base}
     " autocmd FileType java set completefunc=javacomplete#CompleteParamsInfo
 " 括号自动补全
 Plug 'jiangmiao/auto-pairs'
-" let g:AutoPairsMapBS=0
+let g:AutoPairsMapBS=0
 Plug 'davidhalter/jedi-vim',{'for':'python'}
 
 " 多语言模板补全,补全自动弹出
 Plug 'Shougo/neosnippet-snippets',{'for':language_ex}| Plug 'Shougo/neosnippet.vim'
     " Plugin key-mappings.
-    imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-    " imap <expr><C-k>
-                " \ pumvisible() ?  "\<Plug>(neosnippet_expand_or_jump)": "\<C-k>"
-
-    smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+    imap <c-k>     <Plug>(neosnippet_expand_or_jump)
+    smap <c-k>     <Plug>(neosnippet_expand_or_jump)
     xmap <C-k>     <Plug>(neosnippet_expand_target)
+
+    " imap <expr><CR> neosnippet#expandable() ?  "\<Plug>(neosnippet_expand)" : "\<CR>"
+    " imap <CR> <esc>:q!
+    " smap <cr>     <Plug>(neosnippet_expand_or_jump)
+    " xmap <cr>     <Plug>(neosnippet_expand_target)
+
+    imap <expr><up>
+    \ neosnippet#expandable_or_jumpable() ?
+    \    "\<Plug>(neosnippet_expand_or_jump)" : "\<up>"
 
     " SuperTab like snippets behavior.
     imap <expr><TAB>
-    \ pumvisible() ? "\<C-n>" :
     \ neosnippet#expandable_or_jumpable() ?
     \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+
     " For conceal markers.
     if has('conceal')
       set conceallevel=2 concealcursor=niv
@@ -93,6 +99,7 @@ Plug 'Shougo/neocomplete.vim',{'for':language_ex}
         \ 'tex' : $VIM.'/vimfiles/dict/latex.dict',
     \ }
     inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+    " inoremap <expr><c-j>  pumvisible() ? "\<C-n>" : "\<c-j>"
     autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
     autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
     autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
@@ -103,10 +110,10 @@ Plug 'Shougo/neocomplete.vim',{'for':language_ex}
     inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
     inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
 
-    inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-    function! s:my_cr_function()
-      return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
-    endfunction
+    " inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+    " function! s:my_cr_function()
+      " return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
+    " endfunction
 
     if !exists('g:neocomplete#sources#omni#input_patterns')
       let g:neocomplete#sources#omni#input_patterns = {}
@@ -114,7 +121,13 @@ Plug 'Shougo/neocomplete.vim',{'for':language_ex}
     let g:neocomplete#sources#omni#input_patterns.tex= '\\\h\w*{'
 
     " inoremap <expr><C-h> pumvisible() ? neocomplete#smart_close_popup()."\<C-h>" : "\<C-h>"
-    " inoremap <expr><BS> pumvisible() ? neocomplete#smart_close_popup()."\<C-h>" : "\<BS>"
+    inoremap <expr><BS> pumvisible() ? neocomplete#smart_close_popup()."\<C-h>" : "\<BS>"
+"颜色增强
+Plug 'sentientmachine/erics_vim_syntax_and_color_highlighting',{'for':['python','java', 'html', 'javascript', 'php', 'css', 'bash', 'haml', 'viml']}
+" Plug 'sentientmachine/erics_vim_syntax_and_color_highlighting',{'for':language_ex}
+" 目录树
+" Plug 'scrooloose/nerdtree'
+
     function! TreeToggle()
         try
             execute 'EXProjectToggle'
@@ -122,11 +135,6 @@ Plug 'Shougo/neocomplete.vim',{'for':language_ex}
             execute 'NERDTreeToggle'
         endtry
     endfunction
-"颜色增强
-Plug 'sentientmachine/erics_vim_syntax_and_color_highlighting',{'for':['python','java', 'html', 'javascript', 'php', 'css', 'bash', 'haml', 'viml']}
-" Plug 'sentientmachine/erics_vim_syntax_and_color_highlighting',{'for':language_ex}
-" 目录树
-" Plug 'scrooloose/nerdtree'
 
     map <F2> :call TreeToggle()<CR>
     let g:NERDTreeWinSize=25

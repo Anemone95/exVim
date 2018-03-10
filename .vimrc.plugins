@@ -321,6 +321,11 @@ map <unique> <C-F11> <Plug>NERDCommenterUncomment
 Plug 'scrooloose/syntastic',{'for':language_base}
 
 let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
+" let g:syntastic_python_python_exec = 'python'
+" let g:syntastic_python_checkers=['python']
+let g:syntastic_python_checkers=['flake8','pyflakes','python']
+" let g:syntastic_python_checker_args='--ignore=E305,E225'
+let g:syntastic_python_flake8_post_args='--ignore=E501,E128,E225,E305'
 
 " Plug 'w0rp/ale',{'for':language_ex}
 " let g:ale_sign_column_always = 1

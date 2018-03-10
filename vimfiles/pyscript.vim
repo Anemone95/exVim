@@ -19,20 +19,6 @@ if match( getline(1),"django" )!=-1||match(getline(3),"django")!=-1
     map <F9> :Dmanage runserver<cr>
 endif
 if match( getline(10),"scrapy" )!=-1||match(getline(6),"scrapy")!=-1
-    " if WINDOWS()
-        " file_dir=split(expand("%:p:h","\\"))[-1]
-    " else
-        " file_dir=split(expand("%:p:h","\\"))[-1]
-    " endif
-    " if match( expand("%:p:h","\\"),"spiders" )!=-1
-        " if WINDOWS()
-            " map <F9> :!..\main.py<cr>
-        " else
-            " map <F9> :!../main.py<cr>
-        " endif
-    " else
-        " map <F9> :!main.py<cr>
-    " endif
     map <F9> :!python main.py<cr>
 endif
 
