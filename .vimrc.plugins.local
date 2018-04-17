@@ -123,8 +123,7 @@ Plug 'Shougo/neocomplete.vim',{'for':language_ex}
     " inoremap <expr><C-h> pumvisible() ? neocomplete#smart_close_popup()."\<C-h>" : "\<C-h>"
     inoremap <expr><BS> pumvisible() ? neocomplete#smart_close_popup()."\<C-h>" : "\<BS>"
 "颜色增强
-Plug 'sentientmachine/erics_vim_syntax_and_color_highlighting',{'for':['python','java', 'html', 'javascript', 'php', 'css', 'bash', 'haml', 'viml']}
-" Plug 'sentientmachine/erics_vim_syntax_and_color_highlighting',{'for':language_ex}
+Plug 'sentientmachine/erics_vim_syntax_and_color_highlighting'
 " 目录树
 " Plug 'scrooloose/nerdtree'
 
