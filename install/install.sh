@@ -12,4 +12,4 @@ cp -r $EXVIM_DIR/vimfiles/* /usr/share/vim/vimfiles
 cp $EXVIM_DIR/.vimrc* ~/
 apt-get -y install exuberant-ctags gawk id-utils python3-jedi
 git clone https://github.com/powerline/fonts
-source $EXVIM_DIR/fonts/install.sh
+source $TOOL_DIR/fonts/install.sh
