@@ -5,7 +5,7 @@
 ## Windows
 1. 安装[exVim](https://github.com/vim/vim-win3c2-installer/releases).**建议安装x86版本,同时需要将exVim安装在C盘根目录下,如c:\exVim.否则需要修改reg文件**
 
-2. 运行cmd_here.reg,edit_with_vim.reg,new_project.reg.
+2. 运行cmder_here.reg,edit_with_vim.reg,new_project.reg.
 
 3. 检查vim.exe是否在环境变量内,并将newProject.vbs放入环境变量中.
 
@@ -20,7 +20,7 @@
 ## Linux
 ```bash
 cd ~
-git clone https://github.com/Anemone0/exVim.git
+git clone https://github.com/Anemone95/exVim.git
 bash ./exVim/install/install.sh
 ```
 
@@ -134,8 +134,6 @@ git https://github.com/powerline/fonts
 sh fonts/install.sh
 
 # 其他
-联系方式:x565178035@126.com
+联系方式: anemone95@qq.com
 
-Windows完整版:http://pan.baidu.com/s/1o6Yhbaa 密码：lvsv
-
-感谢exVim项目,以及以前帮助过我的人
+感谢exVim项目

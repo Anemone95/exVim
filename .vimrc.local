@@ -156,7 +156,7 @@ function! Compile() abort
     elseif findfile("make.bat",".")=="make.bat"
         execute "!make.bat"
     else
-        execute "SCCompile"
+        execute "SCCompileRun"
     endif
 endfunction
 

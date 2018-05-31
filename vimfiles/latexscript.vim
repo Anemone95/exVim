@@ -38,16 +38,16 @@ function! Compile() abort
     elseif findfile("make.bat",".")=="make.bat"
         execute "!make.bat"
     else
-        execute "SCCompile"
+        execute "SCCompileRun"
     endif
 endfunction
 
-call SingleCompile#SetCompilerTemplate('tex', 'xelatex', 'XeLatex',
-            \ 'xelatex', '-interaction=nonstopmode -synctex=1 -file-line-error-style',
+call SingleCompile#SetCompilerTemplate('tex', 'pdflatex', 'PdfLaTeX',
+            \ 'pdflatex', '',
             \ SingleCompile#GetDefaultOpenCommand() .
             \ ' "$(FILE_TITLE)$.pdf"')
 " call SingleCompile#SetOutfile('filetype', 'compiler', 'out_file')
-call SingleCompile#ChooseCompiler('tex', 'xelatex')
+call SingleCompile#ChooseCompiler('tex', 'pdflatex')
 " nmap <F9> :SCCompile<cr>
 nmap <F9> :call Compile()<cr>
 imap <F9> :call Compile()<cr>
