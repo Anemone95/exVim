@@ -14,3 +14,4 @@ apt-get -y install exuberant-ctags gawk id-utils python3-jedi python3-pip
 pip3 install jedi
 git clone https://github.com/powerline/fonts
 source $TOOL_DIR/fonts/install.sh
+source $TOOL_DIR/../fonts/install.sh
