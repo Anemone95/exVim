@@ -589,7 +589,7 @@ endif
 
 map w e
 imap ]] {<CR>
-cmap W w
+cmap W w !sudo tee %
 imap jj <ESC>
 imap <C-]> <ESC>
 vmap <C-]> <ESC>
