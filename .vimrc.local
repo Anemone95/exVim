@@ -121,6 +121,7 @@ let g:tex_flavor = "latex"
 map w e
 imap ]] {<CR>
 cmap W w
+cmap ww w !sudo tee %
 imap jj <ESC>
 imap <C-]> <ESC>
 vmap <C-]> <ESC>

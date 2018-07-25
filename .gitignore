@@ -1,7 +1,7 @@
 vimfiles/plugged/
 vimfiles/bundle/
 *.dat
-vim80/
+vim*/
 .exvim.vim/
 vimfiles/view/
 install/fonts/
