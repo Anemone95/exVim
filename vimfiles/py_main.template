@@ -7,10 +7,6 @@
 # @version 1.0
 # @date <DATE>
 
-import sys
-
-reload(sys)
-sys.setdefaultencoding("utf-8")
 def <FUN_NAME>():
 
 if __name__ == '__main__':

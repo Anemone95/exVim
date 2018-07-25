@@ -126,13 +126,19 @@ Plug 'Shougo/neocomplete.vim',{'for':language_ex}
 Plug 'sentientmachine/erics_vim_syntax_and_color_highlighting'
 " 目录树
 " Plug 'scrooloose/nerdtree'
-
     function! TreeToggle()
-        try
+        let g:current_path=expand("%:p:h")
+        if WINDOWS()
+            let g:current_dir=split(g:current_path,"\\")[-1]
+        else
+            let g:current_dir=split(g:current_path,"/")[-1]
+        endif
+        if filereadable(g:current_dir.".exvim") || match(g:current_path,"exvim")!=-1
+            let g:ex_project_file=g:current_path."/.exvim.".g:current_dir."/files.exproject"
             execute 'EXProjectToggle'
-        catch
+        else
             execute 'NERDTreeToggle'
-        endtry
+        endif
     endfunction
 
     map <F2> :call TreeToggle()<CR>
