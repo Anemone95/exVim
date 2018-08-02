@@ -96,6 +96,7 @@ Plug 'Shougo/neocomplete.vim',{'for':language_ex}
         \ 'vim' : $VIM.'/vimfiles/dict/vim.dict',
         \ 'matlab' : $VIM.'/vimfiles/dict/matlab.dict',
         \ 'sql' : $VIM.'/vimfiles/dict/sql.dict',
+        \ 'solidity': $VIM.'/vimfiles/dict/solidity.dict',
         \ 'tex' : $VIM.'/vimfiles/dict/latex.dict',
     \ }
     inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
@@ -169,6 +170,9 @@ Plug 'vim-airline/vim-airline-themes'| Plug 'vim-airline/vim-airline'
     let g:airline#extensions#tabline#enabled = 1
     let g:airline#extensions#tabline#buffer_nr_show = 1
 
+    let g:airline#extensions#syntastic#enabled = 1
+
+
     "设置切换Buffer快捷键"
     nnoremap bp :bp<CR>
     nnoremap bn :bn<CR>
@@ -200,12 +204,6 @@ Plug 'vim-airline/vim-airline-themes'| Plug 'vim-airline/vim-airline'
 let g:pony_display_colors=1
 Plug 'jmcomets/vim-pony',{'for':'python'}
 let g:pony_display_colors=1
-" Plug 'hdima/python-syntax'
-    " let python_highlight_all = 1
-
-",{'for':'python'}
-
-" Plug 'vim-scripts/python-fold',{'for':'python'}
 
 Plug 'terryma/vim-multiple-cursors'
 " Called once right before you start selecting multiple cursors
@@ -258,3 +256,4 @@ Plug 'MattesGroeger/vim-bookmarks'
 " smali语法高亮
 Plug 'mzlogin/vim-smali',{'for':'smali'}
 " Plug 'vim-scripts/XML-Folding',{'for':['html','xml','xhtml']}
+Plug 'tomlion/vim-solidity',{'for':'solidity'}

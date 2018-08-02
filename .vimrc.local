@@ -75,8 +75,14 @@ endif
 " 注：使用utf-8格式后，软件与程序源码、文件路径不能有中文，否则报错
 set encoding=utf-8                                    "设置gvim内部编码，默认不更改
 set fileencodings=utf-8,ucs-bom,gbk,cp936,latin-1     "设置支持打开的文件的编码
-" 文件格式，默认 ffs=dos,unix
-autocmd BufNewFile,BufRead * set fileformat=unix
+" 默认改变文件件格式为unix
+function! FormatUnix()
+    if &modifiable==1
+        set fileformat=unix
+        set fileencoding=utf-8
+    endif
+endfunction
+autocmd! BufNewFile,BufRead * call FormatUnix()
 
 
 if has('multi_byte_ime')
