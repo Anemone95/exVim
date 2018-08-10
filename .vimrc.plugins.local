@@ -257,3 +257,8 @@ Plug 'MattesGroeger/vim-bookmarks'
 Plug 'mzlogin/vim-smali',{'for':'smali'}
 " Plug 'vim-scripts/XML-Folding',{'for':['html','xml','xhtml']}
 Plug 'tomlion/vim-solidity',{'for':'solidity'}
+
+Plug 'oplatek/Conque-Shell'
+au BufReadPre FILETYPE au! PluginNotes
+au BufReadPre FILETYPE au! PluginXoloxMisc
+noremap <F3> :ConqueTermSplit bash<CR>
