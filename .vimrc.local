@@ -176,7 +176,7 @@ if has('nvim')
    " open split windows on the bot
    bot split
    " resize the height of terminal windows to 30
-   resize 15
+   resize 10
    :terminal
   endf
 else
@@ -184,7 +184,7 @@ else
    " open split windows on the bot
    bot split
    " resize the height of terminal windows to 30
-   resize 15
+   resize 10
    :call term_start('bash', {'curwin' : 1, 'term_finish' : 'close'})
   endf
 endif
