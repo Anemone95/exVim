@@ -102,16 +102,21 @@ else
 endif
 
 " 个人配置,非本人使用请全部注释
-autocmd BufNewFile,BufRead *.h source $VIM/vimfiles/hscript.vim
-autocmd BufNewFile,BufRead *.c source $VIM/vimfiles/cscript.vim
-autocmd BufNewFile,BufRead *.cpp source $VIM/vimfiles/cppscript.vim
-autocmd FileType python source $VIM/vimfiles/pyscript.vim
-autocmd FileType arduino source $VIM/vimfiles/inoscript.vim
-autocmd FileType matlab source $VIM/vimfiles/matlabscript.vim
-autocmd FileType asm source $VIM/vimfiles/asmscript.vim
-autocmd FileType php source $VIM/vimfiles/phpscript.vim
-autocmd FileType java source $VIM/vimfiles/javascript.vim
-autocmd FileType tex source $VIM/vimfiles/latexscript.vim
+if WINDOWS()
+   let $VIMHOME=$VIM."/vimfiles"
+else
+   let $VIMHOME=$HOME."/.vim"
+endif
+autocmd BufNewFile,BufRead *.h source $VIMHOME/hscript.vim
+autocmd BufNewFile,BufRead *.c source $VIMHOME/cscript.vim
+autocmd BufNewFile,BufRead *.cpp source $VIMHOME/cppscript.vim
+autocmd FileType python source $VIMHOME/pyscript.vim
+autocmd FileType arduino source $VIMHOME/inoscript.vim
+autocmd FileType matlab source $VIMHOME/matlabscript.vim
+autocmd FileType asm source $VIMHOME/asmscript.vim
+autocmd FileType php source $VIMHOME/phpscript.vim
+autocmd FileType java source $VIMHOME/javascript.vim
+autocmd FileType tex source $VIMHOME/latexscript.vim
 autocmd FileType html set ft=htmldjango.html " For SnipMate
 autocmd FileType xhtml set ft=htmldjango.html " For SnipMate
 autocmd FileType htmldjango.html set foldmethod=indent " For SnipMate
