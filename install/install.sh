@@ -8,7 +8,7 @@
 
 TOOL_DIR="$( cd "$( dirname "$0"  )" && pwd  )"
 EXVIM_DIR=$TOOL_DIR/..
-ln -s -f $EXVIM_DIR/vimfiles ~/.vim
+ln -s -f $EXVIM_DIR/vimfiles/ ~/.vim
 ln -f $EXVIM_DIR/.vimrc ~/.vimrc
 ln -f $EXVIM_DIR/.vimrc.local ~/.vimrc.local
 ln -f $EXVIM_DIR/.vimrc.plugins ~/.vimrc.plugins

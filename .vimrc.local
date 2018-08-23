@@ -1,8 +1,16 @@
+let proc_version=system("cat /proc/version")
+if match(proc_version,"Microsoft")==-1
+    let g:is_wsl=0
+else
+    let g:is_wsl=1
+endif
+
 if WINDOWS()
     set clipboard+=unnamed
 else
     set clipboard=unnamedplus
 endif
+
 
 setlocal completeopt-=preview
 " map <leader>y "*y
@@ -57,7 +65,7 @@ set guifontwide=YouYuan:h10.5:cGB2312
 function QfMakeConv()
     let qflist = getqflist()
     for i in qflist
-       let i.text = iconv(i.text, "cp936", "utf-8")
+        let i.text = iconv(i.text, "cp936", "utf-8")
     endfor
     call setqflist(qflist)
 endfunction
@@ -103,9 +111,9 @@ endif
 
 " 个人配置,非本人使用请全部注释
 if WINDOWS()
-   let $VIMHOME=$VIM."/vimfiles"
+    let $VIMHOME=$VIM."/vimfiles"
 else
-   let $VIMHOME=$HOME."/.vim"
+    let $VIMHOME=$HOME."/.vim"
 endif
 autocmd BufNewFile,BufRead *.h source $VIMHOME/hscript.vim
 autocmd BufNewFile,BufRead *.c source $VIMHOME/cscript.vim
@@ -177,21 +185,25 @@ imap <F9> :call Compile()<cr>
 
 " bash
 if has('nvim')
-  fu! OpenTerminal()
-   " open split windows on the bot
-   bot split
-   " resize the height of terminal windows to 30
-   resize 10
-   :terminal
-  endf
+    fu! OpenTerminal()
+        " open split windows on the bot
+        bot split
+        " resize the height of terminal windows to 30
+        resize 10
+        :terminal
+    endf
 else
-  fu! OpenTerminal()
-   " open split windows on the bot
-   bot split
-   " resize the height of terminal windows to 30
-   resize 10
-   :call term_start('bash', {'curwin' : 1, 'term_finish' : 'close'})
-  endf
+    fu! OpenTerminal()
+        " open split windows on the bot
+        bot split
+        " resize the height of terminal windows to 30
+        resize 10
+        if WINDOWS()
+            :call term_start('cmd', {'curwin' : 1, 'term_finish' : 'close'})
+        else
+            :call term_start('bash', {'curwin' : 1, 'term_finish' : 'close'})
+        endif
+    endf
 endif
 noremap <F3> :call OpenTerminal()<CR>
 
