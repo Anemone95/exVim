@@ -194,3 +194,7 @@ else
   endf
 endif
 noremap <F3> :call OpenTerminal()<CR>
+
+" 函数跳转
+nmap gi <c-]><esc>
+nmap go <c-t>
