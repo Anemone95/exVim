@@ -186,18 +186,14 @@ imap <F9> :call Compile()<cr>
 " bash
 if has('nvim')
     fu! OpenTerminal()
-        " open split windows on the bot
         bot split
-        " resize the height of terminal windows to 30
-        resize 10
+        resize 15
         :terminal
     endf
 else
     fu! OpenTerminal()
-        " open split windows on the bot
         bot split
-        " resize the height of terminal windows to 30
-        resize 10
+        resize 15
         if WINDOWS()
             :call term_start('cmd', {'curwin' : 1, 'term_finish' : 'close'})
         else
@@ -210,3 +206,6 @@ noremap <F3> :call OpenTerminal()<CR>
 " 函数跳转
 nmap gi <c-]><esc>
 nmap go <c-t>
+
+" 高亮变量
+map ma *
