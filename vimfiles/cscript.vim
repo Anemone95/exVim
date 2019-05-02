@@ -50,4 +50,4 @@ inoremap    <buffer>  <silent>  <LocalLeader>if    <Esc>G:call C_InsertTemplate(
 if line("$")==1
     call LoadMain("c_main.template")
 endif
-" call SingleCompile#ChooseCompiler('c', 'gcc')
+call SingleCompile#ChooseCompiler('c', 'gcc')

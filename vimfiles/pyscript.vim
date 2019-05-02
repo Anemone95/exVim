@@ -23,3 +23,7 @@ if match( getline(10),"scrapy" )!=-1||match(getline(6),"scrapy")!=-1
 endif
 
 set fileformat=unix
+set foldmethod=indent
+set foldignore=
+" setlocal foldexpr=SimpylFold(5) foldmethod=expr
+" autocmd BufWinLeave *.py setlocal foldexpr< foldmethod<

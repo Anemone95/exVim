@@ -227,9 +227,7 @@ endfunction
 Plug 'starcraftman/vim-eclim',{'on':'EclimEnable'}
 
 
-Plug 'tmhedberg/SimpylFold',{'for':'python'}
-    " autocmd BufWinEnter *.py setlocal foldexpr=SimpylFold(v:lnum) foldmethod=expr
-    " autocmd BufWinLeave *.py setlocal foldexpr< foldmethod<
+" Plug 'tmhedberg/SimpylFold',{'for':'python'}
 
 Plug 'vim-latex/vim-latex',{'for':'tex'}
     " let g:Tex_CompileRule_ps = 'dvips -Ppdf -o $*.ps $*.dvi'

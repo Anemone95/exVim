@@ -181,7 +181,7 @@ function! Compile() abort
 endfunction
 
 nmap <F9> :call Compile()<cr>
-imap <F9> :call Compile()<cr>
+imap <F9> <esc>:call Compile()<cr>
 
 " bash
 if has('nvim')
