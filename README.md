@@ -4,17 +4,11 @@
 # 安装
 ## Windows
 1. 安装[exVim](https://github.com/vim/vim-win3c2-installer/releases).**建议安装x86版本,同时需要将exVim安装在C盘根目录下,如c:\exVim.否则需要修改reg文件**
-
 2. 运行cmder_here.reg,edit_with_vim.reg,new_project.reg.
-
 3. 检查vim.exe是否在环境变量内,并将newProject.vbs放入环境变量中.
-
 4. 安装[Git](http://git-scm.com/download/),检查环境变量.
-
-5. 安装[Python](https://www.python.org/),[Lua](http://www.lua.org/download.html),填写环境变量.
-
+5. 安装[Python](https://www.python.org/),[Lua](http://www.lua.org/download.html),填写环境变量 %PYTHONHOME%,PATH=%PATH%;%PYTHONHOME%;%PYTHONHOME%/Script
 6. 安装youyuan字体.
-
 7. 运行exVim,无视错误,输入 :BundleUpdate,安装插件.
 
 ## Linux
@@ -132,6 +126,10 @@ bash ./exVim/install/install.sh
 ## Linux中字体问题
 git https://github.com/powerline/fonts
 sh fonts/install.sh
+
+## Windows上闪退，装的是conda的python
+
+由于Conda没有填%PYTHONHOME%变量，填上就好
 
 # 其他
 联系方式: anemone95@qq.com
