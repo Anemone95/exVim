@@ -1,8 +1,0 @@
-﻿Windows Registry Editor Version 5.00
-
-[HKEY_CLASSES_ROOT\Directory\Background\shell\vim here]
-@="Vim here"
-
-[HKEY_CLASSES_ROOT\Directory\Background\shell\vim here\command]
-@="C:\\exVim\\vim81\\gvim.exe"
-
