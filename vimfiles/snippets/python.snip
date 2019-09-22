@@ -1,0 +1,59 @@
+# snippet     class
+# abbr        class Class(...): ...
+# options     head
+	# class ${1:#:name}(${2:object}):
+		# def __init__(self, ${3}):
+			# ${0:pass}
+
+snippet     logging
+abbr        logging.basicConfig ...
+options     head
+    logging.basicConfig(format='%(asctime)s : %(levelname)s : %(filename)s : %(funcName)s : %(message)s', level=logging.DEBUG)
+
+snippet     struct
+abbr        collections ...
+options     head
+    collections.namedtuple('${0:sname}', ['${1:field1}', '${2:field2}'])
+
+snippet     cmd
+abbr        subprocess.Popen ...
+options     head
+    process = subprocess.Popen('${0:cmd}', shell=True,
+                               stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    stdout, stderr = process.communicate()
+    process.returncode
+
+snippet     popen
+abbr        subprocess.Popen ...
+options     head
+    process = subprocess.Popen(${0:cmd}, shell=True,
+                               stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    stdout, stderr = process.communicate()
+    process.returncode
+
+snippet     walk
+abbr        os.walk ...
+options     head
+    for root, dirs, files in os.walk(${0:dir}):
+        for d in dirs:
+            print os.path.join(root, d)
+        for f in files:
+            print os.path.join(root, f)
+
+snippet     script_path
+abbr        SCRIPT_PATH = os.path ...
+options     head
+    SCRIPT_PATH = os.path.split(os.path.realpath(__file__))[0]
+
+snippet     md5
+abbr        hashlib.md5 ...
+options     head
+    hashlib.md5("${0:str}").hexdigest()
+
+snippet     enum
+abbr        class Enum():...
+options     head
+    @enum.unique
+    class ${0:#:Enum}(enum.Enum):
+        ${1:key1} = ${2:value1}
+        ${3:key2} = ${4:value2}

@@ -77,6 +77,8 @@ Plug 'Shougo/neosnippet-snippets',{'for':language_ex}| Plug 'Shougo/neosnippet.v
     if has('conceal')
       set conceallevel=2 concealcursor=niv
     endif
+    let g:neosnippet#enable_snipmate_compatibility = 1
+    let g:neosnippet#snippets_directory=$VIM.'/vimfiles/snippets'
 
 Plug 'Shougo/neocomplete.vim',{'for':language_ex}
     " let g:neocomplete#enable_debug = 0
