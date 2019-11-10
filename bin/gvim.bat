@@ -1,4 +1,4 @@
 @echo off
-set PYTHONHOME=%PYTHON_HOME%
+set PYTHONHOME=%CONDA_HOME%
 start "" "gvim.exe" %*
 set PYTHONHOME=

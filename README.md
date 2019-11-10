@@ -129,7 +129,7 @@ sh fonts/install.sh
 
 ## Windows上闪退，装的是conda的python
 
-由于Conda没有填%PYTHONHOME%变量，这就很麻烦了，因为如果设置了全局%PYTHONHOME%，那么conda env会失效，现在想到的方法是启动bin/gvim.bat，在bat中设置环境变量，这就要求环境变量中%VIM%/bin要在%VIM%/vim81之前。
+由于Conda没有填%PYTHONHOME%变量，这就很麻烦了，因为如果设置了全局%PYTHONHOME%，那么conda env会失效，现在想到的方法是(1)在win中设置%CONDA_HOME%变量，同时保证环境变量中%VIM%/bin要在%VIM%/vim81之前。(2)启动时启动bin/gvim.bat，在bat中设置环境变量。
 
 # 其他
 联系方式: anemone95@qq.com
