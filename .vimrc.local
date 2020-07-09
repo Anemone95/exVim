@@ -7,8 +7,10 @@ endif
 
 if WINDOWS()
     set clipboard+=unnamed
+elseif OSX()
+    set clipboard=unnamed
 else
-    set clipboard=unnamedplus
+    set clipboard+=unnamedplus
 endif
 
 
@@ -59,7 +61,9 @@ set vb
 " 外部更改
 set autoread
 
-set guifontwide=YouYuan:h10.5:cGB2312
+if !OSX()
+    set guifontwide=YouYuan:h10.5:cGB2312
+endif
 
 "Qfix 乱码问题
 function QfMakeConv()
