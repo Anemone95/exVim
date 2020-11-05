@@ -6,3 +6,4 @@ vimfiles/bundle/
 .exvim.vim/
 vimfiles/view/
 install/fonts/
+.netrwhist
