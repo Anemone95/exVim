@@ -200,7 +200,7 @@ else
         if WINDOWS()
             :call term_start('cmd', {'curwin' : 1, 'term_finish' : 'close'})
         else
-            :call term_start('bash', {'curwin' : 1, 'term_finish' : 'close'})
+            :call term_start('zsh', {'curwin' : 1, 'term_finish' : 'close'})
         endif
     endf
 endif
