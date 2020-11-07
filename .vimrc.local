@@ -214,7 +214,7 @@ nmap go <c-t>
 
 
 " 高亮变量
-" map hl *
+map hl *
 if WINDOWS()
     py3 import os; sys.executable=os.path.join(sys.prefix, 'python.exe')
 endif
