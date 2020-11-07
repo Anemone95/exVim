@@ -129,8 +129,8 @@ autocmd FileType asm source $VIMHOME/asmscript.vim
 autocmd FileType php source $VIMHOME/phpscript.vim
 autocmd FileType java source $VIMHOME/javascript.vim
 autocmd FileType tex source $VIMHOME/latexscript.vim
-autocmd FileType html set ft=htmldjango.html " For SnipMate
-autocmd FileType xhtml set ft=htmldjango.html " For SnipMate
+" autocmd FileType html set ft=html " For SnipMate
+" autocmd FileType xhtml set ft=htmldjango.html " For SnipMate
 autocmd FileType htmldjango.html set foldmethod=indent " For SnipMate
 autocmd FileType htmldjango.html set foldlevel=1 " For SnipMate
 autocmd FileType tex set spell
@@ -141,7 +141,9 @@ autocmd FileType smali set foldmethod=indent
 
 let g:tex_flavor = "latex"
 
-map w e
+if !OSX()
+    map w e
+endif
 imap ]] {<CR>
 cmap W w
 cmap ww w !sudo tee %
@@ -163,9 +165,6 @@ function! ToggleConcealLevel()
     endif
 endfunction
 
-
-" set guifont=consolas:h18.5:cANSI
-" set guifont=consolas:h18.5:cGB2312
 
 "Ctrl+h/j/k/l切换窗口
 noremap <Up> <c-w>k
@@ -201,7 +200,7 @@ else
         if WINDOWS()
             :call term_start('cmd', {'curwin' : 1, 'term_finish' : 'close'})
         else
-            :call term_start('bash', {'curwin' : 1, 'term_finish' : 'close'})
+            :call term_start('zsh', {'curwin' : 1, 'term_finish' : 'close'})
         endif
         " :call term_start('bash', {'curwin' : 1, 'term_finish' : 'close'})
     endf
@@ -213,8 +212,9 @@ tnoremap <Esc> <C-\><C-N>
 nmap gi <c-]><esc>
 nmap go <c-t>
 
+
 " 高亮变量
-map ma *
+" map hl *
 if WINDOWS()
     py3 import os; sys.executable=os.path.join(sys.prefix, 'python.exe')
 endif
