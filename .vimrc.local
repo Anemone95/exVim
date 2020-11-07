@@ -198,12 +198,12 @@ else
     fu! OpenTerminal()
         bot split
         resize 15
-        " if WINDOWS()
-            " :call term_start('cmd', {'curwin' : 1, 'term_finish' : 'close'})
-        " else
-            " :call term_start('bash', {'curwin' : 1, 'term_finish' : 'close'})
-        " endif
-        :call term_start('bash', {'curwin' : 1, 'term_finish' : 'close'})
+        if WINDOWS()
+            :call term_start('cmd', {'curwin' : 1, 'term_finish' : 'close'})
+        else
+            :call term_start('bash', {'curwin' : 1, 'term_finish' : 'close'})
+        endif
+        " :call term_start('bash', {'curwin' : 1, 'term_finish' : 'close'})
     endf
 endif
 noremap <F3> :call OpenTerminal()<CR>

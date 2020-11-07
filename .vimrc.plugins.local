@@ -257,6 +257,9 @@ Plug 'MattesGroeger/vim-bookmarks'
 Plug 'mzlogin/vim-smali',{'for':'smali'}
 " Plug 'vim-scripts/XML-Folding',{'for':['html','xml','xhtml']}
 Plug 'tomlion/vim-solidity',{'for':'solidity'}
+
+Plug 'ocaml/vim-ocaml',{'for':['ocaml', 'dune', 'opam', 'oasis', 'omake', 'ocamlbuild_tags', 'sexplib']}
+
 " Plug 'oplatek/Conque-Shell'
 
 " au BufReadPre FILETYPE au! PluginNotes

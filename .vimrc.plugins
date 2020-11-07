@@ -1,5 +1,5 @@
 let language_base=['python','c','cpp','vbs','vim','java','php','ino','vimentry','matlab','html','sql']
-let language_ex=['python','c','cpp','vbs','vim','java','php','ino','vimentry','matlab','html','sql','tex','solidity']
+let language_ex=['python','c','cpp','vbs','vim','java','php','ino','vimentry','matlab','html','sql','tex','solidity','ocaml']
 
 " Pathogen or Vundle (deafult is Vundle) {{{
 
