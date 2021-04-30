@@ -5,4 +5,4 @@ Windows Registry Editor Version 5.00
 "Icon"="%USERPROFILE%\\win_dotfiles\\icons\\Vim.ico"
 
 [HKEY_CLASSES_ROOT\*\shell\Vim\command]
-@="bash -c \"source /root/.shconfig.sh && gvim $(wslpath -u '%1')\""
+@="bash -c \"source /root/.display.sh && gvim \\\"$(wslpath -u '%1')\\\"\""
