@@ -188,44 +188,41 @@ endif
 
 " set default guifont
 if has('gui_running')
-    augroup ex_gui_font
-        " check and determine the gui font after GUIEnter.
-        " NOTE: getfontname function only works after GUIEnter.
-        au!
-        au GUIEnter * call s:set_gui_font()
-    augroup END
+    " augroup ex_gui_font
+        " au!
+        " au GUIEnter * call s:set_gui_font()
+    " augroup END
 
     " set guifont
-    function! s:set_gui_font()
-        if has('gui_gtk2')
-            if getfontname( 'DejaVu Sans Mono for Powerline' ) != ''
-                set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 12
-            elseif getfontname( 'DejaVu Sans Mono' ) != ''
-                set guifont=DejaVu\ Sans\ Mono\ 12
-            else
-                set guifont=Luxi\ Mono\ 12
-            endif
-        elseif has('x11')
-            " Also for GTK 1
-            set guifont=*-lucidatypewriter-medium-r-normal-*-*-180-*-*-m-*-*
-        elseif OSX()
-            if getfontname( 'DejaVu Sans Mono for Powerline' ) != ''
-                set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h15
-            elseif getfontname( 'DejaVu Sans Mono' ) != ''
-                set guifont=DejaVu\ Sans\ Mono:h15
-            endif
-        elseif WINDOWS()
-            if getfontname( 'DejaVu Sans Mono for Powerline' ) != ''
-                set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h11:cANSI
-            elseif getfontname( 'DejaVu Sans Mono' ) != ''
-                set guifont=DejaVu\ Sans\ Mono:h11:cANSI
-            elseif getfontname( 'Consolas' ) != ''
-                set guifont=Consolas:h11:cANSI " this is the default visual studio font
-            else
-                set guifont=Lucida_Console:h11:cANSI
-            endif
-        endif
-    endfunction
+    " function! s:set_gui_font()
+        " if has('gui_gtk2')
+            " if getfontname( 'DejaVu Sans Mono for Powerline' ) != ''
+                " set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 12
+            " elseif getfontname( 'DejaVu Sans Mono' ) != ''
+                " set guifont=DejaVu\ Sans\ Mono\ 12
+            " else
+                " set guifont=Luxi\ Mono\ 12
+            " endif
+        " elseif has('x11')
+            " set guifont=*-lucidatypewriter-medium-r-normal-*-*-180-*-*-m-*-*
+        " elseif OSX()
+            " if getfontname( 'DejaVu Sans Mono for Powerline' ) != ''
+                " set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h15
+            " elseif getfontname( 'DejaVu Sans Mono' ) != ''
+                " set guifont=DejaVu\ Sans\ Mono:h15
+            " endif
+        " elseif WINDOWS()
+            " if getfontname( 'DejaVu Sans Mono for Powerline' ) != ''
+                " set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h11:cANSI
+            " elseif getfontname( 'DejaVu Sans Mono' ) != ''
+                " set guifont=DejaVu\ Sans\ Mono:h11:cANSI
+            " elseif getfontname( 'Consolas' ) != ''
+                " set guifont=Consolas:h11:cANSI " this is the default visual studio font
+            " else
+                " set guifont=Lucida_Console:h11:cANSI
+            " endif
+        " endif
+    " endfunction
 endif
 
 " ------------------------------------------------------------------

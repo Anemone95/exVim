@@ -9,6 +9,9 @@ if WINDOWS()
     set clipboard+=unnamed
 elseif OSX()
     set clipboard=unnamed
+elseif LINUX()
+    set clipboard=unnamed
+    set clipboard+=unnamedplus
 else
     set clipboard+=unnamedplus
 endif
@@ -61,15 +64,22 @@ set vb
 " 外部更改
 set autoread
 
-if !OSX()
+if WINDOWS()
+    set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h11:cANSI
     set guifontwide=YouYuan:h10.5:cGB2312
-endif
+elseif LINUX()
+    set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 11
+    set guifontwide=WenQuanYi\ Micro\ Hei\ 11
+    " set guifontwide=DejaVu\ Sans\ Mono\ for\ Powerline\ 11.5\ GB2312
+elseif OSX()
+    set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h11
+end
 
 "Qfix 乱码问题
 function QfMakeConv()
     let qflist = getqflist()
     for i in qflist
-        let i.text = iconv(i.text, "cp936", "utf-8")
+        lt i.text = iconv(i.text, "cp936", "utf-8")
     endfor
     call setqflist(qflist)
 endfunction
@@ -205,7 +215,7 @@ else
         " :call term_start('bash', {'curwin' : 1, 'term_finish' : 'close'})
     endf
 endif
-noremap <F3> :call OpenTerminal()<CR>
+nnoremap <F3> :call OpenTerminal()<CR>
 tnoremap <Esc> <C-\><C-N>
 
 " 函数跳转
@@ -218,3 +228,5 @@ map hl *
 if WINDOWS()
     py3 import os; sys.executable=os.path.join(sys.prefix, 'python.exe')
 endif
+
+
