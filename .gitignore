@@ -1,8 +1,10 @@
 vim*/
 !vimfiles/
 vimfiles/plugged/
+vimfiles/plugged_bk/
 vimfiles/bundle/
 *.dat
 .exvim.vim/
 vimfiles/view/
 install/fonts/
+.netrwhist
