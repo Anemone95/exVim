@@ -7,6 +7,7 @@ endif
 
 if WINDOWS()
     set clipboard+=unnamed
+    let &pythonthreedll = 'python37.dll'
 else
     set clipboard=unnamedplus
 endif
