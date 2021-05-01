@@ -2,52 +2,49 @@
 " basic
 "/////////////////////////////////////////////////////////////////////////////
 
-set nocompatible " be iMproved, required
+" set nocompatible " be iMproved, required
 
-function! OSX()
-    return has('macunix')
-endfunction
-function! LINUX()
-    return has('unix') && !has('macunix') && !has('win32unix')
-endfunction
-function! WINDOWS()
-    return  (has('win16') || has('win32') || has('win64'))
-endfunction
+" function! OSX()
+    " return has('macunix')
+" endfunction
+" function! LINUX()
+    " return has('unix') && !has('macunix') && !has('win32unix')
+" endfunction
+" function! WINDOWS()
+    " return  (has('win16') || has('win32') || has('win64'))
+" endfunction
 
 " On Windows, also use '.vim' instead of 'vimfiles'; this makes synchronization
 " across (heterogeneous) systems easier.
-if WINDOWS()
-    let g:exvim_custom_path=$VIM
-end
-if !exists('g:exvim_custom_path')
-    if WINDOWS()
-        set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
-    endif
-endif
+" if WINDOWS()
+    " let g:exvim_custom_path=$VIM
+" end
+" if !exists('g:exvim_custom_path')
+    " if WINDOWS()
+        " set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
+    " endif
+" endif
 
 "/////////////////////////////////////////////////////////////////////////////
 " language and encoding setup
 "/////////////////////////////////////////////////////////////////////////////
 
-" always use English menu
-" NOTE: this must before filetype off, otherwise it won't work
-set langmenu=none
+" set langmenu=none
 
-" use English for anaything in vim-editor.
-if WINDOWS()
-    silent exec 'language english'
-elseif OSX()
-    silent exec 'language en_US'
-else
-    let s:uname = system("uname -s")
-    if s:uname == "Darwin\n"
-        " in mac-terminal
-        silent exec 'language en_US'
-    else
-        " in linux-terminal
-        silent exec 'language en_US.utf8'
-    endif
-endif
+" if WINDOWS()
+    " silent exec 'language english'
+" elseif OSX()
+    " silent exec 'language en_US'
+" else
+    " let s:uname = system("uname -s")
+    " if s:uname == "Darwin\n"
+	" in mac-terminal
+        " silent exec 'language en_US'
+    " else
+	" in linux-terminal
+        " silent exec 'language en_US.utf8'
+    " endif
+" endif
 
 " try to set encoding to utf-8
 if WINDOWS()
@@ -80,49 +77,49 @@ scriptencoding utf-8
 " filetype plugin indent on " required
 " syntax on " required
 
-if exists('g:exvim_custom_path')
-    let g:ex_tools_path = g:exvim_custom_path.'/vimfiles/tools/'
-    let g:plug_path=g:exvim_custom_path.'/vimfiles/plugged/'
-    " exec 'set rtp+=' . fnameescape ( g:exvim_custom_path.'/vimfiles/bundle/Vundle.vim/' )
-else
-    let g:ex_tools_path = '~/.vim/tools/'
-    let g:plug_path=$HOME.'/.vim/plugged/'
-    " set rtp+=~/.vim/bundle/Vundle.vim/
-endif
-call plug#begin(g:plug_path)
+" if exists('g:exvim_custom_path')
+    " let g:ex_tools_path = g:exvim_custom_path.'/vimfiles/tools/'
+    " let g:plug_path=g:exvim_custom_path.'/vimfiles/plugged/'
+    exec 'set rtp+=' . fnameescape ( g:exvim_custom_path.'/vimfiles/bundle/Vundle.vim/' )
+" else
+    " let g:ex_tools_path = '~/.vim/tools/'
+    " let g:plug_path=$HOME.'/.vim/plugged/'
+    set rtp+=~/.vim/bundle/Vundle.vim/
+" endif
+" call plug#begin(g:plug_path)
 " " load .vimrc.plugins & .vimrc.plugins.local
-if exists('g:exvim_custom_path')
-    let vimrc_plugins_path = g:exvim_custom_path.'/.vimrc.plugins'
-    let vimrc_plugins_local_path = g:exvim_custom_path.'/.vimrc.plugins.local'
-else
-    let vimrc_plugins_path = '~/.vimrc.plugins'
-    let vimrc_plugins_local_path = '~/.vimrc.plugins.local'
-endif
-if filereadable(expand(vimrc_plugins_path))
-    exec 'source ' . fnameescape(vimrc_plugins_path)
-endif
-if filereadable(expand(vimrc_plugins_local_path))
-    exec 'source ' . fnameescape(vimrc_plugins_local_path)
-endif
+" if exists('g:exvim_custom_path')
+    " let vimrc_plugins_path = g:exvim_custom_path.'/.vimrc.plugins'
+    " let vimrc_plugins_local_path = g:exvim_custom_path.'/.vimrc.plugins.local'
+" else
+    " let vimrc_plugins_path = '~/.vimrc.plugins'
+    " let vimrc_plugins_local_path = '~/.vimrc.plugins.local'
+" endif
+" if filereadable(expand(vimrc_plugins_path))
+    " exec 'source ' . fnameescape(vimrc_plugins_path)
+" endif
+" if filereadable(expand(vimrc_plugins_local_path))
+    " exec 'source ' . fnameescape(vimrc_plugins_local_path)
+" endif
 
-call plug#end()
+" call plug#end()
 call InitalExfunction()
 
 "/////////////////////////////////////////////////////////////////////////////
 " Default colorscheme setup
 "/////////////////////////////////////////////////////////////////////////////
 
-if has('gui_running')
-    set background=dark
-else
-    set background=dark
-    if !WINDOWS()
-        set t_Co=256 " make sure our terminal use 256 color
-    endif
-    let g:solarized_termcolors = 256
-endif
+" if has('gui_running')
+    " set background=dark
+" else
+    " set background=dark
+    " if !WINDOWS()
+        " set t_Co=256 " make sure our terminal use 256 color
+    " endif
+    " let g:solarized_termcolors = 256
+" endif
 " colorscheme solarized
-colorscheme molokai
+" colorscheme molokai
 " colorscheme exlightgray
 
 "/////////////////////////////////////////////////////////////////////////////
@@ -130,27 +127,27 @@ colorscheme molokai
 "/////////////////////////////////////////////////////////////////////////////
 
 "set path=.,/usr/include/*,, " where gf, ^Wf, :find will search
-set backup " make backup file and leave it around
+" set backup " make backup file and leave it around
 
-" setup back and swap directory
-let data_dir = $HOME.'/.data/'
-let backup_dir = data_dir . 'backup'
-let swap_dir = data_dir . 'swap'
-if finddir(data_dir) == ''
-    silent call mkdir(data_dir)
-endif
-if finddir(backup_dir) == ''
-    silent call mkdir(backup_dir)
-endif
-if finddir(swap_dir) == ''
-    silent call mkdir(swap_dir)
-endif
-unlet backup_dir
-unlet swap_dir
-unlet data_dir
+setup back and swap directory
+" let data_dir = $HOME.'/.data/'
+" let backup_dir = data_dir . 'backup'
+" let swap_dir = data_dir . 'swap'
+" if finddir(data_dir) == ''
+    " silent call mkdir(data_dir)
+" endif
+" if finddir(backup_dir) == ''
+    " silent call mkdir(backup_dir)
+" endif
+" if finddir(swap_dir) == ''
+    " silent call mkdir(swap_dir)
+" endif
+" unlet backup_dir
+" unlet swap_dir
+" unlet data_dir
 
-set backupdir=$HOME/.data/backup " where to put backup file
-set directory=$HOME/.data/swap " where to put swap file
+" set backupdir=$HOME/.data/backup " where to put backup file
+" set directory=$HOME/.data/swap " where to put swap file
 
 " Redefine the shell redirection operator to receive both the stderr messages and stdout messages
 set shellredir=>%s\ 2>&1
@@ -229,78 +226,71 @@ endif
 " Desc: Vim UI
 " ------------------------------------------------------------------
 
-set wildmenu " turn on wild menu, try typing :h and press <Tab>
-set showcmd " display incomplete commands
-set cmdheight=1 " 1 screen lines to use for the command-line
-set ruler " show the cursor position all the time
-set hidden " allow to change buffer without saving
-set shortmess=aoOtTI " shortens messages to avoid 'press a key' prompt
-set lazyredraw " do not redraw while executing macros (much faster)
-set display+=lastline " for easy browse last line with wrap text
-set laststatus=2 " always have status-line
-set titlestring=%t\ (%{expand(\"%:p:.:h\")}/)
+" set wildmenu " turn on wild menu, try typing :h and press <Tab>
+" set showcmd " display incomplete commands
+" set cmdheight=1 " 1 screen lines to use for the command-line
+" set ruler " show the cursor position all the time
+" set hidden " allow to change buffer without saving
+" set shortmess=aoOtTI " shortens messages to avoid 'press a key' prompt
+" set lazyredraw " do not redraw while executing macros (much faster)
+" set display+=lastline " for easy browse last line with wrap text
+" set laststatus=2 " always have status-line
+" set titlestring=%t\ (%{expand(\"%:p:.:h\")}/)
 
 " set window size (if it's GUI)
-if has('gui_running')
-    " set window's width to 130 columns and height to 40 rows
-    if exists('+lines')
-        set lines=40
-    endif
-    if exists('+columns')
-        set columns=130
-    endif
-
-    " DISABLE
-    " if WINDOWS()
-    "     au GUIEnter * simalt ~x " Maximize window when enter vim
-    " else
-    "     " TODO: no way right now
+" if has('gui_running')
+    set window's width to 130 columns and height to 40 rows
+    " if exists('+lines')
+        " set lines=40
     " endif
-endif
+    " if exists('+columns')
+        " set columns=130
+    " endif
+" endif
 
-set showfulltag " show tag with function protype.
-set guioptions+=b " present the bottom scrollbar when the longest visible line exceed the window
+" set showfulltag " show tag with function protype.
+" set guioptions+=b " present the bottom scrollbar when the longest visible line exceed the window
 
-" disable menu & toolbar
-set guioptions-=m
-set guioptions-=T
+disable menu & toolbar
+" set guioptions-=m
+" set guioptions-=T
 
 " ------------------------------------------------------------------
 " Desc: Text edit
 " ------------------------------------------------------------------
 
-set ai " autoindent
-set si " smartindent
-set backspace=indent,eol,start " allow backspacing over everything in insert mode
+" set ai " autoindent
+" set si " smartindent
+" set backspace=indent,eol,start " allow backspacing over everything in insert mode
 " indent options
 " see help cinoptions-values for more details
-set	cinoptions=>s,e0,n0,f0,{0,}0,^0,:0,=s,l0,b0,g0,hs,ps,ts,is,+s,c3,C0,0,(0,us,U0,w0,W0,m0,j0,)20,*30
+" set	cinoptions=>s,e0,n0,f0,{0,}0,^0,:0,=s,l0,b0,g0,hs,ps,ts,is,+s,c3,C0,0,(0,us,U0,w0,W0,m0,j0,)20,*30
 " default '0{,0},0),:,0#,!^F,o,O,e' disable 0# for not ident preprocess
 " set cinkeys=0{,0},0),:,!^F,o,O,e
 
 " official diff settings
-set diffexpr=g:MyDiff()
-function! g:MyDiff()
-    let opt = '-a --binary -w '
-    if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
-    if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
-    let arg1 = v:fname_in
-    if arg1 =~ ' ' | let arg1 = '"' . arg1 . '"' | endif
-    let arg2 = v:fname_new
-    if arg2 =~ ' ' | let arg2 = '"' . arg2 . '"' | endif
-    let arg3 = v:fname_out
-    if arg3 =~ ' ' | let arg3 = '"' . arg3 . '"' | endif
-    silent execute '!' .  'diff ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3
-endfunction
+" set diffexpr=g:MyDiff()
+" function! g:MyDiff()
+    " let opt = '-a --binary -w '
+    " if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
+    " if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
+    " let arg1 = v:fname_in
+    " if arg1 =~ ' ' | let arg1 = '"' . arg1 . '"' | endif
+    " let arg2 = v:fname_new
+    " if arg2 =~ ' ' | let arg2 = '"' . arg2 . '"' | endif
+    " let arg3 = v:fname_out
+    " if arg3 =~ ' ' | let arg3 = '"' . arg3 . '"' | endif
+    " silent execute '!' .  'diff ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3
+" endfunction
 
-set cindent shiftwidth=4 " set cindent on to autoinent when editing c/c++ file, with 4 shift width
-set tabstop=4 " set tabstop to 4 characters
-set expandtab " set expandtab on, the tab will be change to space automaticaly
-set ve=block " in visual block mode, cursor can be positioned where there is no actual character
+" set cindent shiftwidth=4 " set cindent on to autoinent when editing c/c++ file, with 4 shift width
+" set tabstop=4 " set tabstop to 4 characters
+" set expandtab " set expandtab on, the tab will be change to space automaticaly
+" set ve=block " in visual block mode, cursor can be positioned where there is no actual character
 
-" set Number format to null(default is octal) , when press CTRL-A on number
-" like 007, it would not become 010
-set nf=
+set Number format to null(default is octal) , when press CTRL-A on number
+like 007, it would not become 010
+" set nf=
 
 " ------------------------------------------------------------------
 " Desc: Fold text
@@ -494,13 +484,13 @@ nnoremap <silent> <leader>sw "_yiw:s/\(\%#\w\+\)\(\W\+\)\(\w\+\)/\3\2\1/<cr><c-o
 " local setup
 "/////////////////////////////////////////////////////////////////////////////
 
-let vimrc_local_path = '~/.vimrc.local'
-if exists('g:exvim_custom_path')
-    let vimrc_local_path = g:exvim_custom_path.'/.vimrc.local'
-endif
+" let vimrc_local_path = '~/.vimrc.local'
+" if exists('g:exvim_custom_path')
+    " let vimrc_local_path = g:exvim_custom_path.'/.vimrc.local'
+" endif
 
-if filereadable(expand(vimrc_local_path))
-    exec 'source ' . fnameescape(vimrc_local_path)
-endif
+" if filereadable(expand(vimrc_local_path))
+    " exec 'source ' . fnameescape(vimrc_local_path)
+" endif
 
 " vim:ts=4:sw=4:sts=4 et fdm=marker:

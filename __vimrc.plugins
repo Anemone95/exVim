@@ -298,33 +298,30 @@ xmap s <Plug>VSurround
 
 " nerdtree: invoke by :NERDTreeToggle
 " ---------------------------------------------------
-Plug 'scrooloose/nerdtree'
+" Plug 'scrooloose/nerdtree'
 
-let g:NERDTreeWinSize = 30
-let g:NERDTreeMouseMode = 1
-let g:NERDTreeMapToggleZoom = '<Space>'
+" let g:NERDTreeWinSize = 30
+" let g:NERDTreeMouseMode = 1
+" let g:NERDTreeMapToggleZoom = '<Space>'
 
 " nerdcommenter: invoke by <leader>c<space>, <leader>cl, <leader>cu, <F11> or <C-F11>
 " ---------------------------------------------------
-Plug 'scrooloose/nerdcommenter'
+" Plug 'scrooloose/nerdcommenter'
 
-let g:NERDSpaceDelims = 1
-let g:NERDRemoveExtraSpaces = 1
-let g:NERDCustomDelimiters = {
-            \ 'vimentry': { 'left': '--' },
-            \ }
-map <unique> <F11> <Plug>NERDCommenterAlignBoth
-map <unique> <C-F11> <Plug>NERDCommenterUncomment
+" let g:NERDSpaceDelims = 1
+" let g:NERDRemoveExtraSpaces = 1
+" let g:NERDCustomDelimiters = {
+            " \ 'vimentry': { 'left': '--' },
+            " \ }
+" map <unique> <F11> <Plug>NERDCommenterAlignBoth
+" map <unique> <C-F11> <Plug>NERDCommenterUncomment
 
 " syntastic: invoke when you save file and have syntac-checker
 " ---------------------------------------------------
 Plug 'scrooloose/syntastic',{'for':language_ex}
 
 let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
-" let g:syntastic_python_python_exec = 'python'
-" let g:syntastic_python_checkers=['python']
 let g:syntastic_python_checkers=['python','flake8','pyflakes']
-" let g:syntastic_python_checker_args='--ignore=E305,E225'
 let g:syntastic_python_flake8_post_args='--ignore=E501,E128,E225,E305'
 
 " let g:syntastic_solidity_checkers=['solium']

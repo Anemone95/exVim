@@ -1,7 +1,7 @@
-Plug 'Yggdroot/indentLine'
-    au! BufRead,BufNewFile,BufEnter IndentLinesToggle()
-    let g:indentLine_char = "┊"
-    let g:indentLine_first_char = "┊"
+" Plug 'Yggdroot/indentLine'
+    " au! BufRead,BufNewFile,BufEnter IndentLinesToggle()
+    " let g:indentLine_char = "┊"
+    " let g:indentLine_first_char = "┊"
 " Python字典增强
 " Plug 'pydiction',{'for':'python'}
     "then make sure you set g:pydiction_location to the full path of where you installed complete-dict. Ex:
@@ -11,11 +11,11 @@ Plug 'Yggdroot/indentLine'
     " python pydiction.py <module> [module]
 " 一键编译&运行
 " Plug 'xuhdev/SingleCompile',{'on':['SCCompile','SCCompileRun']}
-Plug 'xuhdev/SingleCompile'
-    nmap <F9> :w<cr>: SCCompileRun<CR>
-    imap <F9> <ESC>:w<CR>:SCCompileRun<CR>
-    nmap <F10> :SCCompile<cr>
-    let g:SingleCompile_showquickfixiferror = 1
+" Plug 'xuhdev/SingleCompile'
+    " nmap <F9> :w<cr>: SCCompileRun<CR>
+    " imap <F9> <ESC>:w<CR>:SCCompileRun<CR>
+    " nmap <F10> :SCCompile<cr>
+    " let g:SingleCompile_showquickfixiferror = 1
 
 " MATLAB/MATLAB-fold: MATLAB 语法高亮及代码折叠插件。
 Plug 'djoshea/vim-matlab',{'for':'matlab'}
@@ -127,100 +127,99 @@ Plug 'Shougo/neocomplete.vim',{'for':language_ex}
     " inoremap <expr><C-h> pumvisible() ? neocomplete#smart_close_popup()."\<C-h>" : "\<C-h>"
     inoremap <expr><BS> pumvisible() ? neocomplete#smart_close_popup()."\<C-h>" : "\<BS>"
 "颜色增强
-Plug 'sentientmachine/erics_vim_syntax_and_color_highlighting'
+" Plug 'sentientmachine/erics_vim_syntax_and_color_highlighting'
 " 目录树
 " Plug 'scrooloose/nerdtree'
-    function! TreeToggle()
-        let g:current_path=expand("%:p:h")
-        if WINDOWS()
-            let g:current_dir=split(g:current_path,"\\")[-1]
-        else
-            let g:current_dir=split(g:current_path,"/")[-1]
-        endif
-        if filereadable(g:current_dir.".exvim") || match(g:current_path,"exvim")!=-1
-            let g:ex_project_file=g:current_path."/.exvim.".g:current_dir."/files.exproject"
-            execute 'EXProjectToggle'
-        else
-            execute 'NERDTreeToggle'
-        endif
-    endfunction
+    " function! TreeToggle()
+        " let g:current_path=expand("%:p:h")
+        " if WINDOWS()
+            " let g:current_dir=split(g:current_path,"\\")[-1]
+        " else
+            " let g:current_dir=split(g:current_path,"/")[-1]
+        " endif
+        " if filereadable(g:current_dir.".exvim") || match(g:current_path,"exvim")!=-1
+            " let g:ex_project_file=g:current_path."/.exvim.".g:current_dir."/files.exproject"
+            " execute 'EXProjectToggle'
+        " else
+            " execute 'NERDTreeToggle'
+        " endif
+    " endfunction
 
-    map <F2> :call TreeToggle()<CR>
-    let g:NERDTreeWinSize=25
+    " map <F2> :call TreeToggle()<CR>
+    " let g:NERDTreeWinSize=25
 " 历史操作列表
 " Plugin 'mbbill/undotree'
-    nnoremap <F3> :UndotreeToggle<CR>
+    " nnoremap <F3> :UndotreeToggle<CR>
 
 " Plugin 'tpope/vim-surround'
-    xmap ) S(
-    xmap ] S[
-    xmap } S{
-    xmap ' S'
-    xmap " S"
+    " xmap ) S(
+    " xmap ] S[
+    " xmap } S{
+    " xmap ' S'
+    " xmap " S"
     " xmap " S"
 
-Plug 'vim-airline/vim-airline-themes'| Plug 'vim-airline/vim-airline'
-   let g:airline_extensions = ['tabline', 'quickfix']
-    let g:airline_theme="molokai"
-    let g:airline_powerline_fonts = 1
-    let g:airline_left_sep = ''
-    let g:airline_left_alt_sep = ''
-    let g:airline_right_sep = ''
-    let g:airline_right_alt_sep = ''
+" Plug 'vim-airline/vim-airline-themes'| Plug 'vim-airline/vim-airline'
+   " let g:airline_extensions = ['tabline', 'quickfix']
+    " let g:airline_theme="molokai"
+    " let g:airline_powerline_fonts = 1
+    " let g:airline_left_sep = ''
+    " let g:airline_left_alt_sep = ''
+    " let g:airline_right_sep = ''
+    " let g:airline_right_alt_sep = ''
 
-    "打开tabline功能,方便查看Buffer和切换，这个功能比较不错"
-    "我还省去了minibufexpl插件，因为我习惯在1个Tab下用多个buffer"
-    let g:airline#extensions#tabline#enabled = 1
-    let g:airline#extensions#tabline#buffer_nr_show = 1
+    打开tabline功能,方便查看Buffer和切换，这个功能比较不错"
+    我还省去了minibufexpl插件，因为我习惯在1个Tab下用多个buffer"
+    " let g:airline#extensions#tabline#enabled = 1
+    " let g:airline#extensions#tabline#buffer_nr_show = 1
 
-    let g:airline#extensions#syntastic#enabled = 1
+    " let g:airline#extensions#syntastic#enabled = 1
 
 
-    "设置切换Buffer快捷键"
-    nnoremap bp :bp<CR>
-    nnoremap bn :bn<CR>
-    " nnoremap <C-P> :bp<CR>
+    设置切换Buffer快捷键"
+    " nnoremap bp :bp<CR>
+    " nnoremap bn :bn<CR>
+    nnoremap <C-P> :bp<CR>
 
-    " 关闭状态显示空白符号计数,这个对我用处不大"
-    let g:airline#extensions#whitespace#enabled = 0
-    let g:airline#extensions#whitespace#symbol = '!'
-    noremap q :call BufferDelete()<CR>
-    function! BufferDelete()
-        if &modified
-            echohl ErrorMsg
-            echomsg "No write since last change. Not closing buffer."
-            echohl NONE
-        else
-            let s:total_nr_buffers = len(filter(range(1, bufnr('$')), 'buflisted(v:val)'))
+    关闭状态显示空白符号计数,这个对我用处不大"
+    " let g:airline#extensions#whitespace#enabled = 0
+    " let g:airline#extensions#whitespace#symbol = '!'
+    " noremap q :call BufferDelete()<CR>
+    " function! BufferDelete()
+        " if &modified
+            " echohl ErrorMsg
+            " echomsg "No write since last change. Not closing buffer."
+            " echohl NONE
+        " else
+            " let s:total_nr_buffers = len(filter(range(1, bufnr('$')), 'buflisted(v:val)'))
 
-            if s:total_nr_buffers == 1
-                bdelete
-                echo "Buffer deleted. Created new buffer."
-            else
-                bprevious
-                bdelete #
-                echo "Buffer deleted."
-            endif
-        endif
-    endfunction
+            " if s:total_nr_buffers == 1
+                " bdelete
+                " echo "Buffer deleted. Created new buffer."
+            " else
+                " bprevious
+                " bdelete #
+                " echo "Buffer deleted."
+            " endif
+        " endif
+    " endfunction
 
 Plug 'jmcomets/vim-pony',{'for':'python'}
 let g:pony_display_colors=1
 
-Plug 'terryma/vim-multiple-cursors'
-" Called once right before you start selecting multiple cursors
-function! Multiple_cursors_before()
-  if exists(':NeoCompleteLock')==2
-    exe 'NeoCompleteLock'
-  endif
-endfunction
+" Plug 'terryma/vim-multiple-cursors'
+" function! Multiple_cursors_before()
+  " if exists(':NeoCompleteLock')==2
+    " exe 'NeoCompleteLock'
+  " endif
+" endfunction
 
-" Called once only when the multiple selection is canceled (default <Esc>)
-function! Multiple_cursors_after()
-  if exists(':NeoCompleteUnlock')==2
-    exe 'NeoCompleteUnlock'
-  endif
-endfunction
+Called once only when the multiple selection is canceled (default <Esc>)
+" function! Multiple_cursors_after()
+  " if exists(':NeoCompleteUnlock')==2
+    " exe 'NeoCompleteUnlock'
+  " endif
+" endfunction
     " let g:multi_cursor_next_key='<Tab>'
     " let g:multi_cursor_prev_key='<C-q>'
     " let g:multi_cursor_skip_key='<C-u>'

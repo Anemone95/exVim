@@ -1,0 +1,326 @@
+let language_base=['python','c','cpp','vbs','vim','java','php','ino','vimentry','matlab','html','sql']
+let language_ex=['python','c','cpp','vbs','vim','java','php','ino','vimentry','matlab','html','sql','tex','solidity','ocaml']
+
+Plug 'preservim/nerdtree'
+    let g:NERDTreeWinSize = 25
+    let g:NERDTreeMouseMode = 1
+    let g:NERDTreeMapToggleZoom = '<Space>'
+    let g:NERDTreeNodeDelimiter = "\u00a0"
+    " let g:NERDTreeMapMenu = 'o'
+    " If another buffer tries to replace NERDTree, put it in the other window, and bring back NERDTree.
+    map <F2> :NERDTreeToggle<CR>
+
+Plug 'preservim/nerdcommenter'
+    let g:NERDSpaceDelims = 1
+    let g:NERDRemoveExtraSpaces = 1
+    let g:NERDCustomDelimiters = {
+		\ 'vimentry': { 'left': '--' },
+		\ }
+
+Plug 'Yggdroot/indentLine'
+    au! BufRead,BufNewFile,BufEnter IndentLinesToggle()
+    let g:indentLine_char = "┊"
+    let g:indentLine_first_char = "┊"
+
+Plug 'vim-airline/vim-airline-themes'| Plug 'vim-airline/vim-airline'
+    let g:airline_extensions = ['tabline', 'quickfix']
+    let g:airline_theme="molokai"
+    let g:airline_powerline_fonts = 1
+    let g:airline_left_sep = ''
+    let g:airline_left_alt_sep = ''
+    let g:airline_right_sep = ''
+    let g:airline_right_alt_sep = ''
+
+    "打开tabline功能,方便查看Buffer和切换，这个功能比较不错"
+    "我还省去了minibufexpl插件，因为我习惯在1个Tab下用多个buffer"
+    let g:airline#extensions#tabline#enabled = 1
+    let g:airline#extensions#tabline#buffer_nr_show = 1
+
+    let g:airline#extensions#syntastic#enabled = 1
+
+
+    "设置切换Buffer快捷键"
+    nnoremap bp :bp<CR>
+    nnoremap bn :bn<CR>
+    " nnoremap <C-P> :bp<CR>
+
+    " 关闭状态显示空白符号计数,这个对我用处不大"
+    let g:airline#extensions#whitespace#enabled = 0
+    let g:airline#extensions#whitespace#symbol = '!'
+    noremap q :call BufferDelete()<CR>
+    function! BufferDelete()
+        if &modified
+            echohl ErrorMsg
+            echomsg "No write since last change. Not closing buffer."
+            echohl NONE
+        else
+            let s:total_nr_buffers = len(filter(range(1, bufnr('$')), 'buflisted(v:val)'))
+
+            if s:total_nr_buffers == 1
+                bdelete
+                echo "Buffer deleted. Created new buffer."
+            else
+                bprevious
+                bdelete #
+                echo "Buffer deleted."
+            endif
+        endif
+    endfunction
+
+Plug 'xuhdev/SingleCompile'
+    nmap <F9> :w<cr>: SCCompileRun<CR>
+    imap <F9> <ESC>:w<CR>:SCCompileRun<CR>
+    nmap <F10> :SCCompile<cr>
+    let g:SingleCompile_showquickfixiferror = 1
+
+" Deprecated
+" Plug 'scrooloose/syntastic',{'for':language_ex}
+
+" let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
+" let g:syntastic_python_checkers=['python','flake8','pyflakes']
+" let g:syntastic_python_flake8_post_args='--ignore=E501,E128,E225,E305'
+
+" Desc: 括号自动补全
+Plug 'jiangmiao/auto-pairs'
+let g:AutoPairsMapBS=1
+
+" Desc: 自动左右括号
+Plug 'tpope/vim-surround'
+    xmap ) S(
+    xmap ] S[
+    xmap } S{
+    xmap ' S'
+    xmap " S"
+
+Plug 'terryma/vim-multiple-cursors'
+    function! Multiple_cursors_before()
+      if exists(':NeoCompleteLock')==2
+	exe 'NeoCompleteLock'
+      endif
+    endfunction
+
+    function! Multiple_cursors_after()
+      if exists(':NeoCompleteUnlock')==2
+	exe 'NeoCompleteUnlock'
+      endif
+    endfunction
+
+Plug 'MattesGroeger/vim-bookmarks'
+
+" Desc: 自动补全
+" https://github.com/jayli/vim-easycomplete
+" Plug 'jayli/vim-easycomplete'
+Plug 'honza/vim-snippets'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    let g:coc_config_home=g:VIMFILES_PATH
+    let $VIMCONFIG=g:VIMFILES_PATH
+    let g:coc_global_extensions=[
+		\"coc-json",
+		\"coc-vimlsp",
+		\"coc-tsserver",
+		\"coc-xml",
+		\"coc-python",
+		\"coc-yaml",
+		\"coc-tsserver",
+		\"coc-highlight",
+		\"coc-snippets",
+		\]
+    augroup vimrc_coc
+      autocmd!
+      autocmd VimEnter * call s:setup_coc()
+    augroup END
+
+    function s:setup_coc() abort
+	if g:IS_MACOS || g:IS_LINUX
+	    call coc#config("python.pythonPath", "/bin/python3")
+	endif
+	call coc#config("snippets.ultisnips.directories", [
+		    \"UltiSnips",
+		    \g:VIMFILES_PATH."/ultisnips",
+		    \g:VIMFILES_PATH."/plugged/vim-snippets/UltiSnips"])
+
+
+    endfunction
+    " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
+    " delays and poor user experience.
+    set updatetime=100
+
+    " Don't pass messages to |ins-completion-menu|.
+    set shortmess+=c
+
+    " Always show the signcolumn, otherwise it would shift the text each time
+    " diagnostics appear/become resolved.
+    if has("patch-8.1.1564")
+      " Recently vim can merge signcolumn and number column into one
+      set signcolumn=number
+    else
+      set signcolumn=yes
+    endif
+
+    " Use tab for trigger completion with characters ahead and navigate.
+    " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+    " other plugin before putting this into your config.
+    inoremap <silent><expr> <TAB>
+	  \ pumvisible() ? coc#jumpable()? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>":"\<C-n>" :
+	  \ <SID>check_back_space() ? "\<TAB>" : coc#refresh()
+    inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+    " imap <TAB> <plug>(coc-snippets-expand-jump)
+
+    function! s:check_back_space() abort
+      let col = col('.') - 1
+      return !col || getline('.')[col - 1]  =~# '\s'
+    endfunction
+
+    " inoremap <silent><expr> <TAB>
+	  " \ pumvisible() ? coc#_select_confirm() :
+	  " \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+	  " \ <SID>check_back_space() ? "\<TAB>" :
+	  " \ coc#refresh()
+
+    " function! s:check_back_space() abort
+      " let col = col('.') - 1
+      " return !col || getline('.')[col - 1]  =~# '\s'
+    " endfunction
+
+    let g:coc_snippet_next = '<tab>'
+
+
+    " Use <c-space> to trigger completion.
+    if has('nvim')
+      inoremap <silent><expr> <c-n> coc#refresh()
+    else
+      inoremap <silent><expr> <c-n> coc#refresh()
+    endif
+
+    " Make <CR> auto-select the first completion item and notify coc.nvim to
+    " format on enter, <cr> could be remapped by other vim plugin
+    inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+				  \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+    " Use `[g` and `]g` to navigate diagnostics
+    " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
+    " nmap <silent> [g <Plug>(coc-diagnostic-prev)
+    " nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+    " GoTo code navigation.
+    nmap <silent> gd <Plug>(coc-definition)
+    nmap <silent> gy <Plug>(coc-type-definition)
+    nmap <silent> gi <Plug>(coc-implementation)
+    nmap <silent> gr <Plug>(coc-references)
+    nmap go <c-t>
+
+    " Use K to show documentation in preview window.
+    nnoremap <silent> M :call <SID>show_documentation()<CR>
+
+    function! <SID>show_documentation()
+      if (index(['vim','help'], &filetype) >= 0)
+	execute 'h '.expand('<cword>')
+      elseif (coc#rpc#ready())
+	call CocActionAsync('doHover')
+      else
+	execute '!' . &keywordprg . " " . expand('<cword>')
+      endif
+    endfunction
+
+    " Highlight the symbol and its references when holding the cursor.
+    autocmd CursorHold * silent call CocActionAsync('highlight')
+
+    " Symbol renaming.
+    nmap <leader>rn <Plug>(coc-rename)
+
+    " Formatting selected code.
+    xmap <leader>=  <Plug>(coc-format-selected)
+    nmap <leader>=  <Plug>(coc-format-selected)
+
+    augroup mygroup
+      autocmd!
+      " Setup formatexpr specified filetype(s).
+      autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+      " Update signature help on jump placeholder.
+      autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+    augroup end
+
+    " Applying codeAction to the selected region.
+    " Example: `<leader>aap` for current paragraph
+    xmap <leader>a  <Plug>(coc-codeaction-selected)
+    nmap <leader>a  <Plug>(coc-codeaction-selected)
+
+    " Remap keys for applying codeAction to the current buffer.
+    nmap <leader>ac  <Plug>(coc-codeaction)
+    " Apply AutoFix to problem on the current line.
+    nmap <leader><c-cr>  <Plug>(coc-fix-current)
+
+    " Map function and class text objects
+    " NOTE: Requires 'textDocument.documentSymbol' support from the language server.
+    xmap if <Plug>(coc-funcobj-i)
+    omap if <Plug>(coc-funcobj-i)
+    xmap af <Plug>(coc-funcobj-a)
+    omap af <Plug>(coc-funcobj-a)
+    xmap ic <Plug>(coc-classobj-i)
+    omap ic <Plug>(coc-classobj-i)
+    xmap ac <Plug>(coc-classobj-a)
+    omap ac <Plug>(coc-classobj-a)
+
+    " Remap <C-f> and <C-b> for scroll float windows/popups.
+    if has('nvim-0.4.0') || has('patch-8.2.0750')
+      nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+      nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+      inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
+      inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
+      vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+      vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+    endif
+
+    " Use CTRL-S for selections ranges.
+    " Requires 'textDocument/selectionRange' support of language server.
+    nmap <silent> <C-s> <Plug>(coc-range-select)
+    xmap <silent> <C-s> <Plug>(coc-range-select)
+
+    " Add `:Format` command to format current buffer.
+    command! -nargs=0 Format :call CocAction('format')
+
+    " Add `:Fold` command to fold current buffer.
+    command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+
+    " Add `:OR` command for organize imports of the current buffer.
+    command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+
+    " Add (Neo)Vim's native statusline support.
+    " NOTE: Please see `:h coc-status` for integrations with external plugins that
+    " provide custom statusline: lightline.vim, vim-airline.
+    set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+
+    " Mappings for CoCList
+    " Show all diagnostics.
+    " nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
+    " Manage extensions.
+    " nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<cr>
+    " Show commands.
+    " nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
+    " Find symbol of current document.
+    " nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
+    " Search workspace symbols.
+    " nnoremap <silent><nowait> gs  :<C-u>CocList -I symbols<cr>
+    " Do default action for next item.
+    " nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
+    " Do default action for previous item.
+    " nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
+    " Resume latest coc list.
+    " nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+
+" Desc: 行尾空格
+Plug 'ntpeters/vim-better-whitespace'
+nnoremap <unique> <leader>w :StripWhitespace<CR>
+Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' }
+    let g:Lf_CommandMap = {'<C-K>': ['<Up>'], '<C-J>': ['<Down>']}
+
+" ---------------------------------------------------
+" Desc: vim-markdown
+" ---------------------------------------------------
+Plug 'plasticboy/vim-markdown',{'for':'markdown'}
+    let g:vim_markdown_initial_foldlevel=0
+    let g:vim_markdown_folding_style_pythonic = 1
+    let g:vim_markdown_folding_level = 0
+    let g:vim_markdown_conceal = 0
+

@@ -1,79 +1,78 @@
-let proc_version=system("cat /proc/version")
-if match(proc_version,"Microsoft")==-1
-    let g:is_wsl=0
-else
-    let g:is_wsl=1
-endif
+" let proc_version=system("cat /proc/version")
+" if match(proc_version,"Microsoft")==-1
+    " let g:is_wsl=0
+" else
+    " let g:is_wsl=1
+" endif
 
-if WINDOWS()
-    set clipboard+=unnamed
-elseif OSX()
-    set clipboard=unnamed
-elseif LINUX()
-    set clipboard=unnamed
-    set clipboard+=unnamedplus
-else
-    set clipboard+=unnamedplus
-endif
+" if WINDOWS()
+    " set clipboard+=unnamed
+" elseif OSX()
+    " set clipboard=unnamed
+" elseif LINUX()
+    " set clipboard=unnamed
+    " set clipboard+=unnamedplus
+" else
+    " set clipboard+=unnamedplus
+" endif
 
 
-setlocal completeopt-=preview
+" setlocal completeopt-=preview
 " map <leader>y "*y
 " vmap <leader>y "*y
 " map <leader>p "*p
 "指定窗口出现的位置，坐标原点在屏幕左上角
-winpos 100 10
+" winpos 100 10
 "换行时自动缩进宽度，可更改（宽度同tabstop）
-set shiftwidth=4
+" set shiftwidth=4
 "指定按一次backspace就删除shiftwidth宽度
-set smarttab
+" set smarttab
 
 " 常规模式下用空格键来开关光标行所在折叠（注：zR 展开所有折叠，zM 关闭所有折叠）
-nnoremap <space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zO')<CR>
-nnoremap zz zM
+" nnoremap <space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zO')<CR>
+" nnoremap zz zM
 
 " 当文件在外部被修改，自动更新该文件
-set autoread
+" set autoread
 
 " 常规模式下输入 cS 清除行尾空格
-nmap su :set fileencoding=utf-8<cr>:set fileformat=unix<cr>
+" nmap su :set fileencoding=utf-8<cr>:set fileformat=unix<cr>
 
 " 常规模式下输入 cM 清除行尾 ^M 符号
-nmap sg :set fileencoding=gbk<cr>:set fileformat=dos<cr>
+" nmap sg :set fileencoding=gbk<cr>:set fileformat=dos<cr>
 " 突出显示当前行
-set cursorline
+" set cursorline
 " 设置不自动换行
-set wrap
+" set wrap
 " 保留5行
-set scrolloff=5
+" set scrolloff=5
 
 "Ctrl+h/j/k/l切换窗口
-noremap <c-k> <c-w>k
-noremap <c-j> <c-w>j
-noremap <c-h> <c-w>h
-noremap <c-l> <c-w>l
+" noremap <c-k> <c-w>k
+" noremap <c-j> <c-w>j
+" noremap <c-h> <c-w>h
+" noremap <c-l> <c-w>l
 
 " 隐藏滚动条
-set guioptions-=L " 隐藏左侧滚动条
-set guioptions-=r " 隐藏右侧滚动条
-set guioptions-=b " 隐藏底部滚动条
+" set guioptions-=L " 隐藏左侧滚动条
+" set guioptions-=r " 隐藏右侧滚动条
+" set guioptions-=b " 隐藏底部滚动条
 
 " 关闭系统警告声
-set noeb
-set vb
+" set noeb
+" set vb
 " 外部更改
-set autoread
+" set autoread
 
-if WINDOWS()
-    set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h11:cANSI
-    set guifontwide=YouYuan:h10.5:cGB2312
-elseif LINUX()
-    set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 11
-    set guifontwide=WenQuanYi\ Micro\ Hei\ 11
-    " set guifontwide=DejaVu\ Sans\ Mono\ for\ Powerline\ 11.5\ GB2312
-elseif OSX()
-    set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h11
-end
+" if WINDOWS()
+    " set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h11:cANSI
+    " set guifontwide=YouYuan:h10.5:cGB2312
+" elseif LINUX()
+    " set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 11
+    " set guifontwide=WenQuanYi\ Micro\ Hei\ 11
+" elseif OSX()
+    " set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h11
+" end
 
 "Qfix 乱码问题
 function QfMakeConv()
@@ -85,43 +84,42 @@ function QfMakeConv()
 endfunction
 au QuickfixCmdPost make call QfMakeConv()
 
-"解决consle输出乱码
-if WINDOWS()
-    language messages zh_CN.utf-8
-endif
+" if WINDOWS()
+    " language messages zh_CN.utf-8
+" endif
 
 
-" -----------------------------------------------------------------------------
-"  < 编码配置 >
-" -----------------------------------------------------------------------------
-" 注：使用utf-8格式后，软件与程序源码、文件路径不能有中文，否则报错
-set encoding=utf-8                                    "设置gvim内部编码，默认不更改
-set fileencodings=utf-8,ucs-bom,gbk,cp936,latin-1     "设置支持打开的文件的编码
-" 默认改变文件件格式为unix
-function! FormatUnix()
-    if &modifiable==1
-        set fileformat=unix
-        set fileencoding=utf-8
-    endif
-endfunction
-autocmd! BufNewFile,BufRead * call FormatUnix()
+" " -----------------------------------------------------------------------------
+" "  < 编码配置 >
+" " -----------------------------------------------------------------------------
+" " 注：使用utf-8格式后，软件与程序源码、文件路径不能有中文，否则报错
+" set encoding=utf-8                                    "设置gvim内部编码，默认不更改
+" set fileencodings=utf-8,ucs-bom,gbk,cp936,latin-1     "设置支持打开的文件的编码
+" " 默认改变文件件格式为unix
+" function! FormatUnix()
+"     if &modifiable==1
+"         set fileformat=unix
+"         set fileencoding=utf-8
+"     endif
+" endfunction
+" autocmd! BufNewFile,BufRead * call FormatUnix()
 
 
-if has('multi_byte_ime')
-    hi Cursor guifg=bg guibg=White gui=NONE
-    hi CursorIM guifg=NONE guibg=Skyblue gui=NONE
-    set iminsert=0 imsearch=0
-endif
+" if has('multi_byte_ime')
+    " hi Cursor guifg=bg guibg=White gui=NONE
+    " hi CursorIM guifg=NONE guibg=Skyblue gui=NONE
+    " set iminsert=0 imsearch=0
+" endif
 
 " 启用折叠
 " set foldmethod=syntax
-if getfsize(expand(@%))>700
-    set foldmethod=syntax
-    set foldlevelstart=0
-    set foldenable
-else
-    set foldlevelstart=999
-endif
+" if getfsize(expand(@%))>700
+    " set foldmethod=syntax
+    " set foldlevelstart=0
+    " set foldenable
+" else
+    " set foldlevelstart=999
+" endif
 
 " 个人配置,非本人使用请全部注释
 if WINDOWS()
@@ -151,36 +149,36 @@ autocmd FileType smali set foldmethod=indent
 
 let g:tex_flavor = "latex"
 
-if !OSX()
-    map w e
-endif
-imap ]] {<CR>
-cmap W w
-cmap ww w !sudo tee %
-imap jj <ESC>
-imap <C-]> <ESC>
-vmap <C-]> <ESC>
-cmap <C-]> <ESC>
-imap kk <ESC>la
-imap <Right> <ESC>la
-map <C-a> ggVG
-unmap <esc>
+" if !OSX()
+    " map w e
+" endif
+" imap ]] {<CR>
+" cmap W w
+" cmap ww w !sudo tee %
+" imap jj <ESC>
+" imap <C-]> <ESC>
+" vmap <C-]> <ESC>
+" cmap <C-]> <ESC>
+" imap kk <ESC>la
+" imap <Right> <ESC>la
+" map <C-a> ggVG
+" unmap <esc>
 
-nmap <leader>v :call ToggleConcealLevel()<CR>
-function! ToggleConcealLevel()
-    if &conceallevel==0
-        set conceallevel=2
-    else
-        set conceallevel=0
-    endif
-endfunction
+" nmap <leader>v :call ToggleConcealLevel()<CR>
+" function! ToggleConcealLevel()
+    " if &conceallevel==0
+        " set conceallevel=2
+    " else
+        " set conceallevel=0
+    " endif
+" endfunction
 
 
 "Ctrl+h/j/k/l切换窗口
-noremap <Up> <c-w>k
-noremap <Down> <c-w>j
-noremap <Left> <c-w>h
-noremap <Right> <c-w>l
+" noremap <Up> <c-w>k
+" noremap <Down> <c-w>j
+" noremap <Left> <c-w>h
+" noremap <Right> <c-w>l
 
 " 定制化编译
 function! Compile() abort
