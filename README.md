@@ -1,15 +1,18 @@
-# exVim 增强配置(支持Windows)
-基于exVim进行配置,仅更改.vimrc.local和.vimrc.plugin.local文件.支持C/C++,Java,Python,PHP,Matlab,Arduino等语言.对界面,字体进行美化调整,改变部分案件映射,同时对Windows进行优化.另外,vim.local文件可以改名为.vimrc文件提供一个无插件的轻型vim配置文件.
+# vim 配置(支持Windows)
+本人vim配置，支持Windows(甚至WSL)、Linux和Mac，需要Vim版本>=8.2
 
 # 安装
 ## Windows
-1. 安装[exVim](https://github.com/vim/vim-win3c2-installer/releases).**建议安装x86版本,同时需要将exVim安装在C盘根目录下,如c:\exVim.否则需要修改reg文件**
-2. 运行cmder_here.reg,edit_with_vim.reg,new_project.reg.
-3. 检查vim.exe是否在环境变量内,并将newProject.vbs放入环境变量中.
+1. 安装[vim](https://github.com/vim/vim-win32-installer/releases).**建议安装x64版本,同时需要将vim安装在C盘根目录下,如c:\vim.否则需要修改reg文件**
+2. 运行cmder_here.reg(当前文件夹下打开命令行), edit_with_vim.reg（右键用 vim 打开）.
+3. 检查vim.exe是否在环境变量内，并且添加`C:\Vim\bin`环境变量.
 4. 安装[Git](http://git-scm.com/download/),检查环境变量.
-5. 安装[Python](https://www.python.org/),[Lua](http://www.lua.org/download.html),填写环境变量 %PYTHONHOME%,PATH=%PATH%;%PYTHONHOME%;%PYTHONHOME%/Script
-6. 安装youyuan字体.
-7. 运行exVim,无视错误,输入 :BundleUpdate,安装插件.
+5. 安装[Python](https://www.python.org/), [Lua](http://www.lua.org/download.html),填写环境变量 %PYTHONHOME%,PATH=%PATH%;%PYTHONHOME%;%PYTHONHOME%/Script，（注意，如果使用conda版本python，需要额外安装python for windows launcher, 在install/launchwin.amd64.msi可以找到该文件）
+6. 安装youyuan、DejaVu Sans Mono for Powerline字体.
+7. 运行gvim,无视错误,输入 :Plugin,安装插件.
+7. 运行gvim,无视错误,coc.nvim 会自动安装补全插件.
+
+注意，WSL用户参照linux安装方法，最后运行`vim/install/edit_with_wsl_vim.reg`可以实现右键使用vim编辑.
 
 ## Linux
 ```bash
@@ -18,13 +21,9 @@ git clone https://github.com/Anemone95/exVim.git
 bash ./exVim/install/install.sh
 ```
 
-运行exVim,无视错误,输入 :BundleUpdate,安装插件.
+运行gvim,无视错误,输入 :PluginInstall, 安装插件，再次启动gvim，coc.nvim自动安装其他补全插件
 
 # 特性
-## 原版功能
-
-保留exVim的配置,支持最新版exVim的一切插件功能
-
 ## vimrc.local
 
 * 共享剪切板
@@ -37,7 +36,7 @@ bash ./exVim/install/install.sh
 
 * 启用折叠(大于200行)
 
-* 常规模式下用空格键来开关光标行所在折叠（注：zR 展开所有折叠，zM 关闭所有折叠）
+* 常规模式下用空格键来开关光标行所在折叠（注：zo 展开当前折叠，zz 关闭当前折叠）
 
 * 当文件在外部被修改，自动更新该文件
 
@@ -57,7 +56,7 @@ bash ./exVim/install/install.sh
 
 * 关闭系统警告声
 
-* 外部更改
+* 外部更改自动刷新
 
 * 字体配置
 
@@ -67,45 +66,22 @@ bash ./exVim/install/install.sh
 
 * 个性化设置 可以删除
 
-## vimrc.plugin.local
+## vimrc.plugin
 * 纵向对齐线插件
 
-* Python字典增强
 
-根据需要修改pydiction的路径
-
-        let g:pydiction_location = $VIM."/vimfiles/bundle/pydiction/complete-dict"
-根据新的库生成新的字典
-
-        python pydiction.py <module> [module]
-        # 例如
-        python pydiction.py requests
 * 多语言F9一键编译&运行
 
-* matlab 增强插件
-
-* php 自动注释
-
-* java 补全增强
+* matlab 增强插件【TODO】
 
 * 括号自动补全
 
-* 多语言模板补全
+* 自动补全【coc.nvim】
 
-    Ctrl+k用来选择以及跳到下一处
-
-* 自动补全
-
-* 目录树
+* 目录树【Nerdtree】
 
     F2为打开/关闭目录树
-    vimrc.plugin 里已经开启这个插件,这里只做配置工作
-
-* 历史操作列表
-
-    F3为打开/关闭历史操作列表
-    vimrc.plugin 里已经开启这个插件,这里只做配置工作
-
+    
 * 快速在首尾添加括号
 
     在块模式下 按下],},)和" 会自动在选中的左右添加括号
@@ -121,8 +97,6 @@ bash ./exVim/install/install.sh
 # Q&A
 ## 提示Python或Lua出现问题
 由于有的插件需要vim有+python和+lua支持.Windows用户,请下载最新版的exVim,之后再下载对应版本的python和lua,并加入环境变量.注意一点,对应版本不止是x86/x64,还指python和lua自身版本,据我所知以前的vim不支持最新的python和lua.
-## exVim的全局搜索功能无法使用
-重装[id-utils](http://gnuwin32.sourceforge.net/packages/id-utils.htm),并将路径指定到非系统目录,并添加到环境变量中.重启系统
 ## Linux中字体问题
 git https://github.com/powerline/fonts
 sh fonts/install.sh
@@ -131,7 +105,4 @@ sh fonts/install.sh
 
 由于Conda没有填%PYTHONHOME%变量，这就很麻烦了，因为如果设置了全局%PYTHONHOME%，那么conda env会失效，现在想到的方法是(1)在win中设置%CONDA_HOME%变量，同时保证环境变量中%VIM%/bin要在%VIM%/vim81之前。(2)启动时启动bin/gvim.bat，在bat中设置环境变量。
 
-# 其他
-联系方式: anemone95@qq.com
 
-感谢exVim项目

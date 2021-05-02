@@ -195,36 +195,36 @@ nmap <F9> :call Compile()<cr>
 imap <F9> <esc>:call Compile()<cr>
 
 " bash
-if has('nvim')
-    fu! OpenTerminal()
-        bot split
-        resize 15
-        :terminal
-    endf
-else
-    fu! OpenTerminal()
-        bot split
-        resize 15
-        if WINDOWS()
-            :call term_start('cmd', {'curwin' : 1, 'term_finish' : 'close'})
-        else
-            :call term_start('zsh', {'curwin' : 1, 'term_finish' : 'close'})
-        endif
-        " :call term_start('bash', {'curwin' : 1, 'term_finish' : 'close'})
-    endf
-endif
-nnoremap <F3> :call OpenTerminal()<CR>
-tnoremap <Esc> <C-\><C-N>
+" if has('nvim')
+    " fu! OpenTerminal()
+        " bot split
+        " resize 15
+        " :terminal
+    " endf
+" else
+    " fu! OpenTerminal()
+        " bot split
+        " resize 15
+        " if WINDOWS()
+            " :call term_start('cmd', {'curwin' : 1, 'term_finish' : 'close'})
+        " else
+            " :call term_start('zsh', {'curwin' : 1, 'term_finish' : 'close'})
+        " endif
+	:call term_start('bash', {'curwin' : 1, 'term_finish' : 'close'})
+    " endf
+" endif
+" nnoremap <F3> :call OpenTerminal()<CR>
+" tnoremap <Esc> <C-\><C-N>
 
 " 函数跳转
-nmap gi <c-]><esc>
-nmap go <c-t>
+" nmap gi <c-]><esc>
+" nmap go <c-t>
 
 
 " 高亮变量
-map hl *
-if WINDOWS()
-    py3 import os; sys.executable=os.path.join(sys.prefix, 'python.exe')
-endif
+" map hl *
+" if WINDOWS()
+    " py3 import os; sys.executable=os.path.join(sys.prefix, 'python.exe')
+" endif
 
 

@@ -23,7 +23,13 @@ else
     let g:is_wsl=1
 endif
 
-
+" ---------------------------------------------------------------------------
+" Desc: windows适配python3
+"----------------------------------------------------------------------------
+if g:IS_WINDOWS
+    let &pythonthreedll = 'python37.dll'
+    py3 import os; sys.executable=os.path.join(sys.prefix, 'python.exe')
+endif
 
 " -----------------------------------------------------------------------------
 " Desc: 永远使用英文菜单
