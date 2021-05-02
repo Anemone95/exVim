@@ -157,7 +157,7 @@ elseif g:IS_LINUX
     set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 11
     set guifontwide=WenQuanYi\ Micro\ Hei\ 11
     " set guifontwide=DejaVu\ Sans\ Mono\ for\ Powerline\ 11.5\ GB2312
-elseif g:IS_MACOS:
+elseif g:IS_MACOS
     set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h11
 end
 
