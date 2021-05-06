@@ -131,8 +131,10 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
     augroup END
 
     function s:setup_coc() abort
-	if g:IS_MACOS || g:IS_LINUX
+	if g:IS_LINUX
 	    call coc#config("python.pythonPath", "/bin/python3")
+	elseif g:IS_MACOS
+	    call coc#config("python.pythonPath", "/usr/local/bin/python3")
 	endif
 	call coc#config("snippets.ultisnips.directories", [
 		    \"UltiSnips",

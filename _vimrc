@@ -346,7 +346,7 @@ endfunction
 
 " 函数跳转
 " nmap gi <c-]><esc>
-" nmap go <c-t>
+nmap go <c-t>
 
 " bash
 if has('nvim')
@@ -368,7 +368,7 @@ else
 endif
 nnoremap <F3> :call OpenTerminal()<CR>
 tnoremap <Esc> <C-\><C-N>
-nnoremap <leader>R :source $MYVIMRC<CR>
+" nnoremap <leader>R :source $MYVIMRC<CR>
 
 " ------------------------------------------------------------------
 " Desc: 文件类型配置
@@ -391,3 +391,16 @@ autocmd FileType java source $VIMHOME/javascript.vim
 " autocmd FileType matlab source $VIMHOME/matlabscript.vim
 " autocmd FileType asm source $VIMHOME/asmscript.vim
 " autocmd FileType php source $VIMHOME/phpscript.vim
+
+" ------------------------------------------------------------------
+" Desc: 其他个人配置
+" ------------------------------------------------------------------
+if g:IS_WINDOWS
+    let g:VIM_LOCAL_FILE=$VIM.'/_vimrc.local'
+else
+    let g:VIM_LOCAL_FILE='~/.vimrc.local'
+endif
+
+if filereadable(expand(g:VIM_LOCAL_FILE))
+    exec 'source ' . fnameescape(g:VIM_LOCAL_FILE)
+endif
