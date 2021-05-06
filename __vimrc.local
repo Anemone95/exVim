@@ -137,10 +137,6 @@ autocmd FileType asm source $VIMHOME/asmscript.vim
 autocmd FileType php source $VIMHOME/phpscript.vim
 autocmd FileType java source $VIMHOME/javascript.vim
 autocmd FileType tex source $VIMHOME/latexscript.vim
-" autocmd FileType html set ft=html " For SnipMate
-" autocmd FileType xhtml set ft=htmldjango.html " For SnipMate
-autocmd FileType htmldjango.html set foldmethod=indent " For SnipMate
-autocmd FileType htmldjango.html set foldlevel=1 " For SnipMate
 autocmd FileType tex set spell
 autocmd FileType plaintex set spell
 autocmd FileType plaintex set textwidth=100

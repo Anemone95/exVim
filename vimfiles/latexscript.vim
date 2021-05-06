@@ -6,14 +6,9 @@ set sw=2
 " all the figure labels. Very useful!
 set iskeyword+=:
 
-" nmap <F9> :call Tex_CompileLatex()<CR>
-
 nmap <F10> :call Tex_ViewLaTeX()<CR>
 " inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
 " inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
-filetype indent on
-" IMPORTANT: win32 users will need to have 'shellslash' set so that latex
-" can be called correctly.
 set shellslash
 
 " IMPORTANT: grep will sometimes skip displaying the file name if you
@@ -26,21 +21,8 @@ set grepprg=grep\ -nH\ $*
 " The following changes the default filetype back to 'tex':
 let g:tex_flavor='latex'
 
-" imap <c-k> <F7>
-nmap <c-j> <c-w>j
-
 nmap <Leader>fa :%s/\./。/gc<cr>
 nmap <Leader>fb :%s/,/，/gc<cr>
-" :%s/,/，/gc
-function! Compile() abort
-    if findfile("make.sh",".")=="make.sh"
-        execute "!make.sh"
-    elseif findfile("make.bat",".")=="make.bat"
-        execute "!make.bat"
-    else
-        execute "SCCompileRun"
-    endif
-endfunction
 
 call SingleCompile#SetCompilerTemplate('tex', 'pdflatex', 'PdfLaTeX',
             \ 'pdflatex', '',
@@ -52,9 +34,7 @@ call SingleCompile#ChooseCompiler('tex', 'pdflatex')
 nmap <F9> :call Compile()<cr>
 imap <F9> :call Compile()<cr>
 " map <F10> :!make.bat<cr>
-" nmap <F8> 
+" nmap <F8>
 set list lcs=tab:\¦\
-let g:neosnippet#snippets_directory='$VIM/vimfiles/latexsnip'
-" set textwidth=100
 set lazyredraw
 set ttyfast

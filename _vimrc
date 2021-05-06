@@ -312,7 +312,6 @@ nnoremap zz zc
 nnoremap za zM
 
 
-
 " 设置coding为utf8
 nmap su :set fileencoding=utf-8<cr>:set fileformat=unix<cr>
 " 设置coding为gbk
@@ -371,3 +370,24 @@ nnoremap <F3> :call OpenTerminal()<CR>
 tnoremap <Esc> <C-\><C-N>
 nnoremap <leader>R :source $MYVIMRC<CR>
 
+" ------------------------------------------------------------------
+" Desc: 文件类型配置
+" ------------------------------------------------------------------
+autocmd FileType python exec 'source '.g:VIMFILES_PATH."/pyscript.vim"
+autocmd FileType arduino exec 'source '.g:VIMFILES_PATH."/inoscript.vim"
+autocmd FileType smali set foldmethod=indent
+
+autocmd FileType tex source $VIMHOME/latexscript.vim
+autocmd FileType tex set spell
+autocmd FileType plaintex set spell
+autocmd FileType plaintex set textwidth=100
+autocmd FileType java source $VIMHOME/javascript.vim
+
+" autocmd FileType bib map <F10> :%s/@//gn<CR>
+
+" autocmd BufNewFile,BufRead *.h source $VIMHOME/hscript.vim
+" autocmd BufNewFile,BufRead *.c source $VIMHOME/cscript.vim
+" autocmd BufNewFile,BufRead *.cpp source $VIMHOME/cppscript.vim
+" autocmd FileType matlab source $VIMHOME/matlabscript.vim
+" autocmd FileType asm source $VIMHOME/asmscript.vim
+" autocmd FileType php source $VIMHOME/phpscript.vim
