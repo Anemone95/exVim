@@ -318,6 +318,7 @@ Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' }
     let g:Lf_CommandMap = {'<C-K>': ['<Up>'], '<C-J>': ['<Down>']}
     let g:Lf_WorkingDirectoryMode = 'AF'
     let g:Lf_RootMarkers = ['.git', '.svn', '.hg', '.project', '.root']
+    nmap <leader>g :Leaderf rg<cr>
 
 " ---------------------------------------------------
 " Desc: vim-markdown
