@@ -131,8 +131,10 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
     augroup END
 
     function s:setup_coc() abort
-	if g:IS_MACOS || g:IS_LINUX
+	if g:IS_LINUX
 	    call coc#config("python.pythonPath", "/bin/python3")
+	elseif g:IS_MACOS
+	    call coc#config("python.pythonPath", "/usr/local/bin/python3")
 	endif
 	call coc#config("snippets.ultisnips.directories", [
 		    \"UltiSnips",
@@ -314,6 +316,9 @@ Plug 'ntpeters/vim-better-whitespace'
 nnoremap <unique> <leader>w :StripWhitespace<CR>
 Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' }
     let g:Lf_CommandMap = {'<C-K>': ['<Up>'], '<C-J>': ['<Down>']}
+    let g:Lf_WorkingDirectoryMode = 'AF'
+    let g:Lf_RootMarkers = ['.git', '.svn', '.hg', '.project', '.root']
+    nmap <leader>g :Leaderf rg<cr>
 
 " ---------------------------------------------------
 " Desc: vim-markdown
