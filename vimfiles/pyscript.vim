@@ -1,4 +1,3 @@
-echo "PYScript Launch"
 function! LoadTemplate(filename)
     "let s:test=input("Please input:")
     sil! exec "0r ".g:VIMFILES_PATH."/".a:filename

@@ -377,11 +377,11 @@ autocmd FileType python exec 'source '.g:VIMFILES_PATH."/pyscript.vim"
 autocmd FileType arduino exec 'source '.g:VIMFILES_PATH."/inoscript.vim"
 autocmd FileType smali set foldmethod=indent
 
-autocmd FileType tex source $VIMHOME/latexscript.vim
-autocmd FileType tex set spell
-autocmd FileType plaintex set spell
-autocmd FileType plaintex set textwidth=100
-autocmd FileType java source $VIMHOME/javascript.vim
+" autocmd FileType tex source $VIMHOME/latexscript.vim
+" autocmd FileType tex set spell
+" autocmd FileType plaintex set spell
+" autocmd FileType plaintex set textwidth=100
+" autocmd FileType java source $VIMHOME/javascript.vim
 
 " autocmd FileType bib map <F10> :%s/@//gn<CR>
 
