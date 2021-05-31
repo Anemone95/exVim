@@ -247,6 +247,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 	let stack['items'] = [item]
 	call settagstack(winid, stack, 't')
 	call searchdecl(expand('<cword>'))
+	call execute("Leaderf! rg -e ".expand("<cword>"))
       endif
     endfunction
 
@@ -363,6 +364,11 @@ Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' }
     let g:Lf_WorkingDirectoryMode = 'AF'
     let g:Lf_RootMarkers = ['.git', '.svn', '.hg', '.project', '.root']
     nmap <leader>g :Leaderf rg<cr>
+    let g:Lf_RgConfig = [
+      \ "--max-columns=150",
+      \ "--glob=!node_modules/*",
+      \ "--glob=!dist/*",
+      \ ]
 
 " ---------------------------------------------------
 " Desc: vim-markdown
