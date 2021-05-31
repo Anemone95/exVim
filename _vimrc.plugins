@@ -206,9 +206,53 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
     " nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
     " GoTo code navigation.
+    function! s:coc_definition_with_tag_list()
+      " Cribbed from :h tagstack-examples
+      let tag = expand('<cword>')
+      let pos = [bufnr()] + getcurpos()[1:]
+      let item = {'bufnr': pos[0], 'from': pos, 'tagname': tag}
+      call CocActionAsync('jumpDefinition')
+      " Maybe jump was successful?  write previous location to tag stack.
+      let winid = win_getid()
+      let stack = gettagstack(winid)
+      let stack['items'] = [item]
+      call settagstack(winid, stack, 't')
+    endfunction
+
+    function! s:GoToImplementation()
+      " Cribbed from :h tagstack-examples
+      let tag = expand('<cword>')
+      let pos = [bufnr()] + getcurpos()[1:]
+      let item = {'bufnr': pos[0], 'from': pos, 'tagname': tag}
+      if CocAction('jumpImpmentation')
+      " Maybe jump was successful?  write previous location to tag stack.
+	let winid = win_getid()
+	let stack = gettagstack(winid)
+	let stack['items'] = [item]
+	call settagstack(winid, stack, 't')
+	return v:true
+      endif
+      if CocAction('jumpDefinition')
+	let winid = win_getid()
+	let stack = gettagstack(winid)
+	let stack['items'] = [item]
+	call settagstack(winid, stack, 't')
+	return v:true
+      endif
+
+      let ret = execute("silent! normal \<C-]>")
+      if ret =~ "Error" || ret =~ "错误"
+	let winid = win_getid()
+	let stack = gettagstack(winid)
+	let stack['items'] = [item]
+	call settagstack(winid, stack, 't')
+	call searchdecl(expand('<cword>'))
+      endif
+    endfunction
+
     nmap <silent> gd <Plug>(coc-definition)
     nmap <silent> gy <Plug>(coc-type-definition)
-    nmap <silent> gi <Plug>(coc-implementation)
+    nmap <silent> gi :call <SID>GoToImplementation()<CR>
     nmap <silent> gr <Plug>(coc-references)
     nmap go <c-t>
 
@@ -313,7 +357,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " Desc: 行尾空格
 Plug 'ntpeters/vim-better-whitespace'
-nnoremap <unique> <leader>w :StripWhitespace<CR>
+    nnoremap <unique> <leader>w :StripWhitespace<CR>
 Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' }
     let g:Lf_CommandMap = {'<C-K>': ['<Up>'], '<C-J>': ['<Down>']}
     let g:Lf_WorkingDirectoryMode = 'AF'
