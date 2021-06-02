@@ -25,7 +25,7 @@ ln -f $EXVIM_DIR/_vimrc.plugins ~/.vimrc.plugins
 if OS="linux"
     sudo apt-get -y install exuberant-ctags ripgrep
 elif OS="OSX"
-    brew install ripgrep
+    brew install ripgrep ctags
 fi
 # sudo pip3 install jedi
 git clone https://github.com/powerline/fonts $TOOL_DIR/fonts

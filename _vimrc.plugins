@@ -154,12 +154,12 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 		    \"UltiSnips",
 		    \g:VIMFILES_PATH."/ultisnips",
 		    \g:VIMFILES_PATH."/plugged/vim-snippets/UltiSnips"])
-
+	call coc#config("python.pythonPath", "/bin/python3")
 
     endfunction
     " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
     " delays and poor user experience.
-    set updatetime=100
+    set updatetime=500
 
     " Don't pass messages to |ins-completion-menu|.
     set shortmess+=c
@@ -291,8 +291,8 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
     nmap <leader>rn <Plug>(coc-rename)
 
     " Formatting selected code.
-    xmap <leader>=  <Plug>(coc-format-selected)
-    nmap <leader>=  <Plug>(coc-format-selected)
+    xmap =  <Plug>(coc-format-selected)
+    nmap =  <Plug>(coc-format-selected)
 
     augroup mygroup
       autocmd!

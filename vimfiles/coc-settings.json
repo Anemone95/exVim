@@ -1,4 +1,4 @@
 {
     "coc.preferences.extensionUpdateCheck": "weekly",
-    "diagnostic.virtualText":true,
+    "diagnostic.virtualText":true
 }
