@@ -401,7 +401,7 @@ Plug 'plasticboy/vim-markdown',{'for':'markdown'}
     let g:vim_markdown_folding_level = 0
     let g:vim_markdown_conceal = 0
 
-" Desc: 输入啊自动切换
+" Desc: 输入自动切换
 " Linux: https://github.com/lyokha/g3kb-switch
 " WINDOWS: https://github.com/DeXP/xkb-switch-win
   " let g:XkbSwitchLib = 'c:\path\to\dll\libxkbswitch32.dll'
@@ -424,10 +424,12 @@ Plug 'plasticboy/vim-markdown',{'for':'markdown'}
   " let g:XkbSwitchIMappings   = ['pinyin']
 " let g:XkbSwitchLib = '~/vim/bin/libxkbswitch.dylib'
 " cp libxkbswitch-macosx/bin/libxkbswitch.dylib /usr/local/lib
-Plug 'lyokha/vim-xkbswitch'
+if has('gui_running') && !g:IS_WSL
+    Plug 'lyokha/vim-xkbswitch'
     let g:XkbSwitchEnabled  = 1
     let g:XkbSwitchSkipFt = ['nerdtree']
     if g:IS_MACOS
-        " xkbswitch -ge
-        let g:XkbSwitchNLayout = 'ABC'
+	" xkbswitch -ge
+	let g:XkbSwitchNLayout = 'ABC'
     endif
+endif

@@ -16,12 +16,16 @@ elseif has('win16') || has('win32') || has('win64')
     let g:IS_WINDOWS=1
 endif
 
-let proc_version=!system("cat /proc/version")
-if match(proc_version,"Microsoft")==-1
-    let g:is_wsl=0
-else
-    let g:is_wsl=1
-endif
+let proc_version=system("cat /proc/version")
+function! s:is_wsl()
+    let l:proc_version=system("cat /proc/version")
+    if match(l:proc_version,"Microsoft")==-1 && match(l:proc_version,"microsoft")==-1
+	return 0
+    else
+	return 1
+    endif
+endfunction
+let g:IS_WSL=<SID>is_wsl()
 
 " ---------------------------------------------------------------------------
 " Desc: windows适配python3
