@@ -401,8 +401,11 @@ Plug 'plasticboy/vim-markdown',{'for':'markdown'}
     let g:vim_markdown_folding_level = 0
     let g:vim_markdown_conceal = 0
 
+" ---------------------------------------------------
 " Desc: 输入自动切换
-" Linux: https://github.com/lyokha/g3kb-switch
+" ---------------------------------------------------
+" Linux: https://github.com/lyokha/g3kb-switch(deprecated, i wrote a easy way
+" for fcitx)
 " WINDOWS: https://github.com/DeXP/xkb-switch-win
   " let g:XkbSwitchLib = 'c:\path\to\dll\libxkbswitch32.dll'
   " let g:XkbSwitchIMappings   = ['cn']
@@ -456,9 +459,8 @@ function <SID>enterLayout()
     endif
 endfunction
 
-
 if has('gui_running')
-    if g:IS_WSL
+    if g:IS_LINUX
 	autocmd InsertLeave * call timer_start(200, { tid -> <SID>exitLayout()})
 	autocmd InsertEnter * call timer_start(200, { tid -> <SID>enterLayout()})
     else
