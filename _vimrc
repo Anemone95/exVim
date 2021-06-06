@@ -338,6 +338,10 @@ cmap W w
 cmap ww w !sudo tee %
 map <C-a> ggVG
 
+" 缩进后保持visual
+vnoremap > >gv
+vnoremap < <gv
+
 " 自动隐藏特殊字符
 nmap <leader>v :call ToggleConcealLevel()<CR>
 function! ToggleConcealLevel()
