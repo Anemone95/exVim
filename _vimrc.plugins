@@ -418,6 +418,7 @@ Plug 'plasticboy/vim-markdown',{'for':'markdown'}
 " MAC:
 " git clone https://github.com/myshov/xkbswitch-macosx
 " cp xkbswitch-macosx/bin/xkbswitch /usr/local/bin
+"
 " git clone https://github.com/myshov/libxkbswitch-macosx
 " cp libxkbswitch-macosx/bin/libxkbswitch.dylib ~/vim/bin/libxkbswitch.dylib
 " Plug 'lyokha/vim-xkbswitch'
@@ -429,48 +430,62 @@ Plug 'plasticboy/vim-markdown',{'for':'markdown'}
 " cp libxkbswitch-macosx/bin/libxkbswitch.dylib /usr/local/lib
 "
 let g:INSERT_IS_CHINESE=0
+
+if g:IS_LINUX
+    let g:layout_on="fcitx-remote -o"
+    let g:layout_off="fcitx-remote -c"
+elseif g:IS_MACOS
+    let g:layout_on="xkbswitch -se 1"
+    let g:layout_off="xkbswitch -se ABC"
+elseif g:IS_WINDOWS
+"https://github.com/daipeihust/im-select
+    let g:layout_open="im -se 1"
+    let g:layout_off="im -se ABC"
+endif
 function <SID>exitLayout()
     " if mode() == "n"
-	if g:IS_LINUX
-	    if match(system("fcitx-remote"),1)==-1
+	if (g:IS_LINUX &&  match(system("fcitx-remote"),1)==-1) ||
+		    \ (g:IS_MACOS &&  match(system("xkbswitch -ge"),"ABC")==-1)
 		let g:INSERT_IS_CHINESE=1
 		if has('job')
-		    call job_start("fcitx-remote -c")
+		    call job_start(g:layout_off)
 		else
-		    call system("fcitx-remote -c")
+		    call system(g:layout_off)
 		endif
-	    else
-		let g:INSERT_IS_CHINESE=0
-		ret
-	    endif
+	else
+	    let g:INSERT_IS_CHINESE=0
+	    ret
 	endif
     " endif
 endfunction
 
 function <SID>enterLayout()
-    if g:IS_LINUX
+    " if g:IS_LINUX
 	if g:INSERT_IS_CHINESE
 	    if has('job')
-		call job_start("fcitx-remote -o")
+		call job_start(g:layout_on)
 	    else
-		call system("fcitx-remote -o")
+		call system(g:layout_on)
 	    endif
 	endif
-    endif
+    " endif
 endfunction
 
 if has('gui_running')
-    if g:IS_LINUX
-	autocmd InsertLeave * call timer_start(200, { tid -> <SID>exitLayout()})
-	autocmd InsertEnter * call timer_start(200, { tid -> <SID>enterLayout()})
-    else
-	Plug 'lyokha/vim-xkbswitch'
-	let g:XkbSwitchEnabled  = 1
-	let g:XkbSwitchSkipFt = ['nerdtree']
-	if g:IS_MACOS
+
+    autocmd InsertLeave * call timer_start(200, { tid -> <SID>exitLayout()})
+    autocmd InsertEnter * call timer_start(200, { tid -> <SID>enterLayout()})
+    " if g:IS_LINUX
+	" autocmd InsertLeave * call timer_start(200, { tid -> <SID>exitLayout()})
+	" autocmd InsertEnter * call timer_start(200, { tid -> <SID>enterLayout()})
+    " else
+	" Plug 'lyokha/vim-xkbswitch'
+	" let g:XkbSwitchEnabled  = 1
+	" let g:XkbSwitchSkipFt = ['nerdtree']
+	" if g:IS_MACOS
 	    " xkbswitch -ge
-	    let g:XkbSwitchNLayout = 'ABC'
-	endif
-    endif
+	    " let g:XkbSwitchNLayout = 'ABC'
+	" endif
+    " endif
 " autocmd InsertLeave * call timer_start(200, { tid -> <SID>condLayout()})
 endif
