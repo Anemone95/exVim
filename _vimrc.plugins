@@ -128,6 +128,7 @@ Plug 'honza/vim-snippets'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
     let g:coc_config_home=g:VIMFILES_PATH
     let $VIMCONFIG=g:VIMFILES_PATH
+    " echo coc#util#extension_root().'/coc-java-data/server'
     let g:coc_global_extensions=[
 		\"coc-json",
 		\"coc-vimlsp",
@@ -138,6 +139,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 		\"coc-tsserver",
 		\"coc-highlight",
 		\"coc-snippets",
+		\"coc-java",
 		\]
     augroup vimrc_coc
       autocmd!
@@ -155,8 +157,10 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 		    \"UltiSnips",
 		    \g:VIMFILES_PATH."/ultisnips",
 		    \g:VIMFILES_PATH."/plugged/vim-snippets/UltiSnips"])
-	call coc#config("python.setLinter", "PyLint")
+	call coc#config("python.setLinter", "pylint")
 	call coc#config("python.formatting.provider", "autopep8")
+	call coc#config("python.linting.flake8Args", ["--ignore=E226,E501,W504"])
+	call coc#config("java.open.serverLog", "/tmp/coc-java.log")
     endfunction
     " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
     " delays and poor user experience.
