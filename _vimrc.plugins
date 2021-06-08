@@ -149,13 +149,14 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 	    call coc#config("python.pythonPath", "/bin/python3")
 	elseif g:IS_MACOS
 	    call coc#config("python.pythonPath", "/usr/local/bin/python3")
+
 	endif
 	call coc#config("snippets.ultisnips.directories", [
 		    \"UltiSnips",
 		    \g:VIMFILES_PATH."/ultisnips",
 		    \g:VIMFILES_PATH."/plugged/vim-snippets/UltiSnips"])
-	call coc#config("python.pythonPath", "/bin/python3")
-
+	call coc#config("python.setLinter", "PyLint")
+	call coc#config("python.formatting.provider", "autopep8")
     endfunction
     " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
     " delays and poor user experience.
@@ -435,7 +436,7 @@ if g:IS_LINUX
     let g:layout_on="fcitx-remote -o"
     let g:layout_off="fcitx-remote -c"
 elseif g:IS_MACOS
-    let g:layout_on="xkbswitch -se 1"
+    let g:layout_on="xkbswitch -s 1"
     let g:layout_off="xkbswitch -se ABC"
 elseif g:IS_WINDOWS
 "https://github.com/daipeihust/im-select
@@ -473,8 +474,9 @@ endfunction
 
 if has('gui_running')
 
-    autocmd InsertLeave * call timer_start(200, { tid -> <SID>exitLayout()})
-    autocmd InsertEnter * call timer_start(200, { tid -> <SID>enterLayout()})
+    " autocmd InsertLeave * call timer_start(10, { tid -> <SID>exitLayout()})
+    autocmd InsertLeave * call <SID>exitLayout()
+    autocmd InsertEnter * call <SID>enterLayout()
     " if g:IS_LINUX
 	" autocmd InsertLeave * call timer_start(200, { tid -> <SID>exitLayout()})
 	" autocmd InsertEnter * call timer_start(200, { tid -> <SID>enterLayout()})
