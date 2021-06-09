@@ -121,14 +121,14 @@ Plug 'terryma/vim-multiple-cursors'
 
 Plug 'MattesGroeger/vim-bookmarks'
 
+" ===================================
 " Desc: 自动补全
-" https://github.com/jayli/vim-easycomplete
-" Plug 'jayli/vim-easycomplete'
-Plug 'honza/vim-snippets'
+" for java, donwloading https://download.eclipse.org/jdtls/milestones/0.57.0/
+" works fine, put it in coc#util#extension_root().'/coc-java-data/server'
+" ===================================
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
     let g:coc_config_home=g:VIMFILES_PATH
     let $VIMCONFIG=g:VIMFILES_PATH
-    " echo coc#util#extension_root().'/coc-java-data/server'
     let g:coc_global_extensions=[
 		\"coc-json",
 		\"coc-vimlsp",
@@ -157,10 +157,16 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 		    \"UltiSnips",
 		    \g:VIMFILES_PATH."/ultisnips",
 		    \g:VIMFILES_PATH."/plugged/vim-snippets/UltiSnips"])
+	" Python
 	call coc#config("python.setLinter", "pylint")
 	call coc#config("python.formatting.provider", "autopep8")
 	call coc#config("python.linting.flake8Args", ["--ignore=E226,E501,W504"])
+	" Java
 	call coc#config("java.open.serverLog", "/tmp/coc-java.log")
+	call coc#config("java.jdt.ls.vmargs", "-Dfile.encoding=UTF-8 -noverify -Xmx8G -XX:+UseG1GC -XX:+UseStringDeduplication")
+	call coc#config("java.import.maven.enabled", "true")
+	call coc#config("java.trace.server", "verbose")
+	call coc#config("typescript.suggest.paths", "true")
     endfunction
     " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
     " delays and poor user experience.
