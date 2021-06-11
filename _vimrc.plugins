@@ -166,6 +166,8 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 	call coc#config("java.jdt.ls.vmargs", "-Dfile.encoding=UTF-8 -noverify -Xmx8G -XX:+UseG1GC -XX:+UseStringDeduplication")
 	call coc#config("java.import.maven.enabled", "true")
 	call coc#config("java.trace.server", "verbose")
+	call coc#config("java.completion.enabled", "true")
+	call coc#config("java.maven.downloadSources", "true")
 	call coc#config("typescript.suggest.paths", "true")
     endfunction
     " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
@@ -248,6 +250,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
       " Cribbed from :h tagstack-examples
       let tag = expand('<cword>')
       let pos = [bufnr()] + getcurpos()[1:]
+      let beforeLine=getcurpos()[1]
       let item = {'bufnr': pos[0], 'from': pos, 'tagname': tag}
       if CocAction('jumpImpmentation')
       " Maybe jump was successful?  write previous location to tag stack.
@@ -258,11 +261,13 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 	return v:true
       endif
       if CocAction('jumpDefinition')
-	let winid = win_getid()
-	let stack = gettagstack(winid)
-	let stack['items'] = [item]
-	call settagstack(winid, stack, 't')
-	return v:true
+	if getcurpos()[1] != beforeLine
+	    let winid = win_getid()
+	    let stack = gettagstack(winid)
+	    let stack['items'] = [item]
+	    call settagstack(winid, stack, 't')
+	    return v:true
+	endif
       endif
 
       let ret = execute("silent! normal \<C-]>")
@@ -391,7 +396,7 @@ Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' }
 
     xnoremap gs :<C-U><C-R>=printf("Leaderf! rg -F -e %s ", leaderf#Rg#visual())<CR><CR>
     " xnoremap Gs :<C-U><C-R>=printf("Leaderf! rg -F --no-ignore -e %s ", leaderf#Rg#visual())<CR>
-    " noremap gs :<C-U><C-R>=printf("Leaderf! rg -e %s ", expand("<cword>"))<CR>
+    noremap <leader>s :<C-U><C-R>=printf("Leaderf! rg -e %s ", expand("<cword>"))<CR><CR>
     " noremap Gs :<C-U><C-R>=printf("Leaderf! rg -e %s ", expand("<cword>"))<CR>
     nmap <leader>g :Leaderf rg -S<cr>
     nmap <leader>G :Leaderf rg --no-ignore<cr>
