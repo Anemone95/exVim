@@ -220,12 +220,12 @@ setlocal completeopt-=preview
 " ------------------------------------------------------------------
 " Desc: Fold text
 " ------------------------------------------------------------------
-if getfsize(expand(@%))>700
-    set foldmethod=syntax
+set foldmethod=syntax
+set foldenable
+if line("w$")>700
     set foldlevelstart=0
-    set foldenable
 else
-    set foldlevelstart=999
+    set foldlevelstart=1
 endif
 
 " -----------------------------------------------------------------------------

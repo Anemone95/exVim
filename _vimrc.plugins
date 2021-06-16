@@ -506,3 +506,7 @@ if has('gui_running')
     " endif
 " autocmd InsertLeave * call timer_start(200, { tid -> <SID>condLayout()})
 endif
+
+Plug 'Konfekt/FastFold',{'for':['python','xml','cpp','h']}
+    let g:python_folding=1
+    let g:xml_syntax_folding = 1
