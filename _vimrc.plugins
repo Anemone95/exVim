@@ -520,5 +520,5 @@ Plug 'Konfekt/FastFold'
     let g:r_syntax_folding = 1
     let g:rust_fold = 1
     let g:php_folding = 1
+    let g:python_folding=1
 
-Plug 'tmhedberg/SimpylFold', {'for',['python']}

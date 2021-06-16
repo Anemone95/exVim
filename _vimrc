@@ -225,7 +225,7 @@ set foldenable
 if line("w$")>700
     set foldlevelstart=0
 else
-    set foldlevelstart=1
+    set foldlevelstart=9999
 endif
 
 " -----------------------------------------------------------------------------

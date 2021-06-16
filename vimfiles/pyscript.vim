@@ -9,9 +9,17 @@ endfunction
 if line("$")==1
     call LoadTemplate("py_main.template")
 endif
-if match( getline(1),"django" )!=-1||match(getline(3),"django")!=-1
-    " map <F9> :Dmanage runserver<cr>
-endif
-if match( getline(10),"scrapy" )!=-1||match(getline(6),"scrapy")!=-1
-    map <F9> :!python main.py<cr>
-endif
+
+func! FoldIndent() abort
+    let indent = indent(v:lnum)/&sw
+    let indent_next = indent(nextnonblank(v:lnum+1))/&sw
+    if indent_next > indent && getline(v:lnum) !~ '^\s*$'
+        return ">" . (indent+1)
+    elseif indent != 0
+        return indent
+    else 
+        return -1
+    endif
+endfunc
+setlocal foldexpr=FoldIndent()
+setlocal foldmethod=expr
