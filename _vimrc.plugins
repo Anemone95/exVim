@@ -8,7 +8,10 @@ Plug 'preservim/nerdtree'
     let g:NERDTreeNodeDelimiter = "\u00a0"
     " let g:NERDTreeMapMenu = 'o'
     " If another buffer tries to replace NERDTree, put it in the other window, and bring back NERDTree.
+    autocmd BufEnter * if bufname('#') =~ 'NERD_tree_\d\+' && bufname('%') !~ 'NERD_tree_\d\+' && winnr('$') > 1 |
+    \ let buf=bufnr() | buffer# | execute "normal! \<C-W>w" | execute 'buffer'.buf | endif
     map <F2> :NERDTreeToggle<CR>
+    map <F3> :NERDTreeFind<CR>
 
 Plug 'preservim/nerdcommenter'
     let g:NERDSpaceDelims = 1

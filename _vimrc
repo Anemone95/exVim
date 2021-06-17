@@ -257,6 +257,8 @@ set smartcase " set smartcase mode on, If there is upper case character in the s
 " -----------------------------------------------------------------------------
 " TAB
 " 换行时自动缩进宽度，可更改（宽度同tabstop）
+set tabstop=4
+set expandtab
 set cindent shiftwidth=4 " set cindent on to autoinent when editing c/c++ file, with 4 shift width
 " 指定按一次backspace就删除shiftwidth宽度
 set smarttab
