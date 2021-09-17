@@ -1,7 +1,7 @@
 let language_base=['python','c','cpp','vbs','vim','java','php','ino','vimentry','matlab','html','sql']
 let language_ex=['python','c','cpp','vbs','vim','java','php','ino','vimentry','matlab','html','sql','tex','solidity','ocaml']
 
-Plug 'preservim/nerdtree'
+Plug 'preservim/nerdtree'|Plug 'Xuyuanp/nerdtree-git-plugin'
     let g:NERDTreeWinSize = 25
     let g:NERDTreeMouseMode = 1
     let g:NERDTreeMapToggleZoom = '<Space>'
@@ -11,14 +11,14 @@ Plug 'preservim/nerdtree'
     autocmd BufEnter * if bufname('#') =~ 'NERD_tree_\d\+' && bufname('%') !~ 'NERD_tree_\d\+' && winnr('$') > 1 |
     \ let buf=bufnr() | buffer# | execute "normal! \<C-W>w" | execute 'buffer'.buf | endif
     map <F2> :NERDTreeToggle<CR>
-    map <F3> :NERDTreeFind<CR>
+    map <F4> :NERDTreeFind<CR>
 
 Plug 'preservim/nerdcommenter'
     let g:NERDSpaceDelims = 1
     let g:NERDRemoveExtraSpaces = 1
     let g:NERDCustomDelimiters = {
-		\ 'vimentry': { 'left': '--' },
-		\ }
+        \ 'vimentry': { 'left': '--' },
+        \ }
 
 Plug 'Yggdroot/indentLine'
     au! BufRead,BufNewFile,BufEnter IndentLinesToggle()
@@ -112,13 +112,13 @@ Plug 'tpope/vim-surround'
 Plug 'terryma/vim-multiple-cursors'
     function! Multiple_cursors_before()
       if exists(':NeoCompleteLock')==2
-	exe 'NeoCompleteLock'
+    exe 'NeoCompleteLock'
       endif
     endfunction
 
     function! Multiple_cursors_after()
       if exists(':NeoCompleteUnlock')==2
-	exe 'NeoCompleteUnlock'
+    exe 'NeoCompleteUnlock'
       endif
     endfunction
 
@@ -133,45 +133,48 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
     let g:coc_config_home=g:VIMFILES_PATH
     let $VIMCONFIG=g:VIMFILES_PATH
     let g:coc_global_extensions=[
-		\"coc-json",
-		\"coc-vimlsp",
-		\"coc-tsserver",
-		\"coc-xml",
-		\"coc-python",
-		\"coc-yaml",
-		\"coc-tsserver",
-		\"coc-highlight",
-		\"coc-snippets",
-		\"coc-java",
-		\]
+        \"coc-json",
+        \"coc-vimlsp",
+        \"coc-tsserver",
+        \"coc-xml",
+        \"coc-python",
+        \"coc-yaml",
+        \"coc-tsserver",
+        \"coc-highlight",
+        \"coc-snippets",
+        \"coc-java",
+        \"coc-sql",
+        \]
     augroup vimrc_coc
       autocmd!
       autocmd VimEnter * call s:setup_coc()
     augroup END
 
     function s:setup_coc() abort
-	if g:IS_LINUX
-	    call coc#config("python.pythonPath", "/bin/python3")
-	elseif g:IS_MACOS
-	    call coc#config("python.pythonPath", "/usr/local/bin/python3")
+    if g:IS_LINUX
+        call coc#config("python.pythonPath", "/bin/python3")
+    elseif g:IS_MACOS
+        call coc#config("python.pythonPath", "/usr/local/bin/python3")
 
-	endif
-	call coc#config("snippets.ultisnips.directories", [
-		    \"UltiSnips",
-		    \g:VIMFILES_PATH."/ultisnips",
-		    \g:VIMFILES_PATH."/plugged/vim-snippets/UltiSnips"])
-	" Python
-	call coc#config("python.setLinter", "pylint")
-	call coc#config("python.formatting.provider", "autopep8")
-	call coc#config("python.linting.flake8Args", ["--ignore=E226,E501,W504"])
-	" Java
-	call coc#config("java.open.serverLog", "/tmp/coc-java.log")
-	call coc#config("java.jdt.ls.vmargs", "-Dfile.encoding=UTF-8 -noverify -Xmx8G -XX:+UseG1GC -XX:+UseStringDeduplication")
-	call coc#config("java.import.maven.enabled", "true")
-	call coc#config("java.trace.server", "verbose")
-	call coc#config("java.completion.enabled", "true")
-	call coc#config("java.maven.downloadSources", "true")
-	call coc#config("typescript.suggest.paths", "true")
+    endif
+    call coc#config("snippets.ultisnips.directories", [
+            \"UltiSnips",
+            \g:VIMFILES_PATH."/ultisnips",
+            \g:VIMFILES_PATH."/plugged/vim-snippets/UltiSnips"])
+    " Python
+    call coc#config("python.setLinter", "pylint")
+    call coc#config("python.formatting.provider", "autopep8")
+    call coc#config("python.linting.flake8Args", ["--ignore=E226,E501,W504"])
+    " Java
+    call coc#config("java.open.serverLog", "/tmp/coc-java.log")
+    call coc#config("java.jdt.ls.vmargs", "-Dfile.encoding=UTF-8 -noverify -Xmx8G -XX:+UseG1GC -XX:+UseStringDeduplication")
+    call coc#config("java.trace.server", "verbose")
+    call coc#config("java.completion.enabled", "true")
+    call coc#config("java.import.maven.enabled", "true")
+    call coc#config("java.maven.downloadSources", "true")
+    call coc#config("java.contentProvider.preferred", "procyon")
+    " typescript
+    call coc#config("typescript.suggest.paths", "true")
     endfunction
     " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
     " delays and poor user experience.
@@ -193,8 +196,8 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
     " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
     " other plugin before putting this into your config.
     inoremap <silent><expr> <TAB>
-	  \ pumvisible() ? coc#jumpable()? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>":"\<C-n>" :
-	  \ <SID>check_back_space() ? "\<TAB>" : coc#refresh()
+      \ pumvisible() ? coc#jumpable()? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>":"\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" : coc#refresh()
     inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
     " imap <TAB> <plug>(coc-snippets-expand-jump)
@@ -205,10 +208,10 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
     endfunction
 
     " inoremap <silent><expr> <TAB>
-	  " \ pumvisible() ? coc#_select_confirm() :
-	  " \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
-	  " \ <SID>check_back_space() ? "\<TAB>" :
-	  " \ coc#refresh()
+      " \ pumvisible() ? coc#_select_confirm() :
+      " \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+      " \ <SID>check_back_space() ? "\<TAB>" :
+      " \ coc#refresh()
 
     " function! s:check_back_space() abort
       " let col = col('.') - 1
@@ -228,7 +231,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
     " Make <CR> auto-select the first completion item and notify coc.nvim to
     " format on enter, <cr> could be remapped by other vim plugin
     inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
-				  \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+                  \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
     " Use `[g` and `]g` to navigate diagnostics
     " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
@@ -255,32 +258,34 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
       let pos = [bufnr()] + getcurpos()[1:]
       let beforeLine=getcurpos()[1]
       let item = {'bufnr': pos[0], 'from': pos, 'tagname': tag}
-      if CocAction('jumpImpmentation')
+      if CocAction('jumpImplementation')
       " Maybe jump was successful?  write previous location to tag stack.
-	let winid = win_getid()
-	let stack = gettagstack(winid)
-	let stack['items'] = [item]
-	call settagstack(winid, stack, 't')
-	return v:true
+        let winid = win_getid()
+        let stack = gettagstack(winid)
+        let stack['items'] = [item]
+        call settagstack(winid, stack, 't')
+        return v:true
       endif
       if CocAction('jumpDefinition')
-	if getcurpos()[1] != beforeLine
-	    let winid = win_getid()
-	    let stack = gettagstack(winid)
-	    let stack['items'] = [item]
-	    call settagstack(winid, stack, 't')
-	    return v:true
-	endif
+        if getcurpos()[1] != beforeLine
+            let winid = win_getid()
+            let stack = gettagstack(winid)
+            let stack['items'] = [item]
+            call settagstack(winid, stack, 't')
+            return v:true
+        endif
       endif
 
       let ret = execute("silent! normal \<C-]>")
       if ret =~ "Error" || ret =~ "错误"
-	let winid = win_getid()
-	let stack = gettagstack(winid)
-	let stack['items'] = [item]
-	call settagstack(winid, stack, 't')
-	call searchdecl(expand('<cword>'))
-	call execute("Leaderf! rg -e ".expand("<cword>"))
+        let winid = win_getid()
+        let stack = gettagstack(winid)
+        let stack['items'] = [item]
+        call settagstack(winid, stack, 't')
+        call searchdecl(expand('<cword>'))
+        if getcurpos()[1] == beforeLine
+            call execute("Leaderf! rg -e ".expand("<cword>"))
+        endif
       endif
     endfunction
 
@@ -295,11 +300,11 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
     function! <SID>show_documentation()
       if (index(['vim','help'], &filetype) >= 0)
-	execute 'h '.expand('<cword>')
+    execute 'h '.expand('<cword>')
       elseif (coc#rpc#ready())
-	call CocActionAsync('doHover')
+    call CocActionAsync('doHover')
       else
-	execute '!' . &keywordprg . " " . expand('<cword>')
+    execute '!' . &keywordprg . " " . expand('<cword>')
       endif
     endfunction
 
@@ -395,7 +400,7 @@ Plug 'ntpeters/vim-better-whitespace'
 Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' }
     let g:Lf_CommandMap = {'<C-K>': ['<Up>'], '<C-J>': ['<Down>']}
     let g:Lf_WorkingDirectoryMode = 'AF'
-    let g:Lf_RootMarkers = ['.root', '.git', '.svn', '.hg', '.project']
+    let g:Lf_RootMarkers = ['.root', '.git', '.svn']
 
     xnoremap gs :<C-U><C-R>=printf("Leaderf! rg -F -e %s ", leaderf#Rg#visual())<CR><CR>
     " xnoremap Gs :<C-U><C-R>=printf("Leaderf! rg -F --no-ignore -e %s ", leaderf#Rg#visual())<CR>
@@ -463,30 +468,30 @@ elseif g:IS_WINDOWS
 endif
 function <SID>exitLayout()
     " if mode() == "n"
-	if (g:IS_LINUX &&  match(system("fcitx-remote"),1)==-1) ||
-		    \ (g:IS_MACOS &&  match(system("xkbswitch -ge"),"ABC")==-1)
-		let g:INSERT_IS_CHINESE=1
-		if has('job')
-		    call job_start(g:layout_off)
-		else
-		    call system(g:layout_off)
-		endif
-	else
-	    let g:INSERT_IS_CHINESE=0
-	    ret
-	endif
+    if (g:IS_LINUX &&  match(system("fcitx-remote"),1)==-1) ||
+            \ (g:IS_MACOS &&  match(system("xkbswitch -ge"),"ABC")==-1)
+        let g:INSERT_IS_CHINESE=1
+        if has('job')
+            call job_start(g:layout_off)
+        else
+            call system(g:layout_off)
+        endif
+    else
+        let g:INSERT_IS_CHINESE=0
+        ret
+    endif
     " endif
 endfunction
 
 function <SID>enterLayout()
     " if g:IS_LINUX
-	if g:INSERT_IS_CHINESE
-	    if has('job')
-		call job_start(g:layout_on)
-	    else
-		call system(g:layout_on)
-	    endif
-	endif
+    if g:INSERT_IS_CHINESE
+        if has('job')
+        call job_start(g:layout_on)
+        else
+        call system(g:layout_on)
+        endif
+    endif
     " endif
 endfunction
 
@@ -496,16 +501,16 @@ if has('gui_running')
     autocmd InsertLeave * call <SID>exitLayout()
     autocmd InsertEnter * call <SID>enterLayout()
     " if g:IS_LINUX
-	" autocmd InsertLeave * call timer_start(200, { tid -> <SID>exitLayout()})
-	" autocmd InsertEnter * call timer_start(200, { tid -> <SID>enterLayout()})
+    " autocmd InsertLeave * call timer_start(200, { tid -> <SID>exitLayout()})
+    " autocmd InsertEnter * call timer_start(200, { tid -> <SID>enterLayout()})
     " else
-	" Plug 'lyokha/vim-xkbswitch'
-	" let g:XkbSwitchEnabled  = 1
-	" let g:XkbSwitchSkipFt = ['nerdtree']
-	" if g:IS_MACOS
-	    " xkbswitch -ge
-	    " let g:XkbSwitchNLayout = 'ABC'
-	" endif
+    " Plug 'lyokha/vim-xkbswitch'
+    " let g:XkbSwitchEnabled  = 1
+    " let g:XkbSwitchSkipFt = ['nerdtree']
+    " if g:IS_MACOS
+        " xkbswitch -ge
+        " let g:XkbSwitchNLayout = 'ABC'
+    " endif
     " endif
 " autocmd InsertLeave * call timer_start(200, { tid -> <SID>condLayout()})
 endif
@@ -525,3 +530,4 @@ Plug 'Konfekt/FastFold'
     let g:php_folding = 1
     let g:python_folding=1
 
+Plug 'pangloss/vim-javascript',{'for':['typescript','javascript']}

@@ -20,9 +20,9 @@ let proc_version=system("cat /proc/version")
 function! s:is_wsl()
     let l:proc_version=system("cat /proc/version")
     if match(l:proc_version,"Microsoft")==-1 && match(l:proc_version,"microsoft")==-1
-	return 0
+    return 0
     else
-	return 1
+    return 1
     endif
 endfunction
 let g:IS_WSL=<SID>is_wsl()
@@ -46,11 +46,11 @@ elseif g:IS_MACOS
 else
     let s:uname = system("uname -s")
     if s:uname == "Darwin\n"
-	" in mac-terminal
-	silent exec 'language en_US'
+    " in mac-terminal
+    silent exec 'language en_US'
     else
-	" in linux-terminal
-	silent exec 'language en_US.utf8'
+    " in linux-terminal
+    silent exec 'language en_US.utf8'
     endif
 endif
 "解决consle输出乱码
@@ -146,10 +146,10 @@ set scrolloff=5
 if has('gui_running')
     " set window's width to 130 columns and height to 40 rows
     if exists('+lines')
-	set lines=40
+    set lines=40
     endif
     if exists('+columns')
-	set columns=130
+    set columns=130
     endif
 endif
 
@@ -179,7 +179,7 @@ set vb
 
 if !has('gui_running')
     if g:IS_WINDOWS
-	set t_Co=256 " make sure our terminal use 256 color
+    set t_Co=256 " make sure our terminal use 256 color
     endif
 endif
 
@@ -236,8 +236,8 @@ set fileencodings=utf-8,ucs-bom,gbk,cp936,latin-1     "设置支持打开的文�
 " 默认改变文件件格式为unix
 function! FormatUnix()
     if &modifiable==1
-	set fileformat=unix
-	set fileencoding=utf-8
+    set fileformat=unix
+    set fileencoding=utf-8
     endif
 endfunction
 autocmd! BufNewFile,BufRead * call FormatUnix()
@@ -344,9 +344,9 @@ map <C-a> ggVG
 nmap <leader>v :call ToggleConcealLevel()<CR>
 function! ToggleConcealLevel()
     if &conceallevel==0
-	set conceallevel=2
+    set conceallevel=2
     else
-	set conceallevel=0
+    set conceallevel=0
     endif
 endfunction
 
@@ -357,19 +357,19 @@ nmap go <c-t>
 " bash
 if has('nvim')
     fu! OpenTerminal()
-	bot split
-	resize 15
-	:terminal
+    bot split
+    resize 15
+    :terminal
     endf
 else
     fu! OpenTerminal()
-	bot split
-	resize 15
-	if g:IS_WINDOWS
-	    :call term_start('cmd', {'curwin' : 1, 'term_finish' : 'close'})
-	else
-	    :call term_start('zsh', {'curwin' : 1, 'term_finish' : 'close'})
-	endif
+    bot split
+    resize 15
+    if g:IS_WINDOWS
+        :call term_start('cmd', {'curwin' : 1, 'term_finish' : 'close'})
+    else
+        :call term_start('zsh', {'curwin' : 1, 'term_finish' : 'close'})
+    endif
     endf
 endif
 nnoremap <F3> :call OpenTerminal()<CR>
@@ -382,6 +382,7 @@ tnoremap <Esc> <C-\><C-N>
 autocmd FileType python exec 'source '.g:VIMFILES_PATH."/pyscript.vim"
 autocmd FileType arduino exec 'source '.g:VIMFILES_PATH."/inoscript.vim"
 autocmd FileType smali set foldmethod=indent
+" autocmd FileType javascript setlocal equalprg=js-beautify -p\ --stdin
 
 " autocmd FileType tex source $VIMHOME/latexscript.vim
 " autocmd FileType tex set spell
