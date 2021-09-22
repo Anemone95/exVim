@@ -139,7 +139,6 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
         \"coc-xml",
         \"coc-python",
         \"coc-yaml",
-        \"coc-tsserver",
         \"coc-highlight",
         \"coc-snippets",
         \"coc-java",
@@ -175,6 +174,8 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
     call coc#config("java.contentProvider.preferred", "procyon")
     " typescript
     call coc#config("typescript.suggest.paths", "true")
+    call coc#config("javascript.format.enabled", "false")
+    call coc#config("typescript.format.enabled", "false")
     endfunction
     " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
     " delays and poor user experience.
@@ -531,3 +532,10 @@ Plug 'Konfekt/FastFold'
     let g:python_folding=1
 
 Plug 'pangloss/vim-javascript',{'for':['typescript','javascript']}
+
+Plug 'prettier/vim-prettier', {
+  \ 'do': 'npm install',
+  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'svelte', 'yaml', 'html'] }
+    let g:prettier#exec_cmd_async = 1
+    xnoremap = :PrettierFragment<CR>
+    nnoremap = :PrettierAsync<CR>
