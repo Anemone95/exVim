@@ -1,4 +1,14 @@
-snippet with "with open file"
-with open(${0}) as ${1:f}:
-    ${2}
+priority 50
+
+snippet withopen "with open file" b
+with open(${1}) as ${2:f}:
+	${3}
+endsnippet
+
+snippet fordir "dir tranversal" b
+for root, dirs, files in os.walk(${1:dir}) :
+	for d in dirs:
+		print os.path.join(root, d)
+	for f in files:
+		print os.path.join(root, f)
 endsnippet

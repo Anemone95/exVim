@@ -497,23 +497,8 @@ function <SID>enterLayout()
 endfunction
 
 if has('gui_running')
-
-    " autocmd InsertLeave * call timer_start(10, { tid -> <SID>exitLayout()})
     autocmd InsertLeave * call <SID>exitLayout()
     autocmd InsertEnter * call <SID>enterLayout()
-    " if g:IS_LINUX
-    " autocmd InsertLeave * call timer_start(200, { tid -> <SID>exitLayout()})
-    " autocmd InsertEnter * call timer_start(200, { tid -> <SID>enterLayout()})
-    " else
-    " Plug 'lyokha/vim-xkbswitch'
-    " let g:XkbSwitchEnabled  = 1
-    " let g:XkbSwitchSkipFt = ['nerdtree']
-    " if g:IS_MACOS
-        " xkbswitch -ge
-        " let g:XkbSwitchNLayout = 'ABC'
-    " endif
-    " endif
-" autocmd InsertLeave * call timer_start(200, { tid -> <SID>condLayout()})
 endif
 
 Plug 'Konfekt/FastFold'
@@ -537,5 +522,5 @@ Plug 'prettier/vim-prettier', {
   \ 'do': 'npm install',
   \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'svelte', 'yaml', 'html'] }
     let g:prettier#exec_cmd_async = 1
-    xnoremap = :PrettierFragment<CR>
-    nnoremap = :PrettierAsync<CR>
+    autocmd FileType javascript,typescript,css,less,scss,json,graphql,markdown,vue,svelte,yaml,html xnoremap = :PrettierFragment<CR>
+    autocmd FileType javascript,typescript,css,less,scss,json,graphql,markdown,vue,svelte,yaml,html nmap = <Plug>(Prettier)
