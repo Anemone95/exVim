@@ -19,12 +19,12 @@ fi
 
 TOOL_DIR="$( cd "$( dirname "$0"  )" && pwd  )"
 EXVIM_DIR=$TOOL_DIR/..
-ln -s -f $EXVIM_DIR/vimfiles/ ~/.vim
+ln -s -f $EXVIM_DIR/vimfiles ~/.vim
 ln -s -f $EXVIM_DIR/_vimrc ~/.vimrc
 ln -s -f $EXVIM_DIR/_vimrc.plugins ~/.vimrc.plugins
-if OS="linux"
+if [[ $OS = "linux" ]]; then
     sudo apt-get -y install exuberant-ctags ripgrep
-elif OS="OSX"
+elif [[ $OS = "OSX" ]]; then
     brew install ripgrep ctags
 fi
 # sudo pip3 install jedi
