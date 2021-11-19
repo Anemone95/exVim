@@ -143,6 +143,8 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
         \"coc-snippets",
         \"coc-java",
         \"coc-sql",
+        \"coc-rust-analyzer",
+        \"coc-markdownlint",
         \]
     augroup vimrc_coc
       autocmd!
@@ -154,7 +156,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
         call coc#config("python.pythonPath", "/bin/python3")
     elseif g:IS_MACOS
         call coc#config("python.pythonPath", "/usr/local/bin/python3")
-
+        call coc#config("rust-analyzer.server.path", "~/.local/bin/rust-analyzer-x86_64-apple-darwin")
     endif
     call coc#config("snippets.ultisnips.directories", [
             \"UltiSnips",
@@ -176,6 +178,8 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
     call coc#config("typescript.suggest.paths", "true")
     call coc#config("javascript.format.enabled", "false")
     call coc#config("typescript.format.enabled", "false")
+    call coc#config("rust-analyzer.rustfmt.enableRangeFormatting", "true")
+
     endfunction
     " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
     " delays and poor user experience.
@@ -202,7 +206,6 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
     inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
     " imap <TAB> <plug>(coc-snippets-expand-jump)
-
     function! s:check_back_space() abort
       let col = col('.') - 1
       return !col || getline('.')[col - 1]  =~# '\s'
@@ -317,12 +320,12 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
     " Formatting selected code.
     xmap =  <Plug>(coc-format-selected)
-    nmap =  <Plug>(coc-format-selected)
+    nmap =  <Plug>(coc-format)
 
     augroup mygroup
       autocmd!
       " Setup formatexpr specified filetype(s).
-      autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+      autocmd FileType typescript,json,rust setl formatexpr=CocAction('formatSelected')
       " Update signature help on jump placeholder.
       autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
     augroup end
@@ -376,6 +379,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
     " NOTE: Please see `:h coc-status` for integrations with external plugins that
     " provide custom statusline: lightline.vim, vim-airline.
     set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+    nmap <A-Enter>  <Plug>(coc-fix-current)
 
     " Mappings for CoCList
     " Show all diagnostics.
@@ -468,7 +472,6 @@ elseif g:IS_WINDOWS
     let g:layout_off="im -se ABC"
 endif
 function <SID>exitLayout()
-    " if mode() == "n"
     if (g:IS_LINUX &&  match(system("fcitx-remote"),1)==-1) ||
             \ (g:IS_MACOS &&  match(system("xkbswitch -ge"),"ABC")==-1)
         let g:INSERT_IS_CHINESE=1
@@ -481,7 +484,6 @@ function <SID>exitLayout()
         let g:INSERT_IS_CHINESE=0
         ret
     endif
-    " endif
 endfunction
 
 function <SID>enterLayout()

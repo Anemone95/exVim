@@ -91,8 +91,6 @@ set clipboard=unnamed,unnamedplus
 " Desc: Vim UI preference
 " -----------------------------------------------------------------------------
 colorscheme molokai
-hi comment guifg=grey
-hi comment ctermfg=grey
 
 " turn on wild menu, try typing :h and press <Tab>
 set wildmenu
@@ -419,3 +417,6 @@ endif
 " 缩进后保持visual
 vnoremap > >gv
 vnoremap < <gv
+
+hi comment guifg=grey
+hi comment ctermfg=grey
