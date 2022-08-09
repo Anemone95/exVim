@@ -29,4 +29,4 @@ elif [[ $OS = "OSX" ]]; then
 fi
 # sudo pip3 install jedi
 git clone https://github.com/powerline/fonts $TOOL_DIR/fonts
-sudo source $TOOL_DIR/fonts/install.sh
+sudo sh $TOOL_DIR/fonts/install.sh
