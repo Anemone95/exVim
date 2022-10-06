@@ -33,6 +33,8 @@ let g:IS_WSL=<SID>is_wsl()
 if g:IS_WINDOWS
     let &pythonthreedll = 'python37.dll'
     py3 import os; sys.executable=os.path.join(sys.prefix, 'python.exe')
+elseif g:IS_MACOS
+    set pythonthreedll=/opt/homebrew/Frameworks/Python.framework/Versions/3.10/lib/libpython3.10.dylib
 endif
 
 " -----------------------------------------------------------------------------
@@ -42,7 +44,7 @@ set langmenu=none
 if g:IS_WINDOWS
     silent exec 'language english'
 elseif g:IS_MACOS
-    silent exec 'language en_US'
+    silent exec 'language en_GB.UTF-8'
 else
     let s:uname = system("uname -s")
     if s:uname == "Darwin\n"
@@ -77,13 +79,6 @@ end
 " -----------------------------------------------------------------------------
 " Desc: 剪切板
 " -----------------------------------------------------------------------------
-" if g:IS_WINDOWS
-" set clipboard+=unnamed
-" elseif g:IS_MACOS
-" set clipboard=unnamed
-" else
-" set clipboard=unnamed,unnamedplus
-" endif
 set clipboard=unnamed,unnamedplus
 
 
@@ -242,6 +237,7 @@ function! FormatUnix()
     endif
 endfunction
 autocmd! BufNewFile,BufRead * call FormatUnix()
+
 " ------------------------------------------------------------------
 " Desc: Search
 " ------------------------------------------------------------------
@@ -263,6 +259,9 @@ set expandtab
 set cindent shiftwidth=4 " set cindent on to autoinent when editing c/c++ file, with 4 shift width
 " 指定按一次backspace就删除shiftwidth宽度
 set smarttab
+autocmd! BufRead,BufNewFile,BufEnter *.facts setlocal noexpandtab
+autocmd! FileType ocaml setlocal tabstop=2 shiftwidth=2
+
 " autoindent
 set ai
 " smartindent
@@ -297,6 +296,7 @@ function! g:MyDiff()
     if arg3 =~ ' ' | let arg3 = '"' . arg3 . '"' | endif
     silent execute '!' .  'diff ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3
 endfunction
+
 
 "/////////////////////////////////////////////////////////////////////////////
 " 设置 vim-plug 加载插件

@@ -24,6 +24,7 @@ Plug 'Yggdroot/indentLine'
     au! BufRead,BufNewFile,BufEnter IndentLinesToggle()
     let g:indentLine_char = "┊"
     let g:indentLine_first_char = "┊"
+    let g:indentLine_autoResetWidth=1
 
 Plug 'vim-airline/vim-airline-themes'| Plug 'vim-airline/vim-airline'
     let g:airline_extensions = ['tabline', 'quickfix']
@@ -100,6 +101,8 @@ Plug 'xuhdev/SingleCompile'
 " Desc: 括号自动补全
 Plug 'jiangmiao/auto-pairs'
 let g:AutoPairsMapBS=1
+" execute 'inoremap <buffer> <silent> <CR> <C-R>=AutoPairsReturn()<CR>
+let g:AutoPairsMapCR=0
 
 " Desc: 自动左右括号
 Plug 'tpope/vim-surround'
@@ -155,7 +158,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
     if g:IS_LINUX
         call coc#config("python.pythonPath", "/bin/python3")
     elseif g:IS_MACOS
-        call coc#config("python.pythonPath", "/usr/local/bin/python3")
+        " call coc#config("python.pythonPath", "/opt/homebrew/bin/python3")
         call coc#config("rust-analyzer.server.path", "~/.local/bin/rust-analyzer-x86_64-apple-darwin")
     endif
     call coc#config("snippets.ultisnips.directories", [
@@ -179,6 +182,13 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
     call coc#config("javascript.format.enabled", "false")
     call coc#config("typescript.format.enabled", "false")
     call coc#config("rust-analyzer.rustfmt.enableRangeFormatting", "true")
+
+    " call coc#config("languageserver.ocaml.command", "ocaml-language-server")
+    " call coc#config("languageserver.ocaml.args", ["--stdio"])
+    " call coc#config("languageserver.ocaml.filetypes", ["ocaml","reason"])
+    call coc#config("languageserver.ocaml.command", "opam")
+    call coc#config("languageserver.ocaml.args", ["config", "exec", "--", "ocaml-language-server", "--stdio"])
+    call coc#config("languageserver.ocaml.filetypes", ["ocaml","reason"])
 
     endfunction
     " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
@@ -204,13 +214,21 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
     " inoremap <silent><expr> <TAB>
       " \ coc#pum#visible() ? coc#jumpable()? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>":"\<C-n>" :
       " \ <SID>check_back_space() ? "\<TAB>" : coc#refresh()
-    inoremap <silent><expr> <TAB>
-        \ coc#pum#visible() ? coc#pum#next(1):
-        \ <SID>check_back_space() ? "\<Tab>" :
-        \ coc#refresh()
+    " inoremap <silent><expr> <TAB>
+        " \ coc#pum#visible() ? coc#pum#next(1):
+        " \ <SID>check_back_space() ? "\<Tab>" :
+        " \ coc#refresh()
+    inoremap <silent><expr> <TAB> TabBehavior()
+    function! TabBehavior() abort
+        if coc#pum#visible()
+            return coc#pum#next(1)
+        else
+            return "\<TAB>"
+        endif
+    endfunction
 
-    inoremap <expr><S-TAB> coc#pum#visible() ?  coc#pum#prev(1) : "\<C-h>"
-
+    " inoremap <expr><S-TAB> coc#pum#visible() ?  coc#pum#prev(1) : "\<C-h>"
+    "
     " imap <TAB> <plug>(coc-snippets-expand-jump)
     function! s:check_back_space() abort
       let col = col('.') - 1
@@ -222,16 +240,22 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 
     " Use <c-space> to trigger completion.
-    if has('nvim')
-      inoremap <silent><expr> <c-n> coc#refresh()
-    else
-      inoremap <silent><expr> <c-n> coc#refresh()
-    endif
+    inoremap <silent><expr> <c-n> coc#refresh()
 
     " Make <CR> auto-select the first completion item and notify coc.nvim to
     " format on enter, <cr> could be remapped by other vim plugin
 
-    inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+    inoremap <silent><expr> <CR> EnterBehavior()
+
+    function! EnterBehavior() abort
+        if coc#pum#visible()
+            return coc#pum#confirm()
+        else
+            return "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+        endif
+    endfunction
+
+    inoremap <silent><expr> <Esc> coc#pum#visible() ? coc#pum#cancel() : "<Esc>"
 
     " Use `[g` and `]g` to navigate diagnostics
     " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
@@ -522,3 +546,18 @@ Plug 'prettier/vim-prettier', {
     let g:prettier#exec_cmd_async = 1
     autocmd FileType javascript,typescript,css,less,scss,json,graphql,markdown,vue,svelte,yaml,html xnoremap = :PrettierFragment<CR>
     autocmd FileType javascript,typescript,css,less,scss,json,graphql,markdown,vue,svelte,yaml,html nmap = <Plug>(Prettier)
+
+Plug 'sbdchd/neoformat', { 'for': ['ocaml'] }
+    " opam install ocamlformat
+    let g:neoformat_ocaml_ocamlformat = {
+                \ 'env': ["DEBUG=1"],
+                \ 'valid_exit_codes': [0],
+                \ 'exe': 'ocamlformat',
+                \ 'no_append': 1,
+                \ 'stdin': 1,
+                \ 'args': ['--enable-outside-detected-project','--name', '"%:p"', '-']
+                \ }
+
+    let g:neoformat_enabled_ocaml = ['ocamlformat']
+    autocmd FileType ocaml nmap = :Neoformat ocamlformat<CR>
+Plug 'hackwaly/vscode-ocaml', {'for': ['ocaml']}
