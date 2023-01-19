@@ -561,3 +561,5 @@ Plug 'sbdchd/neoformat', { 'for': ['ocaml'] }
     let g:neoformat_enabled_ocaml = ['ocamlformat']
     autocmd FileType ocaml nmap = :Neoformat ocamlformat<CR>
 Plug 'hackwaly/vscode-ocaml', {'for': ['ocaml']}
+
+Plug 'bohlender/vim-smt2'
