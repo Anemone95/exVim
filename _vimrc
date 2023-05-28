@@ -173,11 +173,8 @@ set guioptions-=T
 set noeb
 set vb
 
-if !has('gui_running')
-    if g:IS_WINDOWS
-    set t_Co=256 " make sure our terminal use 256 color
-    endif
-endif
+set termguicolors
+set t_Co=256 " make sure our terminal use 256 color
 
 if v:version >= 703
     set noacd " no autochchdir
@@ -385,21 +382,6 @@ autocmd FileType arduino exec 'source '.g:VIMFILES_PATH."/inoscript.vim"
 autocmd FileType smali set foldmethod=indent
 " autocmd FileType javascript setlocal equalprg=js-beautify -p\ --stdin
 
-" autocmd FileType tex source $VIMHOME/latexscript.vim
-" autocmd FileType tex set spell
-" autocmd FileType plaintex set spell
-" autocmd FileType plaintex set textwidth=100
-" autocmd FileType java source $VIMHOME/javascript.vim
-
-" autocmd FileType bib map <F10> :%s/@//gn<CR>
-
-" autocmd BufNewFile,BufRead *.h source $VIMHOME/hscript.vim
-" autocmd BufNewFile,BufRead *.c source $VIMHOME/cscript.vim
-" autocmd BufNewFile,BufRead *.cpp source $VIMHOME/cppscript.vim
-" autocmd FileType matlab source $VIMHOME/matlabscript.vim
-" autocmd FileType asm source $VIMHOME/asmscript.vim
-" autocmd FileType php source $VIMHOME/phpscript.vim
-
 " ------------------------------------------------------------------
 " Desc: 其他个人配置
 " ------------------------------------------------------------------
@@ -420,3 +402,13 @@ vnoremap < <gv
 
 hi comment guifg=grey
 hi comment ctermfg=grey
+hi visual guibg=#666666
+hi visual ctermfg=242
+
+" options key
+set macmeta
+
+set mouse=a
+" 默认在右边/下边打开新窗口
+set splitright
+set splitbelow

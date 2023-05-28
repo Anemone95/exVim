@@ -4,14 +4,41 @@ let language_ex=['python','c','cpp','vbs','vim','java','php','ino','vimentry','m
 Plug 'preservim/nerdtree'|Plug 'Xuyuanp/nerdtree-git-plugin'
     let g:NERDTreeWinSize = 25
     let g:NERDTreeMouseMode = 1
+    let NERDTreeShowHidden = 1
     let g:NERDTreeMapToggleZoom = '<Space>'
     let g:NERDTreeNodeDelimiter = "\u00a0"
-    " let g:NERDTreeMapMenu = 'o'
-    " If another buffer tries to replace NERDTree, put it in the other window, and bring back NERDTree.
-    autocmd BufEnter * if bufname('#') =~ 'NERD_tree_\d\+' && bufname('%') !~ 'NERD_tree_\d\+' && winnr('$') > 1 |
-    \ let buf=bufnr() | buffer# | execute "normal! \<C-W>w" | execute 'buffer'.buf | endif
+
     map <F2> :NERDTreeToggle<CR>
     map <F4> :NERDTreeFind<CR>
+    autocmd StdinReadPre * let s:std_in=1
+    nnoremap <C-P> :FileBrowser<CR>
+    command! -n=? -complete=dir -bar FileBrowser :call OpenFileBrowser('<args>')
+
+    function! OpenFileBrowser(...)
+        if a:0 == 0 || a:1 == ''
+            NERDTreeToggle
+        elseif a:1 =~? '^scp://'
+            execute 'Vexplore '.a:1
+            return 1
+        elseif isdirectory(a:1)
+            execute 'NERDTree '.a:1
+            return 1
+        endif
+        return 0
+    endfunction
+
+    map <F5> :call ToggleVexplore()<CR>
+    function! ToggleVexplore()
+        if exists("g:explr_win_nr") && win_gotoid(g:explr_win_nr)
+            let g:explr_win_nr = winnr()
+            close
+        else
+            Vexplore
+            let g:explr_win_nr = winnr()
+        endif
+    endfunction
+
+
 
 Plug 'preservim/nerdcommenter'
     let g:NERDSpaceDelims = 1
@@ -41,7 +68,7 @@ Plug 'vim-airline/vim-airline-themes'| Plug 'vim-airline/vim-airline'
     let g:airline#extensions#tabline#buffer_nr_show = 1
 
     let g:airline#extensions#syntastic#enabled = 1
-    let g:airline#extensions#tabline#ignore_bufadd_pat = 'gundo|undotree|vimfiler|tagbar|nerd_tree|startify|!|term'
+    let g:airline#extensions#tabline#ignore_bufadd_pat = 'gundo|undotree|vimfiler|tagbar|nerd_tree|startify|!|term|CoC|netew'
 
     au BufEnter * if &buftype == 'terminal' | startinsert | else | stopinsert | endif
     function! PrevBufferTab()
@@ -136,6 +163,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
     let g:coc_config_home=g:VIMFILES_PATH
     let $VIMCONFIG=g:VIMFILES_PATH
     let g:coc_global_extensions=[
+        \"coc-explorer",
         \"coc-json",
         \"coc-vimlsp",
         \"coc-tsserver",
@@ -149,12 +177,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
         \"coc-rust-analyzer",
         \"coc-markdownlint",
         \]
-    augroup vimrc_coc
-      autocmd!
-      autocmd VimEnter * call s:setup_coc()
-    augroup END
-
-    function s:setup_coc() abort
+    function! s:setup_coc() abort
     if g:IS_LINUX
         call coc#config("python.pythonPath", "/bin/python3")
     elseif g:IS_MACOS
@@ -165,6 +188,16 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
             \"UltiSnips",
             \g:VIMFILES_PATH."/ultisnips",
             \g:VIMFILES_PATH."/plugged/vim-snippets/UltiSnips"])
+    " Haskell
+    call coc#config("languageserver.haskell.command", "haskell-language-server-wrapper")
+    call coc#config("languageserver.haskell.args", ["--lsp","--debug"])
+    call coc#config("languageserver.haskell.rootPatterns", ["*.cabal", "stack.yaml", "cabal.project", "package.yaml", "hie.yaml"])
+    call coc#config("languageserver.haskell.filetypes", ["haskell", "lhaskell"])
+    call coc#config("languageserver.haskell.settings.haskell.checkParents", "CheckOnSave")
+    call coc#config("languageserver.haskell.settings.haskell.checkProject", "true")
+    call coc#config("languageserver.haskell.settings.haskell.maxCompletions", 40)
+    call coc#config("languageserver.haskell.settings.haskell.formattingProvider", "ormolu")
+    call coc#config("languageserver.haskell.settings.haskell.plugin.stan.globalOn", "true")
     " Python
     call coc#config("python.setLinter", "pylint")
     call coc#config("python.formatting.provider", "autopep8")
@@ -190,7 +223,25 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
     call coc#config("languageserver.ocaml.args", ["config", "exec", "--", "ocaml-language-server", "--stdio"])
     call coc#config("languageserver.ocaml.filetypes", ["ocaml","reason"])
 
+
+    call coc#config("explorer.root.strategies", "workspace")
+    call coc#config("explorer.root.customRules.vsc.patterns", [".git", ".hg", ".projections.json"])
+
     endfunction
+
+    augroup coc
+      autocmd!
+      autocmd VimEnter * call s:setup_coc()
+    augroup END
+
+
+    " coc-explorer
+    " nmap <F2> <Cmd>CocCommand explorer  --toggle --sources=buffer+,file+<CR>
+
+    " nmap <F4> <Cmd><Cmd>call CocAction('runCommand', 'explorer.doAction', 'closest', ['reveal:0'], [['relative', 0, 'file']])<CR>
+    " 默认在右边打开新窗口
+    set splitright
+
     " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
     " delays and poor user experience.
     set updatetime=200
@@ -429,10 +480,10 @@ Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' }
 
     xnoremap gs :<C-U><C-R>=printf("Leaderf! rg -F -e %s ", leaderf#Rg#visual())<CR><CR>
     " xnoremap Gs :<C-U><C-R>=printf("Leaderf! rg -F --no-ignore -e %s ", leaderf#Rg#visual())<CR>
-    noremap <leader>s :<C-U><C-R>=printf("Leaderf! rg -e %s ", expand("<cword>"))<CR><CR>
+    noremap <leader>gs :<C-U><C-R>=printf("Leaderf! rg -e %s ", expand("<cword>"))<CR><CR>
     " noremap Gs :<C-U><C-R>=printf("Leaderf! rg -e %s ", expand("<cword>"))<CR>
-    nmap <leader>g :Leaderf rg -S<cr>
-    nmap <leader>G :Leaderf rg --no-ignore<cr>
+    nmap <leader>fe :Leaderf rg -S<cr>
+    nmap <leader>fE :Leaderf rg --no-ignore<cr>
     let g:Lf_RgConfig = [
       \ "--max-columns=150",
       \ "--glob=!*/**/node_modules/*",
@@ -563,3 +614,6 @@ Plug 'sbdchd/neoformat', { 'for': ['ocaml'] }
 Plug 'hackwaly/vscode-ocaml', {'for': ['ocaml']}
 
 Plug 'bohlender/vim-smt2'
+
+" Startup dashborad
+Plug 'mhinz/vim-startify'
